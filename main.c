@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/03 17:32:13 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/06 08:39:18 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,65 @@ void	count_w_h(t_maps *map, char **map_table)
 }
 
 
-void	f(t_game *game, double angle, int offset_x, int offset_y, int len, int color)
+void	draw_line(t_game *game, t_line *line, int len)
 {
 	float	x;
 	float	y;
 	float	l;
-	float	step = 0.2;
-	
+	float	step = 0.1;
+
+	line->offset_x  = game->player->x *  20;
+	line->offset_y  = game->player->y *  20;
 	l = 0.0;
 	while (l < len)
 	{
-		x = cos(angle) * l;
-		y = sin(angle) * l;
-		mlx_pixel_put(game->mlx,game->win, x + offset_x, y + offset_y, color);
+		x = cos(game->player->rotation_angle) * l;
+		y = sin(game->player->rotation_angle) * l;
+		mlx_pixel_put(game->mlx,game->win, line->offset_x + x, line->offset_y + y, 0xFF0000);
 		l += step;
 	}
 }
 
 
-void draw_cyrcle(t_game *game)
+void draw_cyrcle(t_game *game , t_line *line)
 {
-	float l = 0;
-	while(l < M_PI * 2)
+	double	l;
+	float	y;
+	float	x;
+	float	step;
+	
+	line->offset_x  = game->player->x *  20;
+	line->offset_y  = game->player->y *  20;
+	l = 0.0;
+	step = 0.0;
+	while (l < M_PI * 2)
 	{
-		f(game, l, game->player->x * 32, game->player->y * 32, 5, 0xFF0000);
-		l+= 0.01;
+		step = 0;
+		while (step < 5)
+		{
+			x = cos(l) * step;
+			y = sin(l) * step;
+			mlx_pixel_put(game->mlx, game->win, game->player->x * 20 + x, game->player->y * 20 + y, 0xFF0000);
+			step += 0.2;
+		}
+		l += 0.01;
+	}
+}
+void draw_square(t_game *data, float x, float y, int color)
+{
+	float	i;
+	float	j;
+
+	j = 0;
+	while(j < 20)
+	{
+		i = 0;
+		while(i < 20)
+		{
+			mlx_pixel_put(data->mlx, data->win, x + i, y + j, color);
+			i += 1.5;
+		}
+		j += 1.5;
 	}
 }
 void	draw_it(t_game *data)
@@ -118,23 +152,24 @@ void	draw_it(t_game *data)
 		while(data->map[i][j])
 		{
 			if(data->map[i][j] == '1')
-			{
-				mlx_put_image_to_window(data->mlx, data->win, data->cube, j * 32,  i * 32);
-			}
+				draw_square(data, j * 20, i * 20, 0xFFFFFF);
+			if(data->map[i][j] == '0')
+				draw_square(data, j * 20, i * 20, 0);
 			j++;
 		}
 		i++;
 	}
-	draw_cyrcle(data);
-	f(data, data->player->rotation_angle, data->player->x *  32, data->player->y * 32 ,20, 0xFF0000);
 }
 
 void update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	f(game, game->player->rotation_angle, game->player->x *  32, game->player->y * 32 ,20, 0xFF0000);
-	draw_cyrcle(game);
 	draw_it(game);
+	draw_cyrcle(game, game->line);
+	printf("%f\n", game->player->rotation_angle);
+	draw_line(game, game->line, 20);
+	if(game->player->rotation_angle >= 4 * M_PI || game->player->rotation_angle <= 0.000001)
+		game->player->rotation_angle = 2 * M_PI;
 }
 int keys(int key, t_game *game)
 {
@@ -146,6 +181,8 @@ int keys(int key, t_game *game)
 		game->player->tab[125] = 1;
 	if(key == 123)
 		game->player->tab[123] = 1;
+	if(key == 2)
+		game->player->tab[2] = 1;
 	return (1);
 }
 int keys2(int key, t_game *game)
@@ -158,26 +195,22 @@ int keys2(int key, t_game *game)
 		game->player->tab[125] = 0;
 	if(key == 123)
 		game->player->tab[123] = 0;
+	if(key == 2)
+		game->player->tab[2] = 0;
 	return (1);
 }
 int render(t_game *game)
 {
 	if(game->player->tab[126])
-	{
-		game->player->move_step = game->player->move_speed *  1;
-		game->player->x +=  cos(game->player->rotation_angle) *  game->player->move_step;
-		game->player->y += sin(game->player->rotation_angle) *  game->player->move_step;	
-	}
+		move_up(game);
 	if(game->player->tab[125])
-	{
-		game->player->move_step = -game->player->move_speed;
-		game->player->x +=  cos(game->player->rotation_angle) *  game->player->move_step;
-		game->player->y += sin(game->player->rotation_angle) *  game->player->move_step;
-	}
+		move_down(game);
 	if(game->player->tab[124])
 		game->player->rotation_angle += game->player->rotation_speed;
 	if(game->player->tab[123])
 		game->player->rotation_angle -= game->player->rotation_speed;
+	if(game->player->tab[2])
+		move_right(game);
 	update(game);
 	return (1);
 }
@@ -191,6 +224,7 @@ int main(int ac, char **av ,char **env)
 	data = malloc(sizeof(t_game));
 	data->ply_map = malloc(sizeof(t_maps));
 	data->player = malloc(sizeof(t_player));
+	data->line = malloc(sizeof(t_line));
 	data->map_name  = ft_strdup(av[ac - 1]);
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
@@ -200,17 +234,20 @@ int main(int ac, char **av ,char **env)
 	int width = 1900;
 	int hight = 900;
 	data->win = mlx_new_window(data->mlx, 1900 ,900, "prototype");
-	int p = 32;
-	int l = 32;
+	int p;
+	int l;
 	data->cube  = mlx_xpm_file_to_image(data->mlx, "cube.xpm", &p , &p);
 	data->cyrcle = mlx_xpm_file_to_image(data->mlx, "cyrcle.xpm", &l , &l);
-	data->player->x = data->ply_map->width / 2;
-	data->player->y = data->ply_map->hight / 2;
-	data->player->rotation_angle = M_PI / 2;
+	data->player->x = 5;
+	data->player->y = 5;
+	data->player->rotation_angle = 2 * M_PI;
 	data->player->rotation_speed = 15 * (M_PI / 180);
 	data->player->walkdaraction = 0;
 	data->player->turndaraction = 0;
-	data->player->move_speed = 0.3;
+	data->player->move_speed = 0.2;
+	for(int i  = 123; i <= 126 ; i++)
+		data->player->tab[i] = 0;
+	data->player->tab[2] = 0;
 	mlx_hook(data->win, 02, 1L, keys, data);
 	mlx_hook(data->win, 03, 2L, keys2, data);
 	mlx_loop_hook(data->mlx, render, data);
