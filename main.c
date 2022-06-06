@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/06 08:39:18 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/06 12:20:18 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,44 +166,25 @@ void update(t_game *game)
 	mlx_clear_window(game->mlx, game->win);
 	draw_it(game);
 	draw_cyrcle(game, game->line);
-	printf("%f\n", game->player->rotation_angle);
 	draw_line(game, game->line, 20);
 	if(game->player->rotation_angle >= 4 * M_PI || game->player->rotation_angle <= 0.000001)
 		game->player->rotation_angle = 2 * M_PI;
 }
 int keys(int key, t_game *game)
 {
-	if(key == 126)
-		game->player->tab[126]= 1;
-	if(key == 124)
-		game->player->tab[124] = 1;
-	if(key == 125)
-		game->player->tab[125] = 1;
-	if(key == 123)
-		game->player->tab[123] = 1;
-	if(key == 2)
-		game->player->tab[2] = 1;
+	game->player->tab[key] = 1;
 	return (1);
 }
 int keys2(int key, t_game *game)
 {
-	if(key == 126)
-		game->player->tab[126]= 0;
-	if(key == 124)
-		game->player->tab[124] = 0;
-	if(key == 125)
-		game->player->tab[125] = 0;
-	if(key == 123)
-		game->player->tab[123] = 0;
-	if(key == 2)
-		game->player->tab[2] = 0;
+	game->player->tab[key] = 0;
 	return (1);
 }
 int render(t_game *game)
 {
-	if(game->player->tab[126])
+	if(game->player->tab[13])
 		move_up(game);
-	if(game->player->tab[125])
+	if(game->player->tab[1])
 		move_down(game);
 	if(game->player->tab[124])
 		game->player->rotation_angle += game->player->rotation_speed;
@@ -211,6 +192,8 @@ int render(t_game *game)
 		game->player->rotation_angle -= game->player->rotation_speed;
 	if(game->player->tab[2])
 		move_right(game);
+	if(game->player->tab[0])
+		move_left(game);
 	update(game);
 	return (1);
 }
