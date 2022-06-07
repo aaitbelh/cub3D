@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/06 12:20:18 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/07 15:01:10 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,21 @@ int	check_map_name(char *str)
 
 }
 
-void	count_w_h(t_maps *map, char **map_table)
+void	count_w_h(t_game *game, int i)
 {
-	int	i;
-	int	j;
+	int	hight;
+	int	width;
+
 	
-	i = 0;
-	j = i;
-	while(map_table[i])
-		i++;
-	while(map_table[0][j])
-		j++;
-	map->width = j;
-	map->hight = i;
+	hight = 0;
+	width = 0;
+	while (game->map[i][width])
+		width++;
+	while (game->map[hight])
+		hight++;
+	game->ply_map->width = width;
+	game->ply_map->hight = hight;
+	
 }
 
 
@@ -198,6 +200,50 @@ int render(t_game *game)
 	return (1);
 }
 
+void	check_map(char **str, t_game *game)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if(str[i][j] == '0')
+			{
+				k = j;
+				while (str[i][k] && str[i][k] != '1')
+					k++;
+				if (!str[i][k] && i != game->ply_map->hight - 1)
+					ft_error_exit("error1\n");
+				k = j;
+				while (k > 0 && str[i][k] != '1')
+					k--;
+				if((k == 0 &&  i != 0 && i != game->ply_map->hight - 1) && str[i][k] != '1')
+					ft_error_exit("error2\n");
+				k = i;
+				while(k < game->ply_map->hight - 1&& str[k][j] != '1')
+					k++;
+				if((k == game->ply_map->hight - 1 && i != game->ply_map->hight - 1) &&  str[k][j] != '1')
+					ft_error_exit("error3\n"); 
+				k = i;
+				while(k > 0 && str[k][j] != '1')
+					k--;
+				if((k == 0 && i != 0 && i != game->ply_map->hight - 1) && str[k][j] != '1')
+				{
+					printf("%d %d '%c'\n", k, j, str[k][j]);
+					ft_error_exit("error4\n");
+				}
+			}
+			j++;
+		}	
+		i++;
+	}
+}
+
 int main(int ac, char **av ,char **env)
 {
 
@@ -212,8 +258,9 @@ int main(int ac, char **av ,char **env)
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
+	count_w_h(data, 0);
+	check_map(data->map, data);
 	data->mlx = mlx_init();
-	count_w_h(data->ply_map, data->map);
 	int width = 1900;
 	int hight = 900;
 	data->win = mlx_new_window(data->mlx, 1900 ,900, "prototype");
@@ -228,9 +275,9 @@ int main(int ac, char **av ,char **env)
 	data->player->walkdaraction = 0;
 	data->player->turndaraction = 0;
 	data->player->move_speed = 0.2;
-	for(int i  = 123; i <= 126 ; i++)
+	for(int i  = 0; i <= 2 ; i++)
 		data->player->tab[i] = 0;
-	data->player->tab[2] = 0;
+	data->player->tab[13] = 0;
 	mlx_hook(data->win, 02, 1L, keys, data);
 	mlx_hook(data->win, 03, 2L, keys2, data);
 	mlx_loop_hook(data->mlx, render, data);
