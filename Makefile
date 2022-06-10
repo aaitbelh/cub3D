@@ -2,7 +2,7 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = #-Wall -Werror -Wextra
+CFLAGS = -fsanitize=address #-Wall -Werror -Wextra
 
 SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c
 

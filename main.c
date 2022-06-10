@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/07 15:01:10 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/10 15:59:19 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	count_w_h(t_game *game, int i)
 	game->ply_map->hight = hight;
 	
 }
-
 
 void	draw_line(t_game *game, t_line *line, int len)
 {
@@ -230,7 +229,7 @@ void	check_map(char **str, t_game *game)
 				if((k == game->ply_map->hight - 1 && i != game->ply_map->hight - 1) &&  str[k][j] != '1')
 					ft_error_exit("error3\n"); 
 				k = i;
-				while(k > 0 && str[k][j] != '1')
+				while((k > 0 && k != game->ply_map->hight - 1) &&  str[k][j] != '1')
 					k--;
 				if((k == 0 && i != 0 && i != game->ply_map->hight - 1) && str[k][j] != '1')
 				{
@@ -261,19 +260,11 @@ int main(int ac, char **av ,char **env)
 	count_w_h(data, 0);
 	check_map(data->map, data);
 	data->mlx = mlx_init();
-	int width = 1900;
-	int hight = 900;
 	data->win = mlx_new_window(data->mlx, 1900 ,900, "prototype");
-	int p;
-	int l;
-	data->cube  = mlx_xpm_file_to_image(data->mlx, "cube.xpm", &p , &p);
-	data->cyrcle = mlx_xpm_file_to_image(data->mlx, "cyrcle.xpm", &l , &l);
 	data->player->x = 5;
 	data->player->y = 5;
 	data->player->rotation_angle = 2 * M_PI;
 	data->player->rotation_speed = 15 * (M_PI / 180);
-	data->player->walkdaraction = 0;
-	data->player->turndaraction = 0;
 	data->player->move_speed = 0.2;
 	for(int i  = 0; i <= 2 ; i++)
 		data->player->tab[i] = 0;
