@@ -5,10 +5,35 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <limits.h>
 #include "../get_next/get_next_line.h"
 #include <math.h>
 
 #include "../minilibx/mlx.h"
+
+# define FOV_ANGLE 60 * (M_PI / 180)
+# define NUM_RAYS 1900
+
+typedef struct s_ray
+{
+	float	rayAngle;
+	float	horzHitX;
+	float	horzHitY;
+	float	vertHitX;
+	float	vertHitY;
+	int		wasHitVert;
+	int		wasHitHorz;
+	int		isRayFacingUp;
+	int		isRayFacingDown;
+	int		isRayFacingLeft;
+	int		isRayFacingRight;
+	int		wallHitContent;
+	float	xstep;
+	float	ystep;
+	float	HitX;
+	float	HitY;
+	float	HitDistance;
+}	t_ray;
 
 
 typedef struct s_line
@@ -52,6 +77,7 @@ typedef struct s_game
 	void *cube;
 	void *cyrcle;
 	void *background;
+	t_ray *rays;
 
 } t_game;
 
