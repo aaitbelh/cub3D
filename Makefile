@@ -2,9 +2,9 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = -fsanitize=address #-Wall -Werror -Wextra
+CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
 
-SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c
+SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c raycasting.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -20,7 +20,8 @@ $(NAME) : $(OBJS)
 
 clean:
 	rm -f $(OBJS)
-fclean:clean
+
+fclean: clean
 	rm -f $(NAME)
 
 re : fclean all

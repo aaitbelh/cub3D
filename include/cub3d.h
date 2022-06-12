@@ -12,7 +12,7 @@
 #include "../minilibx/mlx.h"
 
 # define FOV_ANGLE 60 * (M_PI / 180)
-# define NUM_RAYS 1900
+# define NUM_RAYS 900
 
 typedef struct s_ray
 {
@@ -27,11 +27,10 @@ typedef struct s_ray
 	int		isRayFacingDown;
 	int		isRayFacingLeft;
 	int		isRayFacingRight;
-	int		wallHitContent;
 	float	xstep;
 	float	ystep;
-	float	HitX;
-	float	HitY;
+	float	hDistance;
+	float	vDistance;
 	float	HitDistance;
 }	t_ray;
 
@@ -93,4 +92,7 @@ void	move_down(t_game *game);
 void	move_right(t_game *game);
 void	move_left(t_game *game);
 void	count_w_h(t_game *game, int i);
+void raycasting(t_game *game);
+int	mapHasWallAt(t_game *game, float x, float y);
+void	drawRay(t_game *game,float D);
 #endif
