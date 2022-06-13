@@ -93,7 +93,8 @@ void	move_down(t_game *game);
 void	move_right(t_game *game);
 void	move_left(t_game *game);
 void	count_w_h(t_game *game, int i);
-void raycasting(t_game *game);
-int	mapHasWallAt(t_game *game, float x, float y);
+void	raycasting(t_game *game);
+int		mapHasWallAt(t_game *game, float x, float y);
 void	drawRay(t_game *game,float D);
+void	TwoDfree(char **table);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/13 16:35:46 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/13 20:36:44 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,72 @@ int render(t_game *game)
 	return (1);
 }
 
+
+char	**makeMapRect(t_game *game)
+{
+	int	i;
+	int	tmp;
+	int	j;
+	char **new;
+
+	i = 0;
+	while(game->map[i])
+		i++;
+	new = malloc(sizeof(char *) * (i + 1));
+	tmp = 0;
+	tmp = ft_strlen(game->map[0]);
+	i = 1;
+	while(game->map[i])
+	{
+		if(tmp < ft_strlen(game->map[i]))
+			tmp = ft_strlen(game->map[i]);
+		i++;		
+	}
+	if(!new)
+		return (NULL);
+	i = 0;
+	while(game->map[i])
+	{
+		j = 0;
+		new[i] = malloc(sizeof(char) * (tmp + 1));
+		while(j < tmp)
+		{
+			if(j < ft_strlen(game->map[i]))
+			{
+				new[i][j] = game->map[i][j];
+			}
+			else
+				new[i][j] = '0';
+			j++;
+		}
+		new[i][j] = '\0';
+		i++;
+	}
+	new[i] = NULL;
+	TwoDfree(game->map);
+	return (new);
+} 
+
+void fix_map(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(game->map[i])
+	{
+		j = 0;
+		while(game->map[i][j])
+		{
+			if(game->map[i][j] == ' ')
+				game->map[i][j] = '0';
+			j++;
+		}
+		i++;
+	}
+	game->map = makeMapRect(game);
+}
+
 void	check_map(char **str, t_game *game)
 {
 	int	i;
@@ -258,12 +324,15 @@ int main(int ac, char **av)
 	data->player = malloc(sizeof(t_player));
 	data->line = malloc(sizeof(t_line));
 	data->map_name  = ft_strdup(av[ac - 1]);
-	data->rays = malloc(sizeof(t_ray) * NUM_RAYS);
+	data->rays = malloc(sizeof(t_ray) * 1);
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
 	count_w_h(data, 0);
 	check_map(data->map, data);
+	fix_map(data);
+	for(int i =0 ; data->map[i]; i++)
+		printf("%s\n", data->map[i]);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 900 ,1900, "prototype");
 	data->player->x = 3;
