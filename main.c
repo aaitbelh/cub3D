@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/12 16:27:00 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/13 05:42:25 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	draw_line(t_game *game, t_line *line, int len)
 	float	l;
 	float	step = 0.1;
 
-	line->offset_x  = game->player->x *  20;
-	line->offset_y  = game->player->y *  20;
+	line->offset_x  = game->player->x *  50;
+	line->offset_y  = game->player->y *  50;
 	l = 0.0;
 	while (l < len)
 	{
@@ -105,8 +105,8 @@ void draw_cyrcle(t_game *game , t_line *line)
 	float	x;
 	float	step;
 	
-	line->offset_x  = game->player->x *  20;
-	line->offset_y  = game->player->y *  20;
+	line->offset_x  = game->player->x *  50;
+	line->offset_y  = game->player->y *  50;
 	l = 0.0;
 	step = 0.0;
 	while (l < M_PI * 2)
@@ -116,7 +116,7 @@ void draw_cyrcle(t_game *game , t_line *line)
 		{
 			x = cos(l) * step;
 			y = sin(l) * step;
-			mlx_pixel_put(game->mlx, game->win, game->player->x * 20 + x, game->player->y * 20 + y, 0xFF0000);
+			mlx_pixel_put(game->mlx, game->win, game->player->x * 50 + x, game->player->y * 50 + y, 0xFF0000);
 			step += 0.2;
 		}
 		l += 0.01;
@@ -128,10 +128,10 @@ void draw_square(t_game *data, float x, float y, int color)
 	float	j;
 
 	j = 0;
-	while(j < 20)
+	while(j < 50)
 	{
 		i = 0;
-		while(i < 20)
+		while(i < 50)
 		{
 			mlx_pixel_put(data->mlx, data->win, x + i, y + j, color);
 			i += 1.5;
@@ -151,29 +151,23 @@ void	draw_it(t_game *data)
 		while(data->map[i][j])
 		{
 			if(data->map[i][j] == '1')
-				draw_square(data, j * 20, i * 20, 0xFFFFFF);
+				draw_square(data, j * 50, i * 50, 0xFFFFFF);
 			if(data->map[i][j] == '0')
-				draw_square(data, j * 20, i * 20, 0);
+				draw_square(data, j * 50, i * 50, 0);
 			j++;
 		}
 		i++;
 	}
 }
 
-float	normalizeAngle(float angle)
-{
-	angle = remainder(angle, 2 * M_PI);
-	if (angle < 0)
-		angle = 2 * M_PI + angle;
-	return (angle);
-}
+
 
 void update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	draw_it(game);
 	draw_cyrcle(game, game->line);
-	draw_line(game, game->line, 20);
+	draw_line(game, game->line, 50);
 	raycasting(game);
 	if(game->player->rotation_angle >= 4 * M_PI || game->player->rotation_angle <= 0.000001)
 		game->player->rotation_angle = 2 * M_PI;
@@ -271,15 +265,16 @@ int main(int ac, char **av)
 	count_w_h(data, 0);
 	check_map(data->map, data);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
+	data->win = mlx_new_window(data->mlx, 900 ,1900, "prototype");
 	data->player->x = 3;
 	data->player->y = 2;
 	data->player->rotation_angle = M_PI * 2;
-	data->player->rotation_speed = 3 * (M_PI / 180);
+	data->player->rotation_speed = 10 * (M_PI / 180);
 	data->player->move_speed = 0.2;
 	for(int i  = 0; i <= 2 ; i++)
 		data->player->tab[i] = 0;
 	data->player->tab[13] = 0;
+	data->rayangle = 0;
 	mlx_hook(data->win, 02, 1L, keys, data);
 	mlx_hook(data->win, 03, 2L, keys2, data);
 	mlx_loop_hook(data->mlx, render, data);

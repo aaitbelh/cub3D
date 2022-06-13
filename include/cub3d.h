@@ -77,6 +77,7 @@ typedef struct s_game
 	void *cyrcle;
 	void *background;
 	t_ray *rays;
+	float rayangle;
 
 } t_game;
 
