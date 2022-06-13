@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/13 15:55:22 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:44:37 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,13 @@ void	verinter(t_game *game)
 
 void raycasting(t_game *game)
 {
-	float D;
-	//float i = 0;
+	float	D;
+	int		i;
+
+	i = 0;
 	game->rayangle = (game->player->rotation_angle - M_PI / 6);
-	// while (i < M_PI / 3)
-	// {
+	while (i < 900)
+	{
 		game->rayangle = normalizeAngle(game->rayangle);
 		rayFacing(game->rayangle, game);
 		horinter(game);
@@ -169,6 +171,9 @@ void raycasting(t_game *game)
 			else
 				D = game->rays->vDistance;
 		}
-		drawRay(game, D);
-
+		//drawRay(game, D);
+		game->rays[i].HitDistance = D;
+		game->rayangle += M_PI / 2700; 
+		i++;
+	}
 }

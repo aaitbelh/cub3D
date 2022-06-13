@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/13 05:42:25 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:35:46 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,7 +258,7 @@ int main(int ac, char **av)
 	data->player = malloc(sizeof(t_player));
 	data->line = malloc(sizeof(t_line));
 	data->map_name  = ft_strdup(av[ac - 1]);
-	data->rays = malloc(sizeof(t_ray) * 1);
+	data->rays = malloc(sizeof(t_ray) * NUM_RAYS);
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
