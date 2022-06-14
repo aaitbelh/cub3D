@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/13 20:36:44 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:21:22 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ int	check_map_name(char *str)
 
 }
 
-void	count_w_h(t_game *game, int i)
+void	count_w_h(t_game *game)
 {
 	int	hight;
 	int	width;
 
 	hight = 0;
 	width = 0;
-	while (game->map[i][width])
+	while (game->map[hight][width])
 		width++;
 	while (game->map[hight])
 		hight++;
@@ -328,7 +328,7 @@ int main(int ac, char **av)
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
-	count_w_h(data, 0);
+	count_w_h(data);
 	check_map(data->map, data);
 	fix_map(data);
 	for(int i =0 ; data->map[i]; i++)
@@ -338,7 +338,7 @@ int main(int ac, char **av)
 	data->player->x = 3;
 	data->player->y = 2;
 	data->player->rotation_angle = M_PI * 2;
-	data->player->rotation_speed = 10 * (M_PI / 180);
+	data->player->rotation_speed = 1 * (M_PI / 180);
 	data->player->move_speed = 0.2;
 	for(int i  = 0; i <= 2 ; i++)
 		data->player->tab[i] = 0;

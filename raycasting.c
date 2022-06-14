@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/13 20:37:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:07:40 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ void	verinter(t_game *game)
 void raycasting(t_game *game)
 {
 	float D;
-	float i = 0;
 	game->rayangle = (game->player->rotation_angle - M_PI / 6);
 		game->rayangle = normalizeAngle(game->rayangle);
 		rayFacing(game->rayangle, game);
