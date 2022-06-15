@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/14 18:21:22 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/15 02:32:18 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,7 +324,7 @@ int main(int ac, char **av)
 	data->player = malloc(sizeof(t_player));
 	data->line = malloc(sizeof(t_line));
 	data->map_name  = ft_strdup(av[ac - 1]);
-	data->rays = malloc(sizeof(t_ray) * 1);
+	data->rays = malloc(sizeof(t_ray) * NUM_RAYS);
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
@@ -334,7 +334,7 @@ int main(int ac, char **av)
 	for(int i =0 ; data->map[i]; i++)
 		printf("%s\n", data->map[i]);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 900 ,1900, "prototype");
+	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
 	data->player->x = 3;
 	data->player->y = 2;
 	data->player->rotation_angle = M_PI * 2;

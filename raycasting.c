@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/14 18:07:40 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/15 18:19:31 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	horinter(t_game *game)
 		game->rays->xstep *= -1;
 	if (game->rays->isRayFacingLeft && game->rays->xstep > 0)
 		game->rays->xstep *= -1;
-	while(Ay <= 250 && Ax <= 700 && Ay >= 0 && Ax >= 0)
+	while(Ay <= game->ply_map->hight * 50 && Ax <= game->ply_map->width * 50 && Ay >= 0 && Ax >= 0)
 	{
 		if (mapHasWallAt(game,Ax,Ay))
 		{
 			game->rays->wasHitHorz = 1;
-			break;
+			break ;
 		}
 		Ay += game->rays->ystep;
 		Ax += game->rays->xstep;
@@ -133,7 +133,7 @@ void	verinter(t_game *game)
 		game->rays->ystep *= -1;
 	if (game->rays->isRayFacingUp && game->rays->ystep > 0)
 		game->rays->ystep *= -1;
-	while(Ay <= 250 && Ax <= 700 && Ay >= 0 && Ax >= 0)
+	while(Ay <= game->ply_map->hight * 50 && Ax <= game->ply_map->width * 50 && Ay >= 0 && Ax >= 0)
 	{
 		if (mapHasWallAt(game,Ax,Ay))
 		{
@@ -149,8 +149,13 @@ void	verinter(t_game *game)
 
 void raycasting(t_game *game)
 {
-	float D;
+	float	D;
+	int		i;
+
+	i = 0;
 	game->rayangle = (game->player->rotation_angle - M_PI / 6);
+	while (i < 900)
+	{
 		game->rayangle = normalizeAngle(game->rayangle);
 		rayFacing(game->rayangle, game);
 		horinter(game);
@@ -167,5 +172,8 @@ void raycasting(t_game *game)
 				D = game->rays->vDistance;
 		}
 		drawRay(game, D);
-
+		game->rays[i].HitDistance = D;
+		game->rayangle += M_PI / 2700;
+		i++;
+	}
 }

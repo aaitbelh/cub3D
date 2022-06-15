@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/07 16:03:10 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/14 18:43:29 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void move_up(t_game *game)
 	game->player->move_step = game->player->move_speed;
 	tmp_x = game->player->x + cos(game->player->rotation_angle) *  game->player->move_step;
 	tmp_y = game->player->y + sin(game->player->rotation_angle) *  game->player->move_step;
-	count_w_h(game, game->player->y);
+	count_w_h(game);
 	if(game->map[tmp_y][tmp_x] != '1' && ((tmp_x >= 0 && tmp_x <= game->ply_map->width) && (tmp_y > 0 && tmp_y < game->ply_map->hight - 1)))
 	{
 		game->player->x +=  cos(game->player->rotation_angle) *  game->player->move_step;
@@ -40,7 +40,7 @@ void move_down(t_game *game)
 	game->player->move_step = game->player->move_speed;
 	tmp_x = game->player->x - cos(game->player->rotation_angle) *  game->player->move_step;
 	tmp_y = game->player->y - sin(game->player->rotation_angle) *  game->player->move_step;
-	count_w_h(game, game->player->y);
+	count_w_h(game);
 	if(game->map[(int)tmp_y][(int)tmp_x] != '1' && ((tmp_x >= 0 && tmp_x <= game->ply_map->width) && (tmp_y > 0 && tmp_y <= game->ply_map->hight - 1)))
 	{
 		
@@ -57,7 +57,7 @@ void move_right(t_game *game)
 	game->player->move_step = game->player->move_speed;
 	tmp_x = game->player->x + cos(game->player->rotation_angle + M_PI_2) *  game->player->move_step;
 	tmp_y = game->player->y + sin(game->player->rotation_angle + M_PI_2) *  game->player->move_step;
-	count_w_h(game, game->player->y);
+	count_w_h(game);
 	if(game->map[(int)tmp_y][(int)tmp_x] != '1' && ((tmp_x >= 0 && tmp_x <= game->ply_map->width) && (tmp_y > 0 && tmp_y <= game->ply_map->hight - 1)))
 	{
 		game->player->x += cos(game->player->rotation_angle + M_PI_2) *  game->player->move_step;
@@ -72,7 +72,7 @@ void move_left(t_game *game)
 	game->player->move_step = -game->player->move_speed;
 	tmp_x = game->player->x + cos(game->player->rotation_angle + M_PI_2) *  game->player->move_step;
 	tmp_y = game->player->y + sin(game->player->rotation_angle + M_PI_2) *  game->player->move_step;
-	count_w_h(game, game->player->y);
+	count_w_h(game);
 	if(game->map[(int)tmp_y][(int)tmp_x] != '1' && ((tmp_x >= 0 && tmp_x <= game->ply_map->width) && (tmp_y >= 0 && tmp_y <= game->ply_map->hight - 1)))
 	{
 		game->player->x += cos(game->player->rotation_angle + M_PI_2) *  game->player->move_step;

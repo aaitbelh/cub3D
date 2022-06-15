@@ -78,7 +78,7 @@ typedef struct s_game
 	void *background;
 	t_ray *rays;
 	float rayangle;
-
+	float	P_D;
 } t_game;
 
 void	ft_error_exit(char *str);
