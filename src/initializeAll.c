@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 21:51:20 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:56:32 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void initializeData(int ac, char **av, t_game *data)
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
-	checkElement(data);
+	// checkElement(data);
 	check_map(data->map, data);
 	count_w_h(data);
 	fix_map(data);
