@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/15 18:19:31 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:51:45 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	verinter(t_game *game)
 		game->rays->ystep *= -1;
 	if (game->rays->isRayFacingUp && game->rays->ystep > 0)
 		game->rays->ystep *= -1;
-	while(Ay <= game->ply_map->hight * 50 && Ax <= game->ply_map->width * 50 && Ay >= 0 && Ax >= 0)
+	while (Ay <= game->ply_map->hight * 50 && Ax <= game->ply_map->width * 50 && Ay >= 0 && Ax >= 0)
 	{
 		if (mapHasWallAt(game,Ax,Ay))
 		{
@@ -147,14 +147,74 @@ void	verinter(t_game *game)
 		(Ay - game->player->y*50) * (Ay - game->player->y*50));
 }
 
+float	getSliceHeight(t_game *game, int i)
+{
+	float	DistanceProjPlane;
+
+	DistanceProjPlane = 450 / tan(M_PI / 6);
+	return ((50 / game->rays[i].HitDistance) * DistanceProjPlane);
+}
+
+void	put_pixel_in_image(t_game *game, int i, int j, int color)
+{
+	char	*a;
+
+	a = game->t.p + (j * game->t.size_line + i * (game->t.bits / 8));
+	*(unsigned int *)a = color;
+}
+
+void	fillImage(t_game *game, int i)
+{
+	int	j;
+	float	wallStart;
+	float	wallEnd;
+
+	wallStart = 450 - game->rays[i].sliceHeight / 2;
+	wallEnd = 450 + game->rays[i].sliceHeight / 2;
+	j = 0;
+	while (j < wallStart)
+	{
+		put_pixel_in_image(game, i, j, 0x000000);
+		j++;
+	}
+	while (j < wallEnd)
+	{
+		put_pixel_in_image(game, i, j, 0x0000FF);
+		//mlx_pixel_put(game->mlx, game->win,i, j,0x0000FF);
+		j++;
+	}
+	while (j < 900)
+	{
+		put_pixel_in_image(game, i, j, 0x000000);
+		j++;
+	}
+}
+
+void	drawWalls(t_game *game)
+{
+	int	i;
+	int	tmp;
+
+	i = -1;
+	while (++i < 900)
+	{
+		game->t.img = mlx_new_image(game->mlx, 900, 900);
+		game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits, &game->t.size_line, &tmp);
+		game->rays[i].sliceHeight = getSliceHeight(game, i);
+		fillImage(game, i);
+	}
+	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
+	mlx_destroy_image(game->mlx, game->t.img);
+}
+
 void raycasting(t_game *game)
 {
 	float	D;
 	int		i;
 
-	i = 0;
+	i = -1;
 	game->rayangle = (game->player->rotation_angle - M_PI / 6);
-	while (i < 900)
+	while (++i < 900)
 	{
 		game->rayangle = normalizeAngle(game->rayangle);
 		rayFacing(game->rayangle, game);
@@ -171,9 +231,8 @@ void raycasting(t_game *game)
 			else
 				D = game->rays->vDistance;
 		}
-		drawRay(game, D);
 		game->rays[i].HitDistance = D;
 		game->rayangle += M_PI / 2700;
-		i++;
 	}
+	drawWalls(game);
 }

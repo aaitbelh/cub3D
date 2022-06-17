@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/15 02:32:18 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/17 09:49:22 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,9 +165,9 @@ void	draw_it(t_game *data)
 void update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	draw_it(game);
-	draw_cyrcle(game, game->line);
-	draw_line(game, game->line, 50);
+	//draw_it(game);
+	//draw_cyrcle(game, game->line);
+	//draw_line(game, game->line, 50);
 	raycasting(game);
 	if(game->player->rotation_angle >= 4 * M_PI || game->player->rotation_angle <= 0.000001)
 		game->player->rotation_angle = 2 * M_PI;
@@ -347,6 +347,6 @@ int main(int ac, char **av)
 	mlx_hook(data->win, 02, 1L, keys, data);
 	mlx_hook(data->win, 03, 2L, keys2, data);
 	mlx_loop_hook(data->mlx, render, data);
-	draw_it(data);
+	//draw_it(data);
 	mlx_loop(data->mlx);
 }

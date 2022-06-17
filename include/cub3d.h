@@ -32,6 +32,7 @@ typedef struct s_ray
 	float	hDistance;
 	float	vDistance;
 	float	HitDistance;
+	float	sliceHeight;
 }	t_ray;
 
 
@@ -50,6 +51,16 @@ typedef struct s_maps
 	int hight;
 } t_maps;
 
+typedef	struct s_img
+{
+	void	*img;
+	int		bits;
+	int		size_line;
+	int		endian;
+	char	*p;
+}	t_img;
+
+
 typedef struct s_player
 {
 	float x;
@@ -66,19 +77,20 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	char	*map_name;
-	char	**map;
-	t_maps *ply_map;
-	t_player *player;
-	t_line *line;
-	void *win;
-	void *mlx;
-	void *cube;
-	void *cyrcle;
-	void *background;
-	t_ray *rays;
-	float rayangle;
-	float	P_D;
+	char		*map_name;
+	char		**map;
+	t_maps		*ply_map;
+	t_player	*player;
+	t_line		*line;
+	void		*win;
+	void		*mlx;
+	void		*cube;
+	void		*cyrcle;
+	void		*background;
+	t_ray		*rays;
+	float		rayangle;
+	float		P_D;
+	t_img		t;
 } t_game;
 
 void	ft_error_exit(char *str);
