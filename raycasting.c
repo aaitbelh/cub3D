@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/17 11:20:37 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:34:31 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ void	fillImage(t_game *game, int i)
 	wallStart = 450 - game->rays[i].sliceHeight / 2;
 	wallEnd = 450 + game->rays[i].sliceHeight / 2;
 	j = 0;
-	printf("%d\n",i);
 	while (j < wallStart)
 	{
 		put_pixel_in_image(game, i, j, 0x000000);

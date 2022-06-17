@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 11:15:21 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:41:37 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,13 @@ void	draw_it(t_game *data)
 }
 
 
+void correct_angle(t_game *game)
+{
+	if(game->player->rotation_angle > M_PI)
+		game->player->rotation_angle -= M_PI * 2;
+	if(game->player->rotation_angle < -M_PI)
+		game->player->rotation_angle += M_PI * 2;
+}
 
 int  update(t_game *game)
 {
@@ -106,8 +113,7 @@ int  update(t_game *game)
 	// draw_cyrcle(game, game->line);
 	// draw_line(game, game->line, 50);
 	raycasting(game);
-	if(game->player->rotation_angle >= 2 * M_PI || game->player->rotation_angle <= 0.000001)
-		game->player->rotation_angle = M_PI;
+	correct_angle(game);
 	return (1);
 }
 

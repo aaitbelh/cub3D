@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 11:10:10 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:37:11 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void initializeData(int ac, char **av, t_game *data)
 	check_map(data->map, data);
 	fix_map(data);
 	data->player->rotation_angle = M_PI* 2;
-	data->player->rotation_speed = 10 * (M_PI / 180);
-	data->player->move_speed = 0.2;
+	data->player->rotation_speed = 3 * (M_PI / 180);
+	data->player->move_speed = 0.01;
 	for(int i  = 0; i <= 2 ; i++)
 		data->player->tab[i] = 0;
 	data->player->tab[13] = 0;
