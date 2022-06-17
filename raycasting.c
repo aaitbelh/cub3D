@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/17 11:34:31 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 13:34:16 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	mapHasWallAt(t_game *game, float x, float y)
 
 	X = floor(x / 50);
 	Y = floor(y / 50);
-	//printf("y == %d || x == %d\n",Y,X);
 	if (game->map[Y][X] == '1')
 		return (1);
 	return (0);
@@ -108,8 +107,8 @@ void	horinter(t_game *game)
 		Ay += game->rays->ystep;
 		Ax += game->rays->xstep;
 	}
-	game->rays->hDistance = sqrt((Ax - game->player->x*50) * (Ax - game->player->x*50) +
-		(Ay - game->player->y*50) * (Ay - game->player->y*50));
+	game->rays->hDistance = sqrt((Ax - game->player->x * 50) * (Ax - game->player->x * 50) +
+		(Ay - game->player->y * 50) * (Ay - game->player->y * 50));
 }
 
 void	verinter(t_game *game)
@@ -171,22 +170,23 @@ void	fillImage(t_game *game, int i)
 
 	wallStart = 450 - game->rays[i].sliceHeight / 2;
 	wallEnd = 450 + game->rays[i].sliceHeight / 2;
+	//printf("[%f   %f]\n", wallStart, wallEnd);
+	if (wallStart < 0)
+		wallStart = 0;
 	j = 0;
 	while (j < wallStart)
 	{
 		put_pixel_in_image(game, i, j, 0x000000);
 		j++;
 	}
-	while (j < wallEnd)
+	while (j < wallEnd && j < 900)
 	{
 		put_pixel_in_image(game, i, j, 0xFF0000);
-		// mlx_pixel_put(game->mlx, game->win,i, j,0x0000FF);
 		j++;
 	}
 	while (j < 900)
 	{
 		put_pixel_in_image(game, i, j, 0x000000);
-		//mlx_pixel_put(game->mlx, game->win,i, j,0x000000);
 		j++;
 	}
 }

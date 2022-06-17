@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 10:03:13 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 12:38:33 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	check_map(char **str, t_game *game)
 					k--;
 				if((k == 0 && i != 0 && i != game->ply_map->hight - 1) && str[k][j] != '1')
 				{
-					printf("%d %d '%c'\n", k, j, str[k][j]);
 					ft_error_exit("error4\n");
 				}
 			}
