@@ -4,7 +4,7 @@ CC = gcc
 
 CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
 
-SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c raycasting.c
+SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c raycasting.c src/initializeAll.c src/parseMap.c
 
 OBJS = $(SRCS:.c=.o)
 

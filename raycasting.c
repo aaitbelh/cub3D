@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/17 09:51:45 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:20:37 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ void	fillImage(t_game *game, int i)
 	wallStart = 450 - game->rays[i].sliceHeight / 2;
 	wallEnd = 450 + game->rays[i].sliceHeight / 2;
 	j = 0;
+	printf("%d\n",i);
 	while (j < wallStart)
 	{
 		put_pixel_in_image(game, i, j, 0x000000);
@@ -179,13 +180,14 @@ void	fillImage(t_game *game, int i)
 	}
 	while (j < wallEnd)
 	{
-		put_pixel_in_image(game, i, j, 0x0000FF);
-		//mlx_pixel_put(game->mlx, game->win,i, j,0x0000FF);
+		put_pixel_in_image(game, i, j, 0xFF0000);
+		// mlx_pixel_put(game->mlx, game->win,i, j,0x0000FF);
 		j++;
 	}
 	while (j < 900)
 	{
 		put_pixel_in_image(game, i, j, 0x000000);
+		//mlx_pixel_put(game->mlx, game->win,i, j,0x000000);
 		j++;
 	}
 }
@@ -196,15 +198,20 @@ void	drawWalls(t_game *game)
 	int	tmp;
 
 	i = -1;
+	game->t.img = mlx_new_image(game->mlx, 1000, 1000);
+	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits, &game->t.size_line, &tmp);
 	while (++i < 900)
 	{
-		game->t.img = mlx_new_image(game->mlx, 900, 900);
-		game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits, &game->t.size_line, &tmp);
 		game->rays[i].sliceHeight = getSliceHeight(game, i);
 		fillImage(game, i);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);
+}
+
+float	correctDistance(float D, t_game *game)
+{
+	return (D * cos(game->rayangle - game->player->rotation_angle));
 }
 
 void raycasting(t_game *game)
@@ -232,6 +239,7 @@ void raycasting(t_game *game)
 				D = game->rays->vDistance;
 		}
 		game->rays[i].HitDistance = D;
+		game->rays[i].HitDistance = correctDistance(game->rays[i].HitDistance, game);
 		game->rayangle += M_PI / 2700;
 	}
 	drawWalls(game);

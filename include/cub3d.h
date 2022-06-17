@@ -109,4 +109,9 @@ void	raycasting(t_game *game);
 int		mapHasWallAt(t_game *game, float x, float y);
 void	drawRay(t_game *game,float D);
 void	TwoDfree(char **table);
+void	initializeData(int ac, char **av, t_game *data);
+void	check_map(char **str, t_game *game);
+int		check_map_name(char *str);
+char	**read_map(char *name);
+void	fix_map(t_game *game);
 #endif

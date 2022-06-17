@@ -3,80 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 09:49:22 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/17 11:15:21 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "include/cub3d.h"
-#include <string.h>
-char **read_map(char *name)
-{
-	int		fd;
-	char	*buf;
-	char	**map;
-	int		size;
-	char	*line;
 
 
-	size = 0;
-	fd = open(name, O_RDONLY);
-	if (fd == -1)
-		ft_error_exit("can't open map\n");
-	map = malloc(sizeof(char *) * (size + 1));
-	line = NULL;
-	while(1)
-	{
-		buf = get_next_line(fd);
-		if(!buf)
-			break;
-		line = ft_strjoin_get(line, buf);
-		free(buf);
-		size++;
-	}
-	map = ft_split(line, '\n');
-	free(line);
-	return (map);
-}
-
-int	check_map_name(char *str)
-{
-	char	*new;
-	int		i;
-	int		fd;
-
-	i = 0;
-	while(str[i] && str[i] != '.')
-		i++;
-	new = malloc(sizeof(char) * (i + 1));
-	fd = open(str, O_RDONLY);
-	if(!new)
-		return (1);
-	new = ft_strchr(str, '.');
-	if(!new || ft_strcmp(new, ".cub") || fd == -1)
-		return (1);
-	return (0);
-
-}
-
-void	count_w_h(t_game *game)
-{
-	int	hight;
-	int	width;
-
-	hight = 0;
-	width = 0;
-	while (game->map[hight][width])
-		width++;
-	while (game->map[hight])
-		hight++;
-	game->ply_map->width = width;
-	game->ply_map->hight = hight;
-	
-}
 
 void	draw_line(t_game *game, t_line *line, int len)
 {
@@ -162,25 +99,30 @@ void	draw_it(t_game *data)
 
 
 
-void update(t_game *game)
+int  update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	//draw_it(game);
-	//draw_cyrcle(game, game->line);
-	//draw_line(game, game->line, 50);
+	// draw_it(game);
+	// draw_cyrcle(game, game->line);
+	// draw_line(game, game->line, 50);
 	raycasting(game);
-	if(game->player->rotation_angle >= 4 * M_PI || game->player->rotation_angle <= 0.000001)
-		game->player->rotation_angle = 2 * M_PI;
-}
-
-int keys(int key, t_game *game)
-{
-	game->player->tab[key] = 1;
+	if(game->player->rotation_angle >= 2 * M_PI || game->player->rotation_angle <= 0.000001)
+		game->player->rotation_angle = M_PI;
 	return (1);
 }
-int keys2(int key, t_game *game)
+
+int KeyReleased(int key, t_game *game)
+{
+	game->player->tab[key] = 1;
+	if (key == 53)
+		exit(0);
+	return (1);
+}
+int KeyPressed(int key, t_game *game)
 {
 	game->player->tab[key] = 0;
+	if (key == 53)
+		exit(0);
 	return (1);
 }
 
@@ -249,7 +191,7 @@ char	**makeMapRect(t_game *game)
 	return (new);
 } 
 
-void fix_map(t_game *game)
+void	fix_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -269,50 +211,11 @@ void fix_map(t_game *game)
 	game->map = makeMapRect(game);
 }
 
-void	check_map(char **str, t_game *game)
+int redCross(int Key)
 {
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j])
-		{
-			if(str[i][j] == '0')
-			{
-				k = j;
-				while (str[i][k] && str[i][k] != '1')
-					k++;
-				if (!str[i][k] && i != game->ply_map->hight - 1)
-					ft_error_exit("error1\n");
-				k = j;
-				while (k > 0 && str[i][k] != '1')
-					k--;
-				if((k == 0 &&  i != 0 && i != game->ply_map->hight - 1) && str[i][k] != '1')
-					ft_error_exit("error2\n");
-				k = i;
-				while(k < game->ply_map->hight - 1&& str[k][j] != '1')
-					k++;
-				if((k == game->ply_map->hight - 1 && i != game->ply_map->hight - 1) &&  str[k][j] != '1')
-					ft_error_exit("error3\n"); 
-				k = i;
-				while((k > 0 && k != game->ply_map->hight - 1) &&  str[k][j] != '1')
-					k--;
-				if((k == 0 && i != 0 && i != game->ply_map->hight - 1) && str[k][j] != '1')
-				{
-					printf("%d %d '%c'\n", k, j, str[k][j]);
-					ft_error_exit("error4\n");
-				}
-			}
-			j++;
-		}	
-		i++;
-	}
+	(void)Key;
+	exit(1);
 }
-
 int main(int ac, char **av)
 {
 
@@ -320,33 +223,14 @@ int main(int ac, char **av)
 		ft_error_exit("not enough argument\n");
 	t_game *data;
 	data = malloc(sizeof(t_game));
-	data->ply_map = malloc(sizeof(t_maps));
-	data->player = malloc(sizeof(t_player));
-	data->line = malloc(sizeof(t_line));
-	data->map_name  = ft_strdup(av[ac - 1]);
-	data->rays = malloc(sizeof(t_ray) * NUM_RAYS);
-	if(check_map_name(data->map_name))
-		ft_error_exit("Wrong Map!\n");
-	data->map = read_map(data->map_name);
-	count_w_h(data);
-	check_map(data->map, data);
-	fix_map(data);
-	for(int i =0 ; data->map[i]; i++)
-		printf("%s\n", data->map[i]);
+	initializeData(ac, av, data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
 	data->player->x = 3;
 	data->player->y = 2;
-	data->player->rotation_angle = M_PI * 2;
-	data->player->rotation_speed = 1 * (M_PI / 180);
-	data->player->move_speed = 0.2;
-	for(int i  = 0; i <= 2 ; i++)
-		data->player->tab[i] = 0;
-	data->player->tab[13] = 0;
-	data->rayangle = 0;
-	mlx_hook(data->win, 02, 1L, keys, data);
-	mlx_hook(data->win, 03, 2L, keys2, data);
+	mlx_hook(data->win, 02, 1L, KeyReleased, data);
+	mlx_hook(data->win, 03, 2L, KeyPressed, data);
+	mlx_hook(data->win, 17, 0, redCross, NULL);
 	mlx_loop_hook(data->mlx, render, data);
-	//draw_it(data);
 	mlx_loop(data->mlx);
 }
