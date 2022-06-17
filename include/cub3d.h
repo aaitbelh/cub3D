@@ -49,6 +49,12 @@ typedef struct s_maps
 {
 	int width;
 	int hight;
+	int NO;
+	int SO;
+	int WE;
+	int EA;
+	int F;
+	int C;
 } t_maps;
 
 typedef	struct s_img
@@ -114,4 +120,6 @@ void	check_map(char **str, t_game *game);
 int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
+void	checkElement(t_game *game);
+void 	checkitValid(t_game *game, int  i);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 12:38:33 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:48:06 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_map(char **str, t_game *game)
 				k = i;
 				while(k < game->ply_map->hight - 1&& str[k][j] != '1')
 					k++;
-				if((k == game->ply_map->hight - 1 && i != game->ply_map->hight - 1) &&  str[k][j] != '1')
+				if(k == game->ply_map->hight - 1 &&  str[k][j] != '1')
 					ft_error_exit("error3\n"); 
 				k = i;
 				while((k > 0 && k != game->ply_map->hight - 1) &&  str[k][j] != '1')
@@ -89,6 +89,101 @@ int	check_map_name(char *str)
 		return (1);
 	return (0);
 
+}
+
+
+
+void checkitValid(t_game *game, int  i)
+{
+	
+	void *ptr;
+	int	j;
+	int LOL;
+
+	j = 0;
+	if(game->map[i][0]  == 'N')
+	{
+		j = 2;
+		while(j != ' ' &&  game->map[i][j])
+			j++;
+		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
+		if(!ptr)
+			ft_error_exit("error\n");
+	}
+	else if (game->map[i][0] == 'S')
+	{
+		j = 2;
+		while(j == ' ' &&  game->map[i][j])
+			j++;
+		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
+		if(!ptr)
+			ft_error_exit("error\n");
+	}
+	else if (game->map[i][0] == 'W')
+	{
+		j = 2;
+		while(j == ' ' &&  game->map[i][j])
+			j++;
+		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
+		if(!ptr)
+			ft_error_exit("error\n");
+	}
+	else if (game->map[j][0] == 'E')
+	{
+		j = 2;
+		while(j == ' ' &&  game->map[i][j])
+			j++;
+		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
+		if(!ptr)
+			ft_error_exit("error\n");
+	}
+	// else if (game->map[i][0] == 'F' || game->map[i][0] == 'C')
+	// 	checkitValid2(game, i);
+	
+}
+
+void checkElement(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while(game->map[i])
+	{
+		j = 0;
+		while(game->map[i][j])
+		{
+			if(game->map[i][0] == 'N' && game->map[i][1] == 'O')
+			{
+				game->ply_map->NO++;
+				checkitValid(game, i);
+			}
+			if(game->map[i][0] == 'S' && game->map[i][1] == 'O')
+			{
+				game->ply_map->SO++;
+				checkitValid(game, i);
+			}
+			if(game->map[i][0] == 'W' && game->map[i][1] == 'E')
+			{
+				game->ply_map->WE++;
+				checkitValid(game, i);
+			}
+			if(game->map[i][0] == 'C' && game->map[i][1] == ' ')
+			{
+				game->ply_map->C++;
+				checkitValid(game, i);
+			}
+			if(game->map[i][0] == 'F' && game->map[i][1] == ' ')
+			{
+				game->ply_map->F++;
+				checkitValid(game, i);
+			}
+			j++;
+		}
+		i++;
+	}
+	if(game->ply_map->NO != 1 || game->ply_map->SO != 1 || game->ply_map->WE != 1 || game->ply_map->C != 1 || game->ply_map->F != 1)
+		ft_error_exit("error\n");
 }
 
 char	**read_map(char *name)

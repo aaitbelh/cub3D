@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 11:41:37 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:18:29 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void correct_angle(t_game *game)
 
 int  update(t_game *game)
 {
-	mlx_clear_window(game->mlx, game->win);
+	// mlx_clear_window(game->mlx, game->win);
 	// draw_it(game);
 	// draw_cyrcle(game, game->line);
 	// draw_line(game, game->line, 50);
@@ -232,8 +232,8 @@ int main(int ac, char **av)
 	initializeData(ac, av, data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
-	data->player->x = 3;
-	data->player->y = 2;
+	data->player->x = 12;
+	data->player->y = 3;
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);
