@@ -78,6 +78,7 @@ typedef struct s_player
 	int turndaraction;
 	int walkdaraction;
 	float rotation_speed;
+	char	rederction;
 	int tab[500];
 } t_player;
 

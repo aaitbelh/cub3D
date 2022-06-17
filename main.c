@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 16:18:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:55:25 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,8 +232,8 @@ int main(int ac, char **av)
 	initializeData(ac, av, data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
-	data->player->x = 12;
-	data->player->y = 3;
+	data->player->x = 6;
+	data->player->y = 15;
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);
