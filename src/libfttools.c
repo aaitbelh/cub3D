@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 11:54:41 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/05/28 16:56:32 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:04:44 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,4 @@ char	*ft_strjoin(char *s1, char *s2)
 	str[i] = '\0';
 	return (str);
 }
+

@@ -12,7 +12,7 @@
 
 
 # define FOV_ANGLE 60 * (M_PI / 180)
-# define NUM_RAYS 900
+# define NUM_RAYS 1800
 
 typedef struct s_ray
 {
@@ -50,11 +50,15 @@ typedef struct s_maps
 	int width;
 	int hight;
 	int NO;
-	int SO;
+	int SE;
 	int WE;
 	int EA;
 	int F;
 	int C;
+	void	*Ntexture;
+	void	*Stexture;
+	void	*Wtexture;
+	void	*Etexture;
 } t_maps;
 
 typedef	struct s_img
@@ -123,4 +127,5 @@ char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	checkElement(t_game *game);
 void 	checkitValid(t_game *game, int  i);
+char	*ft_strtrim(char const *s1, char const *set);
 #endif

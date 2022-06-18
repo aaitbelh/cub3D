@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/18 11:46:12 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:43:59 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_map(char **str, t_game *game)
 	int	j;
 	int	k;
 
-	i = 0;
+	i = 6;
 	while (str[i])
 	{
 		j = 0;
@@ -99,7 +99,7 @@ void getPlayerPosition(t_game *game)
 	int	j;
 	int	count;
 
-	i = 4;
+	i = 6;
 	count = 0;
 	while (game->map[i])
 	{
@@ -123,59 +123,46 @@ void getPlayerPosition(t_game *game)
 		ft_error_exit("error\n");
 }
 
-void checkitValid(t_game *game, int  i)
+void whatTypeis(t_game *game, char **str)
 {
-	
-	void *ptr;
-	int	j;
-	int LOL;
-
-	j = 0;
-	LOL = 0;
-	if(game->map[i][0]  == 'N')
+	void	*ptr;
+	int		LOL;
+	if(!ft_strcmp(str[0], "NO") || !ft_strcmp(str[0], "SE") || !ft_strcmp(str[0], "WE") || !ft_strcmp(str[0], "EA"))
 	{
-		j = 2;
-		while(game->map[i][j] && j == ' ')
-			j++;
-		j++;
-		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
+		ptr = mlx_png_file_to_image(game->mlx, str[1], &LOL, &LOL);
 		if(!ptr)
-		{
-			printf("%s\n", &game->map[i][j]);
 			ft_error_exit("error1\n");
-		}
+		if(!ft_strcmp(str[0], "NO"))
+		{
+			game->ply_map->Ntexture = ptr;
+			game->ply_map->NO++;
 
+		}
+		if(!ft_strcmp(str[0], "SE"))
+		{
+			game->ply_map->Stexture = ptr;
+			game->ply_map->SE++;
+		}
+		if(!ft_strcmp(str[0], "WE"))
+		{
+			game->ply_map->Wtexture = ptr;
+			game->ply_map->WE++;
+		}
+		if(!ft_strcmp(str[0], "EA"))
+		{
+			game->ply_map->Etexture = ptr;
+			game->ply_map->EA++;
+		}
 	}
-	else if (game->map[i][0] == 'S')
+	else if(!ft_strcmp(str[0], "F") || !ft_strcmp(str[0], "C"))
 	{
-		j = 2;
-		while(j == ' ' &&  game->map[i][j])
-			j++;
-		j++;
-		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
-		if(!ptr)
-			ft_error_exit("error2\n");
+		if(!ft_strcmp(str[0], "F"))
+			game->ply_map->F++;
+		if(!ft_strcmp(str[0], "C"))
+			game->ply_map->C++;
 	}
-	else if (game->map[i][0] == 'W')
-	{
-		j = 2;
-		while(j == ' ' &&  game->map[i][j])
-			j++;
-		j++;
-		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
-		if(!ptr)
-			ft_error_exit("error3\n");
-	}
-	else if (game->map[j][0] == 'E')
-	{
-		j = 2;
-		while(j == ' ' &&  game->map[i][j])
-			j++;
-		j++;
-		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
-		if(!ptr)
-			ft_error_exit("error4\n");
-	}
+	else
+		ft_error_exit("error\n");
 	
 }
 
@@ -183,44 +170,20 @@ void checkElement(t_game *game)
 {
 	int	i;
 	int	j;
+	char	**str;
 
 	i = 0;
-	while(game->map[i])
+	while(game->map[i] &&  i < 6)
 	{
 		j = 0;
-		while(game->map[i][j])
-		{
-			if(game->map[i][0] == 'N' && game->map[i][1] == 'O')
-			{
-				game->ply_map->NO++;
-				checkitValid(game, i);
-			}
-			else if(game->map[i][0] == 'S' && game->map[i][1] == 'O')
-			{
-				game->ply_map->SO++;
-				checkitValid(game, i);
-			}
-			else if(game->map[i][0] == 'W' && game->map[i][1] == 'E')
-			{
-				game->ply_map->WE++;
-				checkitValid(game, i);
-			}
-			else if(game->map[i][0] == 'C' && game->map[i][1] == ' ')
-			{
-				game->ply_map->C++;
-				checkitValid(game, i);
-			}
-			else if(game->map[i][0] == 'F' && game->map[i][1] == ' ')
-			{
-				game->ply_map->F++;
-				checkitValid(game, i);
-			}
-			j++;
-		}
+		str = ft_split(game->map[i], ' ');
+		whatTypeis(game, str);
+		TwoDfree(str);
 		i++;
 	}
-	// if(game->ply_map->NO != 1 || game->ply_map->SO != 1 || game->ply_map->WE != 1 || game->ply_map->C != 1 || game->ply_map->F != 1)
-	// 	ft_error_exit("error\n");
+	printf("%d %d\n", game->ply_map->C, game->ply_map->F);
+	if(game->ply_map->NO != 1 || game->ply_map->SE != 1 || game->ply_map->WE != 1 || game->ply_map->EA != 1 || game->ply_map->F != 1 || game->ply_map->C != 1)
+		ft_error_exit("error\n");
 	getPlayerPosition(game);
 }
 

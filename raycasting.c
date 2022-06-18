@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/17 14:19:26 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:48:20 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,9 @@ void	drawWalls(t_game *game)
 	int	tmp;
 
 	i = -1;
-	game->t.img = mlx_new_image(game->mlx, 1000, 1000);
+	game->t.img = mlx_new_image(game->mlx, 1800, 900);
 	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits, &game->t.size_line, &tmp);
-	while (++i < 900)
+	while (++i < 1800)
 	{
 		game->rays[i].sliceHeight = getSliceHeight(game, i);
 		fillImage(game, i);
@@ -219,7 +219,7 @@ void raycasting(t_game *game)
 
 	i = -1;
 	game->rayangle = (game->player->rotation_angle - M_PI / 6);
-	while (++i < 900)
+	while (++i < 1800)
 	{
 		game->rayangle = normalizeAngle(game->rayangle);
 		rayFacing(game->rayangle, game);
@@ -238,7 +238,7 @@ void raycasting(t_game *game)
 		}
 		game->rays[i].HitDistance = D;
 		game->rays[i].HitDistance = correctDistance(game->rays[i].HitDistance, game);
-		game->rayangle += M_PI / 2700;
+		game->rayangle += M_PI / 5400;
 	}
 	drawWalls(game);
 }

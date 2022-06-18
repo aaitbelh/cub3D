@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/18 11:24:55 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:48:40 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void initializeMap(t_game *game)
 {
 	game->ply_map->C = 0;
 	game->ply_map->NO = 0;
-	game->ply_map->SO = 0;
+	game->ply_map->SE = 0;
 	game->ply_map->WE = 0;
 	game->ply_map->EA = 0;
 	game->ply_map->F = 0;
@@ -28,17 +28,17 @@ void initializeData(int ac, char **av, t_game *data)
 	data->ply_map = malloc(sizeof(t_maps));
 	data->player = malloc(sizeof(t_player));
 	data->line = malloc(sizeof(t_line));
-	initializeMap(data);
 	data->map_name  = ft_strdup(av[ac - 1]);
-	data->rays = malloc(sizeof(t_ray) * NUM_RAYS);
+	data->rays = malloc(sizeof(t_ray) * 1800);
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
+	initializeMap(data);
 	checkElement(data);
 	check_map(data->map, data);
 	count_w_h(data);
 	fix_map(data);
-	data->player->rotation_angle = M_PI* 2;
+	data->player->rotation_angle = M_PI * 2;
 	data->player->rotation_speed = 3 * (M_PI / 180);
 	data->player->move_speed = 0.05;
 	for(int i  = 0; i <= 2 ; i++)

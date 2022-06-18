@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/18 11:10:53 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:44:00 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ int main(int ac, char **av)
 	t_game *data;
 	data = malloc(sizeof(t_game));
 	data->mlx  = mlx_init();
-	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
+	data->win = mlx_new_window(data->mlx, 1800 ,900, "prototype");
 	initializeData(ac, av, data);
 	data->player->x = 6;
 	data->player->y = 15;
