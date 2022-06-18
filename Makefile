@@ -2,7 +2,6 @@ NAME = cub3d
 
 CC = gcc
 
-MLX = libmlx.dylib
 
 CFLAGS = -g -fsanitize=address -Wall -Werror -Wextra
 
@@ -12,18 +11,16 @@ OBJS = $(SRCS:.c=.o)
 
 USER  = aaitbelh
 
-XFLAGS = -lm -lmlx -framework OpenGL -framework Appkit
-
 
 all : $(NAME)
 $(NAME) : $(OBJS)
 	make -C minilibx
-	mv minilibx/$(MLX) .
-	$(CC) $(CFLAGS) $(OBJS) $(XFLAGS) $(MLX) -o $(NAME)
+	mv minilibx/libmlx.dylib .
+	$(CC) $(CFLAGS) $(OBJS) libmlx.dylib  -o $(NAME)
 
 clean:
 	make -C minilibx clean
-	rm -f $(OBJS)
+	rm -f $(OBJS) libmlx.dylib
 
 fclean: clean
 	rm -f $(NAME)

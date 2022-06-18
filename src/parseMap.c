@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 21:54:21 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:46:12 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void getPlayerPosition(t_game *game)
 	int	j;
 	int	count;
 
-	i = 5;
+	i = 4;
 	count = 0;
 	while (game->map[i])
 	{
@@ -108,14 +108,13 @@ void getPlayerPosition(t_game *game)
 		{
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
+
 				game->player->x = j;
 				game->player->y = i;
 				game->player->rederction = game->map[i][j];
 				game->map[i][j] = '0';
 				count++;
 			}
-			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
-				ft_error_exit("error\n");
 			j++;
 		}
 		i++;
@@ -132,23 +131,27 @@ void checkitValid(t_game *game, int  i)
 	int LOL;
 
 	j = 0;
+	LOL = 0;
 	if(game->map[i][0]  == 'N')
 	{
 		j = 2;
-		while(j == ' ' &&  game->map[i][j])
+		while(game->map[i][j] && j == ' ')
 			j++;
+		j++;
 		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
 		if(!ptr)
 		{
 			printf("%s\n", &game->map[i][j]);
-			ft_error_exit("error\n");
+			ft_error_exit("error1\n");
 		}
+
 	}
 	else if (game->map[i][0] == 'S')
 	{
 		j = 2;
 		while(j == ' ' &&  game->map[i][j])
 			j++;
+		j++;
 		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
 		if(!ptr)
 			ft_error_exit("error2\n");
@@ -158,6 +161,7 @@ void checkitValid(t_game *game, int  i)
 		j = 2;
 		while(j == ' ' &&  game->map[i][j])
 			j++;
+		j++;
 		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
 		if(!ptr)
 			ft_error_exit("error3\n");
@@ -167,6 +171,7 @@ void checkitValid(t_game *game, int  i)
 		j = 2;
 		while(j == ' ' &&  game->map[i][j])
 			j++;
+		j++;
 		ptr = mlx_png_file_to_image(game->mlx, &game->map[i][j], &LOL, &LOL);
 		if(!ptr)
 			ft_error_exit("error4\n");
@@ -214,8 +219,9 @@ void checkElement(t_game *game)
 		}
 		i++;
 	}
-	if(game->ply_map->NO != 1 || game->ply_map->SO != 1 || game->ply_map->WE != 1 || game->ply_map->C != 1 || game->ply_map->F != 1)
-		ft_error_exit("error\n");
+	// if(game->ply_map->NO != 1 || game->ply_map->SO != 1 || game->ply_map->WE != 1 || game->ply_map->C != 1 || game->ply_map->F != 1)
+	// 	ft_error_exit("error\n");
+	getPlayerPosition(game);
 }
 
 char	**read_map(char *name)

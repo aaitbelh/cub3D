@@ -6,12 +6,12 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 21:55:25 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/18 11:10:53 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "include/cub3d.h"
+#include "minilibx/mlx.h"
 
 
 
@@ -224,14 +224,13 @@ int redCross(int Key)
 }
 int main(int ac, char **av)
 {
-
 	if(ac > 2 || ac < 2)
 		ft_error_exit("not enough argument\n");
 	t_game *data;
 	data = malloc(sizeof(t_game));
-	initializeData(ac, av, data);
-	data->mlx = mlx_init();
+	data->mlx  = mlx_init();
 	data->win = mlx_new_window(data->mlx, 900 ,900, "prototype");
+	initializeData(ac, av, data);
 	data->player->x = 6;
 	data->player->y = 15;
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
