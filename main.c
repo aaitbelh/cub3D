@@ -6,31 +6,22 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/18 17:44:00 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/21 15:12:51 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
 #include "minilibx/mlx.h"
 
-
-
-void	draw_line(t_game *game, t_line *line, int len)
+void	draw_line(t_game *game, int len)
 {
 	float	x;
 	float	y;
-	float	l;
-	float	step = 0.1;
-
-	line->offset_x  = game->player->x *  50;
-	line->offset_y  = game->player->y *  50;
-	l = 0.0;
-	while (l < len)
+	for(int i = 0; i < len; i++)
 	{
-		x = cos(game->player->rotation_angle) * l;
-		y = sin(game->player->rotation_angle) * l;
-		mlx_pixel_put(game->mlx,game->win, line->offset_x + x, line->offset_y + y, 0xFF0000);
-		l += step;
+		x = (game->player->x * 50) + game->player->DirX * i;
+		y = (game->player->y * 50) + game->player->DirY * i;
+		mlx_pixel_put(game->mlx, game->win, x, y, 0x00FF00);
 	}
 }
 
@@ -108,11 +99,13 @@ void correct_angle(t_game *game)
 
 int  update(t_game *game)
 {
-	// mlx_clear_window(game->mlx, game->win);
-	// draw_it(game);
-	// draw_cyrcle(game, game->line);
-	// draw_line(game, game->line, 50);
-	raycasting(game);
+	mlx_clear_window(game->mlx, game->win);
+	draw_it(game);
+		printf("%f\n", game->player->DirX);
+	printf("%f\n", game->player->DirY);
+	draw_cyrcle(game, game->line);
+	draw_line(game, 50);
+	// raycasting(game);
 	correct_angle(game);
 	return (1);
 }
@@ -139,14 +132,14 @@ int render(t_game *game)
 		move_up(game);
 	if(game->player->tab[1])
 		move_down(game);
-	if(game->player->tab[124])
-		game->player->rotation_angle += game->player->rotation_speed;
-	if(game->player->tab[123])
-		game->player->rotation_angle -= game->player->rotation_speed;
-	if(game->player->tab[2])
-		move_right(game);
 	if(game->player->tab[0])
 		move_left(game);
+	if(game->player->tab[2])
+		move_right(game);
+	if(game->player->tab[124])
+		rotate_right(game);
+	if(game->player->tab[123])
+		rotate_left(game);
 	update(game);
 	return (1);
 }
@@ -229,13 +222,19 @@ int main(int ac, char **av)
 	t_game *data;
 	data = malloc(sizeof(t_game));
 	data->mlx  = mlx_init();
+	if(!data->mlx)
+		exit(1);
 	data->win = mlx_new_window(data->mlx, 1800 ,900, "prototype");
+	if(!data->win)
+		exit(1);
 	initializeData(ac, av, data);
 	data->player->x = 6;
 	data->player->y = 15;
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);
+	data->player->x = 4;
+	data->player->y = 2;
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 }

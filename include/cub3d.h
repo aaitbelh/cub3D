@@ -47,14 +47,16 @@ typedef struct s_line
 
 typedef struct s_maps
 {
-	int width;
-	int hight;
-	int NO;
-	int SE;
-	int WE;
-	int EA;
-	int F;
-	int C;
+	int		width;
+	int		hight;
+	int		NO;
+	int		SE;
+	int		WE;
+	int		EA;
+	int		F;
+	int		C;
+	int		Fcolor;
+	int		Ccolor;
 	void	*Ntexture;
 	void	*Stexture;
 	void	*Wtexture;
@@ -83,6 +85,11 @@ typedef struct s_player
 	int walkdaraction;
 	float rotation_speed;
 	char	rederction;
+	float DirX;
+	float DirY;
+	float planeX;
+	float planeY;
+	float rot_speed;
 	int tab[500];
 } t_player;
 
@@ -115,6 +122,8 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 void	move_right(t_game *game);
 void	move_left(t_game *game);
+void 	rotate_left(t_game *game);
+void 	rotate_right(t_game *game);
 void	count_w_h(t_game *game);
 void	raycasting(t_game *game);
 int		mapHasWallAt(t_game *game, float x, float y);
@@ -127,5 +136,8 @@ char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	checkElement(t_game *game);
 void 	checkitValid(t_game *game, int  i);
-char	*ft_strtrim(char const *s1, char const *set);
+int		ft_rgb_to_hex(int r, int g, int b);
+int		ft_atoi(char *str);
+char	*ft_strtrim(char *s1, char c);
+
 #endif

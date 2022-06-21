@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/18 19:48:40 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/21 11:22:54 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,21 @@ void initializeData(int ac, char **av, t_game *data)
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
 	initializeMap(data);
-	checkElement(data);
-	check_map(data->map, data);
-	count_w_h(data);
-	fix_map(data);
+	data->player->DirX = -1;
+	data->player->DirY = 1;
+	data->player->planeX = 0;
+	data->player->planeY = 0.66;
+	// checkElement(data);
+	// check_map(data->map, data);
+	// count_w_h(data);
+	// fix_map(data);
 	data->player->rotation_angle = M_PI * 2;
-	data->player->rotation_speed = 3 * (M_PI / 180);
-	data->player->move_speed = 0.05;
-	for(int i  = 0; i <= 2 ; i++)
-		data->player->tab[i] = 0;
+	data->player->rotation_speed = 6 * (M_PI / 180);
+	data->player->move_speed = 0.1;
+	data->player->rot_speed = 0.1;
+	data->player->tab[0] = 0;
+	data->player->tab[1] = 0;
+	data->player->tab[2] = 0;
 	data->player->tab[13] = 0;
 	data->player->tab[123] = 0;
 	data->player->tab[124] = 0;
