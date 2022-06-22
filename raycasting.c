@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/20 05:19:52 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/22 06:36:19 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	put_pixel_in_image(t_game *game, int i, int j, int color)
 	*(unsigned int *)a = color;
 }
 
-void	fillImage(t_game *game, int i, int wallStart, int wallEnd)
+void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 {
 	int	j;
-	
+
 	j = -1;
 	while (++j < wallStart)
 		put_pixel_in_image(game, i, j, 0xFFFFFF);
@@ -43,8 +43,7 @@ void	fillImage(t_game *game, int i, int wallStart, int wallEnd)
 		put_pixel_in_image(game, i, j, 0x000000);
 }
 
-
-void	getDeltaDist(t_ray *r)
+void	get_delta_dist(t_ray *r)
 {
 	if (r->rayDirX == 0)
 		r->deltaDistX = 1e30;
@@ -56,32 +55,32 @@ void	getDeltaDist(t_ray *r)
 		r->deltaDistY = fabs(1 / r->rayDirY);
 }
 
-void	getSideDist(t_game *game, t_ray *r)
+void	get_side_dist(t_game *game, t_ray *r)
 {
-	getDeltaDist(r);
+	get_delta_dist(r);
 	if (r->rayDirX < 0)
-    {
-    	r->stepX = -1;
-    	r->sideDistX = (game->player->x - r->mapX) * r->deltaDistX;
-    }
-    else
-    {
-    	r->stepX = 1;
-    	r->sideDistX = (r->mapX + 1.0 - game->player->x) * r->deltaDistX;
-    }
-    if (r->rayDirY < 0)
-    {
-    	r->stepY = -1;
-    	r->sideDistY = (game->player->y - r->mapY) * r->deltaDistY;
-    }
-    else
-    {
-    	r->stepY = 1;
-    	r->sideDistY = (r->mapY + 1.0 - game->player->y) * r->deltaDistY;
-    }
+	{
+		r->stepX = -1;
+		r->sideDistX = (game->player->x - r->mapX) * r->deltaDistX;
+	}
+	else
+	{
+		r->stepX = 1;
+		r->sideDistX = (r->mapX + 1.0 - game->player->x) * r->deltaDistX;
+	}
+	if (r->rayDirY < 0)
+	{
+		r->stepY = -1;
+		r->sideDistY = (game->player->y - r->mapY) * r->deltaDistY;
+	}
+	else
+	{
+		r->stepY = 1;
+		r->sideDistY = (r->mapY + 1.0 - game->player->y) * r->deltaDistY;
+	}
 }
 
-void	getHitDistance(t_game *game, t_ray *r)
+void	get_hit_distance(t_game *game, t_ray *r)
 {
 	int	hit;
 
@@ -89,17 +88,17 @@ void	getHitDistance(t_game *game, t_ray *r)
 	while (hit == 0)
 	{
 		if (r->sideDistX < r->sideDistY)
-    	{
-    		r->sideDistX += r->deltaDistX;
-    		r->mapX += r->stepX;
+		{
+			r->sideDistX += r->deltaDistX;
+			r->mapX += r->stepX;
 			r->side = 0;
-    	}
-    	else
-    	{
-    		r->sideDistY += r->deltaDistY;
-    		r->mapY += r->stepY;
+		}
+		else
+		{
+			r->sideDistY += r->deltaDistY;
+			r->mapY += r->stepY;
 			r->side = 1;
-    	}
+		}
 		if (game->map[r->mapY][r->mapX] == '1')
 			hit = 1;
 	}
@@ -109,10 +108,10 @@ void	getHitDistance(t_game *game, t_ray *r)
 		r->perpWallDist = (r->sideDistY - r->deltaDistY);
 }
 
-void	getLineHeight(t_ray *r)
+void	get_line_height(t_ray *r)
 {
 	r->lineHeight = (int)(900 / r->perpWallDist);
-	r->drawStart =  ((-1 * r->lineHeight) / 2) + 450;
+	r->drawStart = ((-1 * r->lineHeight) / 2) + 450;
 	if (r->drawStart < 0)
 		r->drawStart = 0;
 	r->drawEnd = (r->lineHeight / 2) + 450;
@@ -120,7 +119,7 @@ void	getLineHeight(t_ray *r)
 		r->drawEnd = 899;
 }
 
-void rayCasting(t_game *game)
+void	ray_casting(t_game *game)
 {
 	int		i;
 	int		tmp;
@@ -128,7 +127,8 @@ void rayCasting(t_game *game)
 
 	r = game->ray;
 	game->t.img = mlx_new_image(game->mlx, 1800, 900);
- 	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits, &game->t.size_line, &tmp);
+	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits,
+			&game->t.size_line, &tmp);
 	i = -1;
 	while (++i < 1800)
 	{
@@ -137,10 +137,10 @@ void rayCasting(t_game *game)
 		r->rayDirY = game->player->dirY + r->planeY * r->cameraX;
 		r->mapX = (int)game->player->x;
 		r->mapY = (int)game->player->y;
-		getSideDist(game, r);
-		getHitDistance(game, r);
-		getLineHeight(r);
-		fillImage(game, i, r->drawStart, r->drawEnd);
+		get_side_dist(game, r);
+		get_hit_distance(game, r);
+		get_line_height(r);
+		fill_image(game, i, r->drawStart, r->drawEnd);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);

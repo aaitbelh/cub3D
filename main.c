@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 05:56:47 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/22 06:37:37 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int  update(t_game *game)
 	// draw_it(game);
 	// draw_cyrcle(game, game->line);
 	// draw_line(game, game->line, 50);
-	rayCasting(game);
+	ray_casting(game);
 	correct_angle(game);
 	return (1);
 }
