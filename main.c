@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 06:37:37 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/22 13:53:14 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ char	**makeMapRect(t_game *game)
 	new = malloc(sizeof(char *) * (i + 1));
 	tmp = 0;
 	tmp = ft_strlen(game->map[0]);
-	i = 1;
+	i = 0;
 	while(game->map[i])
 	{
 		if(tmp < ft_strlen(game->map[i]))
@@ -193,7 +193,6 @@ char	**makeMapRect(t_game *game)
 		i++;
 	}
 	new[i] = NULL;
-	TwoDfree(game->map);
 	return (new);
 } 
 
@@ -201,7 +200,7 @@ void	fix_map(t_game *game)
 {
 	int	i;
 	int	j;
-
+	
 	i = 0;
 	while(game->map[i])
 	{
@@ -229,9 +228,9 @@ int main(int ac, char **av)
 		ft_error_exit("not enough argument\n");
 	t_game *data;
 	data = malloc(sizeof(t_game));
-	initializeData(ac, av, data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1800 ,900, "prototype");
+	initializeData(ac, av, data);
 	data->player->x = 12;
 	data->player->y = 2;
 	data->player->dirX = -1.0;

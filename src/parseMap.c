@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/17 12:38:33 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/22 12:21:08 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	count_w_h(t_game *game)
 	game->ply_map->hight = hight;
 	
 }
+
 
 int	check_map_name(char *str)
 {

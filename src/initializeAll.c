@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   initializeAll.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/20 05:06:41 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/22 18:37:14 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void initializeMap(t_game *game)
+{
+	game->ply_map->C = 0;
+	game->ply_map->NO = 0;
+	game->ply_map->SE = 0;
+	game->ply_map->WE = 0;
+	game->ply_map->EA = 0;
+	game->ply_map->F = 0;
+}
 
 void initializeData(int ac, char **av, t_game *data)
 {
@@ -22,9 +32,14 @@ void initializeData(int ac, char **av, t_game *data)
 	if(check_map_name(data->map_name))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(data->map_name);
-	count_w_h(data);
+	initializeMap(data);
+	checkElement(data);
+	for(int i = 0; i < 6; i++)
+		data->map++;
 	check_map(data->map, data);
 	fix_map(data);
+	getPlayerPosition(data);
+	count_w_h(data);
 	data->player->rotation_angle = M_PI* 2;
 	data->player->rotation_speed = 0.05;
 	data->player->move_speed = 0.1;

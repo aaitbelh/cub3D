@@ -48,8 +48,20 @@ typedef struct s_line
 
 typedef struct s_maps
 {
-	int width;
-	int hight;
+	int		width;
+	int		hight;
+	int		NO;
+	int		SE;
+	int		WE;
+	int		EA;
+	int		F;
+	int		C;
+	int		Fcolor;
+	int		Ccolor;
+	void	*Ntexture;
+	void	*Stexture;
+	void	*Wtexture;
+	void	*Etexture;
 } t_maps;
 
 typedef	struct s_img
@@ -73,6 +85,7 @@ typedef struct s_player
 	int turndaraction;
 	int walkdaraction;
 	float rotation_speed;
+	char rederaction;
 	int tab[500];
 	float		dirX;
 	float		dirY;
@@ -120,5 +133,9 @@ char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	rotate_right(t_game *game);
 void 	rotate_left(t_game *game);
-
+void	checkElement(t_game *game);
+char	*ft_strtrim(char *s1, char c);
+int		ft_rgb_to_hex(int r, int g, int b);
+int		ft_atoi(char *str);
+void	getPlayerPosition(t_game *game);
 #endif
