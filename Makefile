@@ -2,27 +2,24 @@ NAME = cub3d
 
 CC = gcc
 
+CFLAGS = -g3 -fsanitize=address -Wall -Werror -Wextra
 
-CFLAGS = -g -fsanitize=address
-XFLACGS = -lmlx -framework OpenGL -framework Appkit
-
-
-SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c raycasting.c src/initializeAll.c src/parseMap.c src/libfttools2.c src/ft_strtrim.c
+SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c src/initializeAll.c src/parseMap.c raycasting.c
 
 OBJS = $(SRCS:.c=.o)
 
 USER  = aaitbelh
 
+XFLAGS = -lm -lmlx -framework OpenGL -framework Appkit # MLX42/libmlx42.a -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -
+
 
 all : $(NAME)
+
 $(NAME) : $(OBJS)
-	# make -C minilibx
-	# mv minilibx/libmlx.dylib .
-	$(CC) $(CFLAGS) $(OBJS) $(XFLACGS)  -o $(NAME)
+	$(CC) $(CFLAGS)  $(OBJS) $(XFLAGS)  -o $(NAME)
 
 clean:
-	make -C minilibx clean
-	rm -f $(OBJS) libmlx.dylib
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

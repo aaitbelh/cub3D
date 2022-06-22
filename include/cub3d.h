@@ -2,7 +2,6 @@
 #define CUB3D_H
 
 
-#include "../minilibx/mlx.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -10,29 +9,31 @@
 #include "../get_next/get_next_line.h"
 #include <math.h>
 
+#include "../minilibx/mlx.h"
 
 # define FOV_ANGLE 60 * (M_PI / 180)
-# define NUM_RAYS 1800
+# define NUM_RAYS 900
 
 typedef struct s_ray
 {
-	float	rayAngle;
-	float	horzHitX;
-	float	horzHitY;
-	float	vertHitX;
-	float	vertHitY;
-	int		wasHitVert;
-	int		wasHitHorz;
-	int		isRayFacingUp;
-	int		isRayFacingDown;
-	int		isRayFacingLeft;
-	int		isRayFacingRight;
-	float	xstep;
-	float	ystep;
-	float	hDistance;
-	float	vDistance;
-	float	HitDistance;
-	float	sliceHeight;
+	float		planeX;
+	float		planeY;
+	float		deltaDistX;
+	float		deltaDistY;
+	int			stepX;
+	int			stepY;
+	float		sideDistX;
+	float		sideDistY;
+	int			side;
+	float		perpWallDist;
+	int			lineHeight;
+	int			drawStart;
+	int			drawEnd;
+	float		cameraX;
+	float		rayDirX;
+	float		rayDirY;
+	int			mapX;
+	int			mapY;
 }	t_ray;
 
 
@@ -47,20 +48,8 @@ typedef struct s_line
 
 typedef struct s_maps
 {
-	int		width;
-	int		hight;
-	int		NO;
-	int		SE;
-	int		WE;
-	int		EA;
-	int		F;
-	int		C;
-	int		Fcolor;
-	int		Ccolor;
-	void	*Ntexture;
-	void	*Stexture;
-	void	*Wtexture;
-	void	*Etexture;
+	int width;
+	int hight;
 } t_maps;
 
 typedef	struct s_img
@@ -84,13 +73,9 @@ typedef struct s_player
 	int turndaraction;
 	int walkdaraction;
 	float rotation_speed;
-	char	rederction;
-	float DirX;
-	float DirY;
-	float planeX;
-	float planeY;
-	float rot_speed;
 	int tab[500];
+	float		dirX;
+	float		dirY;
 } t_player;
 
 typedef struct s_game
@@ -105,10 +90,11 @@ typedef struct s_game
 	void		*cube;
 	void		*cyrcle;
 	void		*background;
-	t_ray		*rays;
+	t_ray		*ray;
 	float		rayangle;
 	float		P_D;
 	t_img		t;
+	
 } t_game;
 
 void	ft_error_exit(char *str);
@@ -122,10 +108,8 @@ void	move_up(t_game *game);
 void	move_down(t_game *game);
 void	move_right(t_game *game);
 void	move_left(t_game *game);
-void 	rotate_left(t_game *game);
-void 	rotate_right(t_game *game);
 void	count_w_h(t_game *game);
-void	raycasting(t_game *game);
+void	rayCasting(t_game *game);
 int		mapHasWallAt(t_game *game, float x, float y);
 void	drawRay(t_game *game,float D);
 void	TwoDfree(char **table);
@@ -134,10 +118,7 @@ void	check_map(char **str, t_game *game);
 int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
-void	checkElement(t_game *game);
-void 	checkitValid(t_game *game, int  i);
-int		ft_rgb_to_hex(int r, int g, int b);
-int		ft_atoi(char *str);
-char	*ft_strtrim(char *s1, char c);
+void	rotate_right(t_game *game);
+void 	rotate_left(t_game *game);
 
 #endif

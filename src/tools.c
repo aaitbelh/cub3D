@@ -21,6 +21,7 @@ void	ft_error_exit(char *str)
 int		ft_rgb_to_hex(int r, int g, int b)
 {
 	int	hex;
+
 	hex = r * 65536 + g * 256 + b;
 	return (hex);
 }

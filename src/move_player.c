@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/21 15:12:44 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/22 06:00:02 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,51 +15,90 @@
 #include <string.h>
 #include <math.h>
 
-
-
 void move_up(t_game *game)
 {
-	game->player->x += game->player->DirX * game->player->move_speed;
-	game->player->y += game->player->DirY * game->player->move_speed;
+	float	tmp_x;
+	float	tmp_y;
+
+	tmp_x = game->player->x + game->player->dirX * game->player->move_speed;
+	tmp_y = game->player->y + game->player->dirY * game->player->move_speed;
+	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
+	{
+		game->player->x = tmp_x;
+		game->player->y = tmp_y;
+	}
+	
 }
 void move_down(t_game *game)
 {
-	game->player->x -= game->player->DirX * game->player->move_speed;
-	game->player->y -= game->player->DirY * game->player->move_speed;
-	
+	float	tmp_x;
+	float	tmp_y;
+
+	tmp_x = game->player->x - game->player->dirX * game->player->move_speed;
+	tmp_y = game->player->y - game->player->dirY * game->player->move_speed;
+	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
+	{
+		game->player->x = tmp_x;
+		game->player->y = tmp_y;
+	}
 }
 
-void move_left(t_game *game)
+void	move_left(t_game *game)
 {
-	float tmp_DirX = game->player->DirX * cos(-1.57) - game->player->DirY * sin(-1.57);
-	float tmp_DirY = game->player->DirX * sin(-1.57) + game->player->DirY * cos(-1.57);
-	game->player->x += tmp_DirX * game->player->move_speed;
-	game->player->y += tmp_DirY * game->player->move_speed;
+	float	tmp_x;
+	float	tmp_y;
+	float	tmp_dirX;
+	float	tmp_dirY;
+
+	tmp_dirX = game->player->dirX * cos((M_PI / 2))
+		- game->player->dirY * sin((M_PI / 2));
+	tmp_dirY = game->player->dirX * sin((M_PI / 2))
+		+ game->player->dirY * cos((M_PI / 2));
+	tmp_x = game->player->x + tmp_dirX * game->player->move_speed;
+	tmp_y = game->player->y + tmp_dirY * game->player->move_speed;
+	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
+	{
+		game->player->x = tmp_x;
+		game->player->y = tmp_y;
+	}
 }
 
-void move_right(t_game *game)
+void	move_right(t_game *game)
 {
-	float tmp_DirX= game->player->DirX * cos(1.57) - game->player->DirY * sin(1.57);
-	float tmp_DirY = game->player->DirX * sin(1.57) + game->player->DirY * cos(1.57);
-	game->player->x += tmp_DirX * game->player->move_speed;
-	game->player->y += tmp_DirY * game->player->move_speed;
+	float	tmp_x;
+	float	tmp_y;
+	float	tmp_dirX;
+	float	tmp_dirY;
 
+	tmp_dirX = game->player->dirX * -cos((M_PI / 2))
+		- game->player->dirY * -sin((M_PI / 2));
+	tmp_dirY = game->player->dirX * -sin((M_PI / 2))
+		+ game->player->dirY * -cos((M_PI / 2));
+	tmp_x = game->player->x + tmp_dirX * game->player->move_speed;
+	tmp_y = game->player->y + tmp_dirY * game->player->move_speed;
+	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
+	{
+		game->player->x = tmp_x;
+		game->player->y = tmp_y;
+	}
 }
-void rotate_right(t_game *game)
+
+void rotate_left(t_game *game)
 {
-	float oldDirX = game->player->DirX;
-	game->player->DirX = game->player->DirX * cos(game->player->rot_speed) - game->player->DirY * sin(game->player->rot_speed);
-	game->player->DirY = oldDirX * sin(game->player->rot_speed) + game->player->DirY * cos(game->player->rot_speed);
-	float oldPlaneX = game->player->planeX;
-	game->player->planeX = game->player->planeX * cos(game->player->rot_speed) - game->player->planeY * sin(game->player->rot_speed);
-	game->player->planeY = oldPlaneX * sin(game->player->rot_speed) + game->player->planeY * cos(game->player->rot_speed);
+	float oldDirX = game->player->dirX;
+	game->player->dirX = game->player->dirX * cos(game->player->rotation_speed) - game->player->dirY * sin(game->player->rotation_speed);
+	game->player->dirY = oldDirX * sin(game->player->rotation_speed) + game->player->dirY * cos(game->player->rotation_speed);
+	float oldPlaneX = game->ray->planeX;
+	game->ray->planeX = game->ray->planeX * cos(game->player->rotation_speed) - game->ray->planeY * sin(game->player->rotation_speed);
+	game->ray->planeY = oldPlaneX * sin(game->player->rotation_speed) + game->ray->planeY * cos(game->player->rotation_speed);
 }
-void	rotate_left(t_game *game)
+void	rotate_right(t_game *game)
 {
-	game->player->DirX = game->player->DirX * cos(-game->player->rot_speed) - game->player->DirY * sin(-game->player->rot_speed);
-	game->player->DirY = game->player->DirX * sin(-game->player->rot_speed) + game->player->DirY * cos(-game->player->rot_speed);
-	float oldDirX = game->player->DirX;
-	float oldPlaneX = game->player->planeX;
-	game->player->planeX = game->player->planeX * cos(-game->player->rot_speed) - game->player->planeY * sin(-game->player->rot_speed);
-	game->player->planeY = oldPlaneX * sin(-game->player->rot_speed) + game->player->planeY * cos(-game->player->rot_speed);
+	game->player->dirX = game->player->dirX * cos(-game->player->rotation_speed) - game->player->dirY * sin(-game->player->rotation_speed);
+	game->player->dirY = game->player->dirX * sin(-game->player->rotation_speed) + game->player->dirY * cos(-game->player->rotation_speed);
+	//float oldDirX = game->player->dirX;
+	float oldPlaneX = game->ray->planeX;
+	game->ray->planeX = game->ray->planeX * cos(-game->player->rotation_speed) - game->ray->planeY * sin(-game->player->rotation_speed);
+	game->ray->planeY = oldPlaneX * sin(-game->player->rotation_speed) + game->ray->planeY * cos(-game->player->rotation_speed);
 }
+
