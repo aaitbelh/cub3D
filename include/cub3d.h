@@ -115,6 +115,7 @@ typedef struct s_game
 	char 		*colorPointer;
 	int			tbits;
 	int			tsize_line;
+	double  	Wallx;
 	int			tendian;
 	
 } t_game;

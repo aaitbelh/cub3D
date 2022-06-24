@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/24 15:53:55 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/24 15:56:52 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,12 +151,11 @@ void	ray_casting(t_game *game)
 		get_side_dist(game, r);
 		get_hit_distance(game, r);
 		get_line_height(r);
-		double	r1;
 		if (r->side == 0)
-			r1 = game->player->y + r->perpWallDist * r->rayDirY;
+			game->Wallx = game->player->y + r->perpWallDist * r->rayDirY;
 		else
-			r1 = game->player->x + r->perpWallDist * r->rayDirX;
-		game->texX = (r1 - (int)r1) * 64;
+			game->Wallx = game->player->x + r->perpWallDist * r->rayDirX;
+		game->texX = (game->Wallx - (int)game->Wallx) * 64;
 		game->step =  1.0 * 64 / r->lineHeight;
 		game->texPos = ((r->drawStart - 900 / 2) + (r->lineHeight / 2)) * game->step;
 		fill_image(game, i, r->drawStart, r->drawEnd); 
