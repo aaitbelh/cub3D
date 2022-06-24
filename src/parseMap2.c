@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 18:39:00 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/24 10:17:02 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void whatTypeis(t_game *game, char *str)
 		str++;
 	if(!ft_strcmp(type, "NO") || !ft_strcmp(type, "SE") || !ft_strcmp(type, "WE") || !ft_strcmp(type, "EA"))
 	{
-		ptr = mlx_png_file_to_image(game->mlx, "./walls.png", &LOL, &LOL);
+		ptr = mlx_png_file_to_image(game->mlx, str, &LOL, &LOL);
 		if(!ptr)
 			ft_error_exit("error : texture path is invalid\n");
 		if(!ft_strcmp(type, "NO"))

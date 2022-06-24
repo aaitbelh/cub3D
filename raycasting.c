@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/11 16:47:21 by alaajili          #+#    #+#             */
-/*   Updated: 2022/06/22 06:36:19 by alaajili         ###   ########.fr       */
+/*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
+/*   Updated: 2022/06/24 12:34:53 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
+
+
+void GetColorfromimg(t_game *game)
+{
+	
+	game->colorPointer = mlx_get_data_addr(game->ply_map->Wtexture, &game->tbits , &game->tsize_line, &game->tendian);
+}
 
 void	put_pixel_in_image(t_game *game, int i, int j, int color)
 {
@@ -23,17 +30,20 @@ void	put_pixel_in_image(t_game *game, int i, int j, int color)
 void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 {
 	int	j;
+	int *color;
 
 	j = -1;
 	while (++j < wallStart)
 		put_pixel_in_image(game, i, j, 0xFFFFFF);
 	j = wallStart;
+	GetColorfromimg(game);
 	while (j < wallEnd)
 	{
-		if (game->ray->side == 0)
-			put_pixel_in_image(game, i, j, 0xFF00FF);
-		else
-			put_pixel_in_image(game, i, j, 0x00F0F0);
+		game->texY = game->texPos;
+		game->texPos += game->step;
+		color = (int *)(game->colorPointer + (game->tsize_line * game->texY \
+		+ game->texX * (game->tbits / 8)));
+		put_pixel_in_image(game, i, j, *color);
 		j++;
 	}
 	j = wallEnd;
@@ -106,6 +116,7 @@ void	get_hit_distance(t_game *game, t_ray *r)
 		r->perpWallDist = (r->sideDistX - r->deltaDistX);
 	else
 		r->perpWallDist = (r->sideDistY - r->deltaDistY);
+		
 }
 
 void	get_line_height(t_ray *r)
@@ -140,7 +151,10 @@ void	ray_casting(t_game *game)
 		get_side_dist(game, r);
 		get_hit_distance(game, r);
 		get_line_height(r);
-		fill_image(game, i, r->drawStart, r->drawEnd);
+		game->texX = r->perpWallDist *  64;
+		game->step =  1.0 * 64 / r->lineHeight;
+		game->texPos = ((r->drawStart - 900 / 2) + (r->lineHeight / 2)) * game->step;
+		fill_image(game, i, r->drawStart, r->drawEnd); 
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);

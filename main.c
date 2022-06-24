@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 13:53:14 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:09:52 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int  update(t_game *game)
 	// draw_line(game, game->line, 50);
 	ray_casting(game);
 	correct_angle(game);
+
 	return (1);
 }
 
@@ -237,7 +238,6 @@ int main(int ac, char **av)
 	data->player->dirY = 0.0;
 	data->ray->planeX = 0.0;
 	data->ray->planeY = 0.66;
-	//rayCasting(data);
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);

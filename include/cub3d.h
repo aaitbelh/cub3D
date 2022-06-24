@@ -13,6 +13,8 @@
 
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define NUM_RAYS 900
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 
 typedef struct s_ray
 {
@@ -100,13 +102,20 @@ typedef struct s_game
 	t_line		*line;
 	void		*win;
 	void		*mlx;
-	void		*cube;
-	void		*cyrcle;
-	void		*background;
 	t_ray		*ray;
+	t_img		t;
 	float		rayangle;
 	float		P_D;
-	t_img		t;
+	//--------------------
+	uint32_t	*textures;
+	uint32_t	texX;
+	uint32_t	texY;
+	float		step;
+	float		texPos;
+	char 		*colorPointer;
+	int			tbits;
+	int			tsize_line;
+	int			tendian;
 	
 } t_game;
 
@@ -138,4 +147,5 @@ char	*ft_strtrim(char *s1, char c);
 int		ft_rgb_to_hex(int r, int g, int b);
 int		ft_atoi(char *str);
 void	getPlayerPosition(t_game *game);
+void	GetColorfromimg(t_game *game);
 #endif

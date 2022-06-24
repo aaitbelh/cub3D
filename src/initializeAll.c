@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 18:37:14 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/24 11:10:23 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void initializeData(int ac, char **av, t_game *data)
 	check_map(data->map, data);
 	fix_map(data);
 	getPlayerPosition(data);
+	GetColorfromimg(data); 
 	count_w_h(data);
 	data->player->rotation_angle = M_PI* 2;
 	data->player->rotation_speed = 0.05;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 06:00:02 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/23 19:56:57 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,11 @@ void rotate_left(t_game *game)
 }
 void	rotate_right(t_game *game)
 {
+	float oldPlaneX;
+	
+	oldPlaneX = game->ray->planeX;
 	game->player->dirX = game->player->dirX * cos(-game->player->rotation_speed) - game->player->dirY * sin(-game->player->rotation_speed);
 	game->player->dirY = game->player->dirX * sin(-game->player->rotation_speed) + game->player->dirY * cos(-game->player->rotation_speed);
-	//float oldDirX = game->player->dirX;
-	float oldPlaneX = game->ray->planeX;
 	game->ray->planeX = game->ray->planeX * cos(-game->player->rotation_speed) - game->ray->planeY * sin(-game->player->rotation_speed);
 	game->ray->planeY = oldPlaneX * sin(-game->player->rotation_speed) + game->ray->planeY * cos(-game->player->rotation_speed);
 }
