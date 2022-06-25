@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/24 11:09:52 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:51:48 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,24 +97,11 @@ void	draw_it(t_game *data)
 	}
 }
 
-
-void correct_angle(t_game *game)
-{
-	if(game->player->rotation_angle > M_PI)
-		game->player->rotation_angle -= M_PI * 2;
-	if(game->player->rotation_angle < -M_PI)
-		game->player->rotation_angle += M_PI * 2;
-}
-
 int  update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	// draw_it(game);
-	// draw_cyrcle(game, game->line);
-	// draw_line(game, game->line, 50);
 	ray_casting(game);
-	correct_angle(game);
-
+	printf("%f %f %f %f\n", game->player->dirX, game->player->dirY, game->ray->planeX, game->ray->planeY);
 	return (1);
 }
 
@@ -232,12 +219,6 @@ int main(int ac, char **av)
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1800 ,900, "prototype");
 	initializeData(ac, av, data);
-	data->player->x = 12;
-	data->player->y = 2;
-	data->player->dirX = -1.0;
-	data->player->dirY = 0.0;
-	data->ray->planeX = 0.0;
-	data->ray->planeY = 0.66;
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);

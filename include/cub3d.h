@@ -106,7 +106,6 @@ typedef struct s_game
 	t_img		t;
 	float		rayangle;
 	float		P_D;
-	//--------------------
 	uint32_t	*textures;
 	uint32_t	texX;
 	uint32_t	texY;

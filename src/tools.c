@@ -3,7 +3,8 @@
 
 void TwoDfree(char **table)
 {
-	int i =0;
+	int i;
+	i = 0;
 	while(table[i])
 	{
 		free(table[i]);

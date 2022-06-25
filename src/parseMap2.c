@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/24 10:17:02 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/25 09:10:08 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void getPlayerPosition(t_game *game)
 		i++;
 	}
 	if(count != 1)
-		ft_error_exit("player position too much\n");
+		ft_error_exit("player position not found or too much\n");
 }
 
 void getColor(t_game *game, char *str, char *type)
@@ -150,6 +150,7 @@ void checkElement(t_game *game)
 {
 	int		i;
 	char	*str;
+	char	**new;
 
 	i = 0;
 	while(game->map[i] &&  i < 6)
@@ -161,4 +162,15 @@ void checkElement(t_game *game)
 	}
 	if(game->ply_map->NO != 1 || game->ply_map->SE != 1 || game->ply_map->WE != 1 || game->ply_map->EA != 1 || game->ply_map->F != 1 || game->ply_map->C != 1)
 		ft_error_exit("Too much or missed some element\n");
+	i = 0;
+	while(game->map[i])
+		i++;
+	new = malloc(sizeof(char *) * (i + 1));
+	if(!new)
+		ft_error_exit("error in malloc\n");
+	i = 5;
+	while(game->map[++i])
+		new[i - 6] = ft_strdup(game->map[i]);
+	new[i - 6] = NULL;
+	game->map = new;
 }
