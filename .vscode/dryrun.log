@@ -1,0 +1,20 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/alaajili/Desktop/cub3D'
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o main.o main.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/libfttools.o src/libfttools.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/tools.o src/tools.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o get_next/get_next_line.o get_next/get_next_line.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o get_next/get_next_line_utils.o get_next/get_next_line_utils.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/ft_split.o src/ft_split.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/move_player.o src/move_player.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/initializeAll.o src/initializeAll.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/parseMap.o src/parseMap.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o raycasting.o raycasting.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/ft_strtrim.o src/ft_strtrim.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/libfttools2.o src/libfttools2.c
+gcc -g -fsanitize=address -Wall -Werror -Wextra   -c -o src/parseMap2.o src/parseMap2.c
+make -C minilibx
+mv minilibx/libmlx.dylib .
+gcc -g -fsanitize=address -Wall -Werror -Wextra  main.o src/libfttools.o src/tools.o get_next/get_next_line.o get_next/get_next_line_utils.o src/ft_split.o src/move_player.o src/initializeAll.o src/parseMap.o raycasting.o src/ft_strtrim.o src/libfttools2.o src/parseMap2.o libmlx.dylib -o cub3d
+make: Leaving directory `/Users/alaajili/Desktop/cub3D'
+ 

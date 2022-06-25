@@ -1,7 +1,7 @@
-NO   ./pics/eagle.png
-SE   ./pics/eagle.png
-WE   ./pics/eagle.png
-EA   ./pics/eagle.png
+NO   ./pics/redbrick.png
+SE   ./pics/bluestone.png
+WE   ./pics/colorstone.png
+EA   ./pics/wood.png
 
 F 255,0,0
 C 255,0,0

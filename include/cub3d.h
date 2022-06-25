@@ -149,4 +149,5 @@ int		ft_rgb_to_hex(int r, int g, int b);
 int		ft_atoi(char *str);
 void	getPlayerPosition(t_game *game);
 void	GetColorfromimg(t_game *game);
+
 #endif

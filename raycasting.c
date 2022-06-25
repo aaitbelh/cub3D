@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/24 15:56:52 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/24 23:42:20 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,17 @@
 
 void GetColorfromimg(t_game *game)
 {
-	
-	game->colorPointer = mlx_get_data_addr(game->ply_map->Wtexture, &game->tbits , &game->tsize_line, &game->tendian);
+	t_ray	*r;
+
+	r = game->ray;
+	if (r->side == 0 && r->rayDirX < 0)
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Wtexture, &game->tbits , &game->tsize_line, &game->tendian);
+	if (r->side == 0 && r->rayDirX >= 0)
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Etexture, &game->tbits , &game->tsize_line, &game->tendian);
+	if (r->side == 1 && r->rayDirY < 0)
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Ntexture, &game->tbits , &game->tsize_line, &game->tendian);
+	if (r->side == 1 && r->rayDirY >= 0)
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Stexture, &game->tbits , &game->tsize_line, &game->tendian);
 }
 
 void	put_pixel_in_image(t_game *game, int i, int j, int color)
