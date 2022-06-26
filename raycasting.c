@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/25 11:00:42 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:01:30 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void	get_hit_distance(t_game *game, t_ray *r)
 		r->perpWallDist = (r->sideDistX - r->deltaDistX);
 	else
 		r->perpWallDist = (r->sideDistY - r->deltaDistY);
-		
 }
 
 void	get_line_height(t_ray *r)

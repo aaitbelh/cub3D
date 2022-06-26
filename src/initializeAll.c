@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializeAll.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/25 11:33:57 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:04:41 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,33 @@
 
 void	GetDirectionOfPlayer(t_game *game)
 {
+	if (game->player->rederaction == 'W')
+	{
+		game->player->dirX = -1.0;
+		game->player->dirY = 0.0;
+		game->ray->planeX = 0.0;
+		game->ray->planeY = 0.66;
+	}
+	if (game->player->rederaction == 'E')
+	{
+		game->player->dirX = 1.0;
+		game->player->dirY = 0.0;
+		game->ray->planeX = 0.0;
+		game->ray->planeY = -0.66;
+	}
+	if(game->player->rederaction == 'N')
+	{
+		game->player->dirX = 0.0;
+		game->player->dirY = -1.0;
+		game->ray->planeX = -0.66;
+		game->ray->planeY = 0.0;
+	}
 	if(game->player->rederaction == 'S')
 	{
-		game->player->dirX = -game->player->dirX;
-		game->ray->planeX = -game->ray->planeX;
-		game->ray->planeY = -game->ray->planeY;
+		game->player->dirX = 0.0;
+		game->player->dirY = 1.0;
+		game->ray->planeX = 0.66;
+		game->ray->planeY = 0.0;
 	}
 } 
 
@@ -40,10 +62,10 @@ void initializeMap(t_game *game)
 	game->ply_map->WE = 0;
 	game->ply_map->EA = 0;
 	game->ply_map->F = 0;
-	game->player->dirX = -1.0;
-	game->player->dirY = 0.0;
-	game->ray->planeX = 0.0;
-	game->ray->planeY = 0.66;
+	// game->player->dirX = -1.0;
+	// game->player->dirY = 0.0;
+	// game->ray->planeX = 0.0;
+	// game->ray->planeY = 0.66;
 }
 
 void initializeData(int ac, char **av, t_game *data)

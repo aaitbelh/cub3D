@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/25 09:10:08 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 11:42:16 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+
 
 void getPlayerPosition(t_game *game)
 {

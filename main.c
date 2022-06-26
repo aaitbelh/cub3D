@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/25 09:51:48 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 11:04:09 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "include/cub3d.h"
-
-
 
 void	draw_line(t_game *game, t_line *line, int len)
 {
@@ -209,10 +207,11 @@ int redCross(int Key)
 	(void)Key;
 	exit(1);
 }
+
 int main(int ac, char **av)
 {
 
-	if(ac > 2 || ac < 2)
+	if(ac != 2)
 		ft_error_exit("not enough argument\n");
 	t_game *data;
 	data = malloc(sizeof(t_game));
