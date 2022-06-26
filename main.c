@@ -6,11 +6,10 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 15:04:41 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 18:41:28 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "mandatory/include/cub3d.h"
 
 

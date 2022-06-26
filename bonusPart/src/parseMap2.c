@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:04:59 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:49:58 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void getColor(t_game *game, char *str, char *type)
 	colors = ft_split(str, ',');
 	if(!ft_strcmp(type, "F"))
 	{
-		game->ply_map->f++;
+		game->ply_map->F++;
 		while(colors[i])
 		{
 			if(i < 3)
@@ -66,12 +66,12 @@ void getColor(t_game *game, char *str, char *type)
 				ft_error_exit("error in floor color N of elements\n");
 			i++;
 		}
-		game->ply_map->fcolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		game->ply_map->Fcolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
 		TwoDfree(colors);
 	}
 	if(!ft_strcmp(type, "C"))
 	{
-		game->ply_map->c++;
+		game->ply_map->C++;
 		while(colors[i])
 		{
 			if(i < 3)
@@ -84,7 +84,7 @@ void getColor(t_game *game, char *str, char *type)
 				ft_error_exit("error in celing color N of elements\n");
 			i++;
 		}
-		game->ply_map->ccolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		game->ply_map->Ccolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
 		TwoDfree(colors);
 	}
 }
@@ -120,23 +120,23 @@ void whatTypeis(t_game *game, char *str)
 			ft_error_exit("error : texture path is invalid\n");
 		if(!ft_strcmp(type, "NO"))
 		{
-			game->ply_map->ntexture = ptr;
-			game->ply_map->no++;
+			game->ply_map->Ntexture = ptr;
+			game->ply_map->NO++;
 		}
 		if(!ft_strcmp(type, "SE"))
 		{
-			game->ply_map->stexture = ptr;
-			game->ply_map->se++;
+			game->ply_map->Stexture = ptr;
+			game->ply_map->SE++;
 		}
 		if(!ft_strcmp(type, "WE"))
 		{
-			game->ply_map->wtexture = ptr;
-			game->ply_map->we++;
+			game->ply_map->Wtexture = ptr;
+			game->ply_map->WE++;
 		}
 		if(!ft_strcmp(type, "EA"))
 		{
-			game->ply_map->etexture = ptr;
-			game->ply_map->ea++;
+			game->ply_map->Etexture = ptr;
+			game->ply_map->EA++;
 		}
 	}
 	else if(!ft_strcmp(type, "F") || !ft_strcmp(type, "C"))
@@ -180,7 +180,7 @@ void checkElement(t_game *game)
 		free(str);
 		i++;
 	}
-	if(game->ply_map->no != 1 || game->ply_map->se != 1 || game->ply_map->we != 1 || game->ply_map->ea != 1 || game->ply_map->f != 1 || game->ply_map->c != 1)
+	if(game->ply_map->NO != 1 || game->ply_map->SE != 1 || game->ply_map->WE != 1 || game->ply_map->EA != 1 || game->ply_map->F != 1 || game->ply_map->C != 1)
 		ft_error_exit("Too much or missed some element\n");
 	game->map = GetNewMap(game->map);
 }

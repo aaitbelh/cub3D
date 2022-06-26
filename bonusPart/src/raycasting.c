@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:05:10 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 14:46:43 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void GetColorfromimg(t_game *game)
 
 	r = game->ray;
 	if (r->side == 0 && r->rayDirX < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->wtexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Wtexture, &game->tbits , &game->tsize_line, &game->tendian);
 	if (r->side == 0 && r->rayDirX >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->etexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Etexture, &game->tbits , &game->tsize_line, &game->tendian);
 	if (r->side == 1 && r->rayDirY < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->ntexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Ntexture, &game->tbits , &game->tsize_line, &game->tendian);
 	if (r->side == 1 && r->rayDirY >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->stexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->Stexture, &game->tbits , &game->tsize_line, &game->tendian);
 }
 
 void	put_pixel_in_image(t_game *game, int i, int j, int color)
@@ -43,7 +43,7 @@ void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 
 	j = -1;
 	while (++j < wallStart)
-		put_pixel_in_image(game, i, j, game->ply_map->ccolor);
+		put_pixel_in_image(game, i, j, 0xFFFFFF);
 	j = wallStart;
 	GetColorfromimg(game);
 	while (j < wallEnd)
@@ -59,7 +59,7 @@ void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 	if (j < 0)
 		return ;
 	while (++j < 900)
-		put_pixel_in_image(game, i, j, game->ply_map->fcolor);
+		put_pixel_in_image(game, i, j, 0x000000);
 }
 
 void	get_delta_dist(t_ray *r)

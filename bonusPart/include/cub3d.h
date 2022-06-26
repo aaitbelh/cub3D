@@ -1,26 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:08:01 by aaitbelh         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
-# define CUB3D_H
+#define CUB3D_H
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <limits.h>
-# include "../../get_next/get_next_line.h"
-# include <math.h>
-# include "../../minilibx/mlx.h"
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <limits.h>
+#include "../get_next/get_next_line.h"
+#include <math.h>
+
+#include "../../minilibx/mlx.h"
+
+# define FOV_ANGLE 60 * (M_PI / 180)
 # define NUM_RAYS 900
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
@@ -61,18 +52,18 @@ typedef struct s_maps
 {
 	int		width;
 	int		hight;
-	int		no;
-	int		se;
-	int		we;
-	int		ea;
-	int		f;
-	int		c;
-	int		fcolor;
-	int		ccolor;
-	void	*ntexture;
-	void	*stexture;
-	void	*wtexture;
-	void	*etexture;
+	int		NO;
+	int		SE;
+	int		WE;
+	int		EA;
+	int		F;
+	int		C;
+	int		Fcolor;
+	int		Ccolor;
+	void	*Ntexture;
+	void	*Stexture;
+	void	*Wtexture;
+	void	*Etexture;
 } t_maps;
 
 typedef	struct s_img
@@ -114,6 +105,7 @@ typedef struct s_game
 	t_ray		*ray;
 	t_img		t;
 	float		rayangle;
+	float		P_D;
 	uint32_t	*textures;
 	uint32_t	texX;
 	uint32_t	texY;

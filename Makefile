@@ -4,10 +4,10 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c mandatory/src/libfttools.c mandatory/src/tools.c mandatory/get_next/get_next_line.c \
-	mandatory/get_next/get_next_line_utils.c mandatory/src/ft_split.c mandatory/src/move_player.c \
+SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c \
+	get_next/get_next_line_utils.c libftTools/ft_split.c mandatory/src/move_player.c \
 	mandatory/src/initializeAll.c mandatory/src/parseMap.c mandatory/src/raycasting.c \
-	mandatory/src/ft_strtrim.c mandatory/src/libfttools2.c mandatory/src/parseMap2.c \
+	libftTools/ft_strtrim.c libftTools/libfttools2.c mandatory/src/parseMap2.c \
 
 OBJS = $(SRCS:.c=.o)
 
