@@ -3,14 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   initializeAll.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:08:20 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:45:35 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	GetDirectionOfPlayer(t_game *game)
+{
+	if (game->player->rederaction == 'W')
+	{
+		game->player->dirX = -1.0;
+		game->player->dirY = 0.0;
+		game->ray->planeX = 0.0;
+		game->ray->planeY = 0.66;
+	}
+	if (game->player->rederaction == 'E')
+	{
+		game->player->dirX = 1.0;
+		game->player->dirY = 0.0;
+		game->ray->planeX = 0.0;
+		game->ray->planeY = -0.66;
+	}
+	if(game->player->rederaction == 'N')
+	{
+		game->player->dirX = 0.0;
+		game->player->dirY = -1.0;
+		game->ray->planeX = 0.66;
+		game->ray->planeY = 0.0;
+	}
+	if(game->player->rederaction == 'S')
+	{
+		game->player->dirX = 0.0;
+		game->player->dirY = 1.0;
+		game->ray->planeX = -0.66;
+		game->ray->planeY = 0.0;
+	}
+}
 
 void initializeMap(t_game *game)
 {
@@ -30,10 +62,10 @@ void initializeMap(t_game *game)
 	game->ply_map->we = 0;
 	game->ply_map->ea = 0;
 	game->ply_map->f = 0;
-	game->player->dirX = -1.0;
-	game->player->dirY = 0.0;
-	game->ray->planeX = 0.0;
-	game->ray->planeY = 0.66;
+	// game->player->dirX = -1.0;
+	// game->player->dirY = 0.0;
+	// game->ray->planeX = 0.0;
+	// game->ray->planeY = 0.66;
 }
 
 void initializeData(int ac, char **av, t_game *data)
@@ -51,6 +83,7 @@ void initializeData(int ac, char **av, t_game *data)
 	check_map(data->map, data);
 	fix_map(data);
 	getPlayerPosition(data);
+	GetDirectionOfPlayer(data);
 	count_w_h(data);
 	data->player->rotation_speed = 0.05;
 	data->player->move_speed = 0.1;

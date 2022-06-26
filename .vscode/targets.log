@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sun Jun 26 10:45:48 2022
+# Make data base, printed on Sun Jun 26 20:43:09 2022
 
 # Variables
 
@@ -33,25 +33,21 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 5)
-CFLAGS = -g -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 7)
-SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c src/initializeAll.c src/parseMap.c raycasting.c src/ft_strtrim.c src/libfttools2.c src/parseMap2.c
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 9)
+# makefile (from `Makefile', line 12)
 OBJS = $(SRCS:.c=.o)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0000hbw00042z/T/vscode-ipc-0f21d1ac-05d5-4775-8bc0-a9474751ba07.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n0000hbw00042z/T/vscode-ipc-380c1a1c-25d6-478b-8cf1-2f28573f0cf1.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.japh4UJxfE/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.ZqRjAl1AfZ/Render
 # environment
-PATH = /goinfre/alaajili/miniconda3/bin:/Users/alaajili/.brew/bin:/Users/alaajili/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin:/Users/alaajili/goinfre/Flutter/flutter/bin:/Applications/Android Studio.app/Contents/jre/Contents/Home/bin:/Users/alaajili/Library/Android/sdk/platform-tools:/Users/alaajili/Library/Android/sdk/tools/bin
-# environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
+PATH = /usr/bin:/bin:/usr/sbin:/sbin
 # environment
 VSCODE_LOG_STACK = false
 # environment
@@ -59,13 +55,9 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.if3lwAcKW7/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.sWsc0ojlsl/Listeners
 # automatic
 %F = $(notdir $%)
-# environment
-HOMEBREW_TEMP = /tmp/alaajili/Homebrew/Temp
-# environment
-ANDROID_SDK_HOME = /Users/alaajili/Library/Android/sdk
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -83,9 +75,7 @@ VSCODE_CODE_CACHE_PATH = /Users/alaajili/Library/Application Support/Code/Cached
 # environment
 LOGNAME = alaajili
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-ZSH = /Users/alaajili/.oh-my-zsh
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -96,24 +86,20 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# environment
-HOMEBREW_CACHE = /tmp/alaajili/Homebrew/Caches
+# makefile (from `Makefile', line 7)
+SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c libftTools/ft_split.c mandatory/src/move_player.c mandatory/src/initializeAll.c mandatory/src/parseMap.c mandatory/src/raycasting.c libftTools/ft_strtrim.c libftTools/libfttools2.c mandatory/src/parseMap2.c 
 # environment
 SHLVL = 1
 # makefile (from `Makefile', line 3)
 CC = gcc
-# environment
-JAVA_HOME = /Applications/Android Studio.app/Contents/jre/Contents/Home
 # default
 MAKE_VERSION := 3.81
-# makefile (from `Makefile', line 11)
-USER = aaitbelh
+# environment
+USER = alaajili
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 1)
 NAME = cub3d
-# environment
-LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -133,7 +119,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -147,11 +133,9 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-PAGER = less
-# environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a8
+SECURITYSESSIONID = 186a7
 # automatic
 ^F = $(notdir $^)
 # default
@@ -163,9 +147,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 47633
+VSCODE_PID = 3166
 # variable set hash-table stats:
-# Load=76/1024=7%, Rehash=0, Collisions=5/105=5%
+# Load=68/1024=7%, Rehash=0, Collisions=3/96=3%
 
 # Pattern-specific Variable Values
 
@@ -173,27 +157,15 @@ VSCODE_PID = 47633
 
 # Directories
 
-# . (device 16777227, inode 5604178): 16 files, no impossibilities.
+# . (device 16777227, inode 5640287): 13 files, no impossibilities.
 
-# 16 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
-
-# Not a target:
-src/tools.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/move_player.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 all: cub3d
 #  Command-line target.
@@ -204,41 +176,38 @@ all: cub3d
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
+libftTools/libfttools2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 get_next/get_next_line.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/ft_strtrim.o:
+cub3d: main.o libftTools/libfttools.o libftTools/tools.o get_next/get_next_line.o get_next/get_next_line_utils.o libftTools/ft_split.o mandatory/src/move_player.o mandatory/src/initializeAll.o mandatory/src/parseMap.o mandatory/src/raycasting.o libftTools/ft_strtrim.o libftTools/libfttools2.o mandatory/src/parseMap2.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-cub3d: main.o src/libfttools.o src/tools.o get_next/get_next_line.o get_next/get_next_line_utils.o src/ft_split.o src/move_player.o src/initializeAll.o src/parseMap.o raycasting.o src/ft_strtrim.o src/libfttools2.o src/parseMap2.o
-#  Implicit rule search has not been done.
-#  Last modified 2022-06-26 10:44:13
+#  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 16):
+#  commands to execute (from `Makefile', line 18):
 	make -C minilibx
-	mv minilibx/libmlx.dylib .
-	$(CC) $(CFLAGS)  $(OBJS) libmlx.dylib -o $(NAME)
+	mv	minilibx/libmlx.dylib .
+	$(CC) $(CFLAGS) $(OBJS) libmlx.dylib -o $(NAME)
 	
 
 # Not a target:
-src/libfttools.o:
+mandatory/src/raycasting.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-src/parseMap2.o:
+mandatory/src/initializeAll.o:
 #  Implicit rule search has not been done.
- 
-make: *** No rule to make target `main.o', needed by `cub3d'.  Stop.
-
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -249,7 +218,7 @@ make: *** No rule to make target `main.o', needed by `cub3d'.  Stop.
 #  File has not been updated.
 
 # Not a target:
-raycasting.o:
+mandatory/src/parseMap.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -257,14 +226,14 @@ raycasting.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-26 10:44:13
+#  Last modified 2022-06-26 20:41:53
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-src/ft_split.o:
+libftTools/tools.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -273,12 +242,25 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 25):
+#  commands to execute (from `Makefile', line 27):
+	rm -rf libmlx.dylib
 	rm -f $(NAME)
 	
 
 # Not a target:
+mandatory/src/move_player.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+libftTools/ft_strtrim.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -288,29 +270,32 @@ re: fclean all
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+libftTools/libfttools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 23):
+ 
+make: *** No rule to make target `main.o', needed by `cub3d'.  Stop.
+
 	make -C minilibx clean
 	rm -f $(OBJS)
 	
 
 # Not a target:
-src/libfttools2.o:
+mandatory/src/parseMap2.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 get_next/get_next_line_utils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-src/initializeAll.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -324,13 +309,13 @@ main.o:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-src/parseMap.o:
+libftTools/ft_split.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=2/51=4%
+# Load=21/1024=2%, Rehash=0, Collisions=0/51=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -342,6 +327,6 @@ src/parseMap.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jun 26 10:45:48 2022
+# Finished Make data base on Sun Jun 26 20:43:09 2022
 
  
