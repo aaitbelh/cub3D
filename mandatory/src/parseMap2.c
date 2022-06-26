@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 11:42:16 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/26 13:49:58 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
 
 void getPlayerPosition(t_game *game)
 {
@@ -36,9 +34,7 @@ void getPlayerPosition(t_game *game)
 				count++;
 			}
 			else if(game->map[i][j] != '0' && game->map[i][j] != '1')
-			{
 				ft_error_exit("invalid charterer in map");
-			}
 			j++;
 		}
 		i++;
@@ -95,7 +91,7 @@ void getColor(t_game *game, char *str, char *type)
 
 void whatTypeis(t_game *game, char *str)
 {
-	void	*ptr = NULL;
+	void	*ptr;
 	int		LOL;
 	char	*type;
 	
@@ -145,14 +141,36 @@ void whatTypeis(t_game *game, char *str)
 	}
 	else if(!ft_strcmp(type, "F") || !ft_strcmp(type, "C"))
 		getColor(game, str, type);
+	free(type);
 	
+}
+
+char **GetNewMap(char **map)
+{
+	int		i;
+	char	**new;
+	
+	i = 6;
+	while(map[i])
+		i++;
+	new = malloc(sizeof(char*) * (i + 1));
+	if(!new)
+		ft_error_exit("error in malloc\n");
+	i = 6;
+	while(map[i])
+	{
+		new[i - 6] = ft_strdup(map[i]);
+		i++;
+	}
+	new[i - 6] = NULL;
+	TwoDfree(map);
+	return (new);
 }
 
 void checkElement(t_game *game)
 {
 	int		i;
 	char	*str;
-	char	**new;
 
 	i = 0;
 	while(game->map[i] &&  i < 6)
@@ -164,15 +182,5 @@ void checkElement(t_game *game)
 	}
 	if(game->ply_map->NO != 1 || game->ply_map->SE != 1 || game->ply_map->WE != 1 || game->ply_map->EA != 1 || game->ply_map->F != 1 || game->ply_map->C != 1)
 		ft_error_exit("Too much or missed some element\n");
-	i = 0;
-	while(game->map[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 1));
-	if(!new)
-		ft_error_exit("error in malloc\n");
-	i = 5;
-	while(game->map[++i])
-		new[i - 6] = ft_strdup(game->map[i]);
-	new[i - 6] = NULL;
-	game->map = new;
+	game->map = GetNewMap(game->map);
 }

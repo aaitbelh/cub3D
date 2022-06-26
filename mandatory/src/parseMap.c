@@ -6,17 +6,58 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/25 08:20:42 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 12:59:49 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
+
+void	checkFory(t_game *game, int i, int j)
+{
+	int		h;
+	int		k;
+
+	h = 0;
+	k = i;
+	while(game->map[h])
+		h++;
+	while(game->map[k][j] != '1' && k > 0)
+		k--;
+	if(game->map[k][j] != '1' && k == 0)
+		ft_error_exit("Error Map is not closed\n");
+	k = i;
+	while(game->map[k][j] != '1' && k < h - 1)
+		k++;
+	if(game->map[k][j] != '1' && k == h - 1)
+		ft_error_exit("Error Map is not closed\n");
+}
+
+void	checkForx(t_game *game, int i, int j)
+{
+	int		k;
+	int		w;
+
+	k = j;
+	w = 0;
+	while(game->map[i][w])
+		w++;
+	while(game->map[i][k]  != '1' && k < w)
+		k++;
+	if(game->map[i][k] != '1' && k >= w)
+		ft_error_exit("Error: Map is not closed");
+	k = j;
+	while(game->map[i][k]  != '1' && k > 0)
+		k--;
+	if(game->map[i][k] != '1' && k <= 0)
+		ft_error_exit("Error: Map is not closed");
+}
+
+
 void	check_map(char **str, t_game *game)
 {
 	int	i;
 	int	j;
-	int	k;
 
 	i = 0;
 	while (str[i])
@@ -26,28 +67,8 @@ void	check_map(char **str, t_game *game)
 		{
 			if(str[i][j] == '0')
 			{
-				k = j;
-				while (str[i][k] && str[i][k] != '1')
-					k++;
-				if (!str[i][k] && i != game->ply_map->hight - 1)
-					ft_error_exit("error1\n");
-				k = j;
-				while (k > 0 && str[i][k] != '1')
-					k--;
-				if((k == 0 &&  i != 0 && i != game->ply_map->hight - 1) && str[i][k] != '1')
-					ft_error_exit("error2\n");
-				k = i;
-				while(k < game->ply_map->hight - 1&& str[k][j] != '1')
-					k++;
-				if((k == game->ply_map->hight - 1 && i != game->ply_map->hight - 1) &&  str[k][j] != '1')
-					ft_error_exit("error3\n"); 
-				k = i;
-				while((k > 0 && k != game->ply_map->hight - 1) &&  str[k][j] != '1')
-					k--;
-				if((k == 0 && i != 0 && i != game->ply_map->hight - 1) && str[k][j] != '1')
-				{
-					ft_error_exit("error4\n");
-				}
+				checkForx(game, i, j);
+				checkFory(game, i, j);
 			}
 			j++;
 		}	
@@ -81,10 +102,7 @@ int	check_map_name(char *str)
 	i = 0;
 	while(str[i] && str[i] != '.')
 		i++;
-	new = malloc(sizeof(char) * (i + 1));
 	fd = open(str, O_RDONLY);
-	if(!new)
-		return (1);
 	new = ft_strchr(str, '.');
 	if(!new || ft_strcmp(new, ".cub") || fd == -1)
 		return (1);
@@ -97,15 +115,11 @@ char	**read_map(char *name)
 	int		fd;
 	char	*buf;
 	char	**map;
-	int		size;
 	char	*line;
 
-
-	size = 0;
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		ft_error_exit("can't open map\n");
-	map = malloc(sizeof(char *) * (size + 1));
 	line = NULL;
 	while(1)
 	{
@@ -114,7 +128,6 @@ char	**read_map(char *name)
 			break;
 		line = ft_strjoin_get(line, buf);
 		free(buf);
-		size++;
 	}
 	map = ft_split(line, '\n');
 	free(line);

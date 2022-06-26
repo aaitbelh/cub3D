@@ -9,7 +9,7 @@
 #include "../get_next/get_next_line.h"
 #include <math.h>
 
-#include "../minilibx/mlx.h"
+#include "../../minilibx/mlx.h"
 
 # define FOV_ANGLE 60 * (M_PI / 180)
 # define NUM_RAYS 900

@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 08:45:52 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/22 10:09:03 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:14:38 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strtrim(char *s1, char c)
 	len_f = count_lenf(s1, c);
 	len_b = count_lenb(s1, c);
 	if(len_b == 0 && len_f == 0)
-		return (s1);
+		return (ft_strdup(s1));
 	new = malloc(sizeof(char ) * (ft_strlen(s1) - (len_b + len_f) + 1));
 	i  = 0;
 	while(i <= ft_strlen(s1)  - (len_f + len_b) - 1)

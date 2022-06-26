@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 11:04:09 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/26 15:04:41 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "include/cub3d.h"
+#include "mandatory/include/cub3d.h"
+
+
 
 void	draw_line(t_game *game, t_line *line, int len)
 {
@@ -99,7 +101,6 @@ int  update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	ray_casting(game);
-	printf("%f %f %f %f\n", game->player->dirX, game->player->dirY, game->ray->planeX, game->ray->planeY);
 	return (1);
 }
 
@@ -179,6 +180,7 @@ char	**makeMapRect(t_game *game)
 		i++;
 	}
 	new[i] = NULL;
+	TwoDfree(game->map); 
 	return (new);
 } 
 
@@ -207,11 +209,10 @@ int redCross(int Key)
 	(void)Key;
 	exit(1);
 }
-
 int main(int ac, char **av)
 {
 
-	if(ac != 2)
+	if(ac > 2 || ac < 2)
 		ft_error_exit("not enough argument\n");
 	t_game *data;
 	data = malloc(sizeof(t_game));

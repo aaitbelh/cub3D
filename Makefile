@@ -2,26 +2,29 @@ NAME = cub3d
 
 CC = gcc
 
-CFLAGS = -g -fsanitize=address -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c src/libfttools.c src/tools.c get_next/get_next_line.c get_next/get_next_line_utils.c src/ft_split.c src/move_player.c src/initializeAll.c src/parseMap.c raycasting.c src/ft_strtrim.c src/libfttools2.c src/parseMap2.c
+SRCS = main.c mandatory/src/libfttools.c mandatory/src/tools.c mandatory/get_next/get_next_line.c \
+	mandatory/get_next/get_next_line_utils.c mandatory/src/ft_split.c mandatory/src/move_player.c \
+	mandatory/src/initializeAll.c mandatory/src/parseMap.c mandatory/src/raycasting.c \
+	mandatory/src/ft_strtrim.c mandatory/src/libfttools2.c mandatory/src/parseMap2.c \
 
 OBJS = $(SRCS:.c=.o)
 
-USER  = aaitbelh
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	make -C minilibx
-	mv minilibx/libmlx.dylib .
-	$(CC) $(CFLAGS)  $(OBJS) libmlx.dylib -o $(NAME)
+	mv	minilibx/libmlx.dylib .
+	$(CC) $(CFLAGS) $(OBJS) libmlx.dylib -o $(NAME)
 
 clean:
 	make -C minilibx clean
 	rm -f $(OBJS)
 
 fclean: clean
+	rm -rf libmlx.dylib
 	rm -f $(NAME)
 
 re : fclean all

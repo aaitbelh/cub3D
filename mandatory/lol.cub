@@ -1,7 +1,7 @@
-NO   ./pics/redbrick.png
-SE   ./pics/bluestone.png
-WE   ./pics/colorstone.png
-EA   ./pics/wood.png
+NO   mandatory/pics/redbrick.png
+SE   mandatory/pics/bluestone.png
+WE   mandatory/pics/colorstone.png
+EA   mandatory/pics/wood.png
 
 F 255,0,0
 C 255,0,0
