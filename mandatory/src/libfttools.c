@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 11:54:41 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/05/28 16:56:32 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 08:33:44 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -43,9 +43,9 @@ char	*ft_strchr(char *str, char c)
 	int	i;
 
 	i = 0;
-	while(str[i] && str[i] != (char)c)
+	while (str[i] && str[i] != (char)c)
 			i++;
-	if(str[i] == (char)c)
+	if (str[i] == (char)c)
 		return (&(str[i]));
 	return (NULL);
 }
@@ -55,7 +55,7 @@ int		ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	while(s1[i] && s2[i] && s1[i] == s2[i])
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializeAll.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 20:45:35 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/27 08:32:04 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void initializeMap(t_game *game)
 	game->ply_map->we = 0;
 	game->ply_map->ea = 0;
 	game->ply_map->f = 0;
-	// game->player->dirX = -1.0;
-	// game->player->dirY = 0.0;
-	// game->ray->planeX = 0.0;
-	// game->ray->planeY = 0.66;
 }
 
 void initializeData(int ac, char **av, t_game *data)
