@@ -6,99 +6,15 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:44:02 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:52:45 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d_bonus.h"
 
 
-
-void	draw_line(t_game *game, t_line *line, int len)
-{
-	float	x;
-	float	y;
-	float	l;
-	float	step = 0.1;
-
-	line->offset_x  = game->player->x *  50;
-	line->offset_y  = game->player->y *  50;
-	l = 0.0;
-	while (l < len)
-	{
-		x = cos(game->player->rotation_angle) * l;
-		y = sin(game->player->rotation_angle) * l;
-		mlx_pixel_put(game->mlx,game->win, line->offset_x + x, line->offset_y + y, 0xFF0000);
-		l += step;
-	}
-}
-
-
-void draw_cyrcle(t_game *game , t_line *line)
-{
-	double	l;
-	float	y;
-	float	x;
-	float	step;
-	
-	line->offset_x  = game->player->x *  50;
-	line->offset_y  = game->player->y *  50;
-	l = 0.0;
-	step = 0.0;
-	while (l < M_PI * 2)
-	{
-		step = 0;
-		while (step < 5)
-		{
-			x = cos(l) * step;
-			y = sin(l) * step;
-			mlx_pixel_put(game->mlx, game->win, game->player->x * 50 + x, game->player->y * 50 + y, 0xFF0000);
-			step += 0.2;
-		}
-		l += 0.01;
-	}
-}
-void draw_square(t_game *data, float x, float y, int color)
-{
-	float	i;
-	float	j;
-
-	j = 0;
-	while(j < 50)
-	{
-		i = 0;
-		while(i < 50)
-		{
-			mlx_pixel_put(data->mlx, data->win, x + i, y + j, color);
-			i += 1.5;
-		}
-		j += 1.5;
-	}
-}
-void	draw_it(t_game *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while(data->map[i])
-	{
-		j = 0;
-		while(data->map[i][j])
-		{
-			if(data->map[i][j] == '1')
-				draw_square(data, j * 50, i * 50, 0xFFFFFF);
-			if(data->map[i][j] == '0')
-				draw_square(data, j * 50, i * 50, 0);
-			j++;
-		}
-		i++;
-	}
-}
-
 int  update(t_game *game)
 {
-	mlx_clear_window(game->mlx, game->win);
 	ray_casting(game);
 	return (1);
 }

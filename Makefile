@@ -2,7 +2,7 @@ NAME = cub3d
 BNAME = cub3d_bonus
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c \
 	get_next/get_next_line_utils.c libftTools/ft_split.c mandatory/src/move_player.c \
@@ -12,7 +12,7 @@ SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.
 BSRC = bonus/main_bonus.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c \
 	get_next/get_next_line_utils.c libftTools/ft_split.c bonus/src_bonus/move_player_bonus.c \
 	bonus/src_bonus/initializeall_bonus.c bonus/src_bonus/parsemap_bonus.c bonus/src_bonus/raycasting_bonus.c \
-	libftTools/ft_strtrim.c libftTools/libfttools2.c bonus/src_bonus/parsemap2_bonus.c \
+	libftTools/ft_strtrim.c libftTools/libfttools2.c bonus/src_bonus/parsemap2_bonus.c bonus/src_bonus/draw_minimap.c\
 
 OBJS = $(SRCS:.c=.o)
 BOBJS = $(BSRC:.c=.o)

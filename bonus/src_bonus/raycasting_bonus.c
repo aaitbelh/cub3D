@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:43:48 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 14:15:09 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,14 +141,15 @@ void	get_line_height(t_ray *r)
 void	ray_casting(t_game *game)
 {
 	int		i;
-	int		tmp;
 	t_ray	*r;
-
+	int tmp;
 	r = game->ray;
+	i = -1;
 	game->t.img = mlx_new_image(game->mlx, 1800, 900);
 	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits,
 			&game->t.size_line, &tmp);
-	i = -1;
+	game->t.miniimg = mlx_new_image(game->mlx, 200, 200);
+	game->t.minip = mlx_get_data_addr(game->t.miniimg, &game->t.minibits, &game->t.minisize_line, &game->t.miniendian);
 	while (++i < 1800)
 	{
 		r->cameraX = 2 * i / (float)1800 - 1.0;
@@ -169,5 +170,8 @@ void	ray_casting(t_game *game)
 		fill_image(game, i, r->drawStart, r->drawEnd); 
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
+	draw_minimap(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->t.miniimg, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);
+	mlx_destroy_image(game->mlx, game->t.miniimg);
 }

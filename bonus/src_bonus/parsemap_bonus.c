@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paremap_bonus.c                                    :+:      :+:    :+:   */
+/*   parsemap_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:43:40 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 18:38:35 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	checkfory(t_game *game, int i, int j)
 	k = i;
 	while (game->map[h])
 		h++;
-	while (game->map[k][j] != '1' && k > 0)
+	while (game->map[k][j] != '1' && k > 0 && k <= ft_strlen(game->map[k - 1]))
 		k--;
-	if (game->map[k][j] != '1' && k == 0)
+	if ((game->map[k][j] != '1' && k == 0) || k > ft_strlen(game->map[i - 1]))
 		ft_error_exit("Error Map is not closed\n");
 	k = i;
 	while (game->map[k][j] != '1' && k < h - 1)

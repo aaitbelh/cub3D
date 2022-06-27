@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:27:59 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:36:45 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ typedef	struct s_img
 	int		size_line;
 	int		endian;
 	char	*p;
+	void	*miniimg;
+	int		minibits;
+	int		minisize_line;
+	int		miniendian;
+	char	*minip;
 }	t_img;
 
 
@@ -154,5 +159,7 @@ int		ft_rgb_to_hex(int r, int g, int b);
 int		ft_atoi(char *str);
 void	getplayerposition(t_game *game);
 void	getcolorfromimg(t_game *game);
+void	draw_minimap(t_game *game);
+
 
 #endif

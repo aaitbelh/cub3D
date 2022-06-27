@@ -1,173 +1,190 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsmap2_bonus.c                                   :+:      :+:    :+:   */
+/*   parsemap2_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:43:44 by aaitbelh         ###   ########.fr       */
+/*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
+/*   Updated: 2022/06/27 11:26:36 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-
-void getcolorfromimg(t_game *game)
+void	getplayerposition(t_game *game)
 {
-	t_ray	*r;
-
-	r = game->ray;
-	if (r->side == 0 && r->rayDirX < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->wtexture, &game->tbits , &game->tsize_line, &game->tendian);
-	if (r->side == 0 && r->rayDirX >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->etexture, &game->tbits , &game->tsize_line, &game->tendian);
-	if (r->side == 1 && r->rayDirY < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->ntexture, &game->tbits , &game->tsize_line, &game->tendian);
-	if (r->side == 1 && r->rayDirY >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->stexture, &game->tbits , &game->tsize_line, &game->tendian);
-}
-
-void	put_pixel_in_image(t_game *game, int i, int j, int color)
-{
-	char	*a;
-
-	a = game->t.p + (j * game->t.size_line + i * (game->t.bits / 8));
-	*(unsigned int *)a = color;
-}
-
-void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
-{
+	int	i;
 	int	j;
-	int *color;
+	int	count;
 
-	j = -1;
-	while (++j < wallStart)
-		put_pixel_in_image(game, i, j, game->ply_map->ccolor);
-	j = wallStart;
-	getcolorfromimg(game);
-	while (j < wallEnd)
+	i = 0;
+	count = 0;
+	while (game->map[i])
 	{
-		game->texY = game->texPos;
-		game->texPos += game->step;
-		color = (int *)(game->colorPointer + (game->tsize_line * game->texY \
-		+ game->texX * (game->tbits / 8)));
-		put_pixel_in_image(game, i, j, *color);
-		j++;
-	}
-	j = wallEnd;
-	if (j < 0)
-		return ;
-	while (++j < 900)
-		put_pixel_in_image(game, i, j, game->ply_map->fcolor);
-}
-
-void	get_delta_dist(t_ray *r)
-{
-	if (r->rayDirX == 0)
-		r->deltaDistX = 1e30;
-	else
-		r->deltaDistX = fabs(1 / r->rayDirX);
-	if (r->rayDirY == 0)
-		r->deltaDistY = 1e30;
-	else
-		r->deltaDistY = fabs(1 / r->rayDirY);
-}
-
-void	get_side_dist(t_game *game, t_ray *r)
-{
-	get_delta_dist(r);
-	if (r->rayDirX < 0)
-	{
-		r->stepX = -1;
-		r->sideDistX = (game->player->x - r->mapX) * r->deltaDistX;
-	}
-	else
-	{
-		r->stepX = 1;
-		r->sideDistX = (r->mapX + 1.0 - game->player->x) * r->deltaDistX;
-	}
-	if (r->rayDirY < 0)
-	{
-		r->stepY = -1;
-		r->sideDistY = (game->player->y - r->mapY) * r->deltaDistY;
-	}
-	else
-	{
-		r->stepY = 1;
-		r->sideDistY = (r->mapY + 1.0 - game->player->y) * r->deltaDistY;
-	}
-}
-
-void	get_hit_distance(t_game *game, t_ray *r)
-{
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
-	{
-		if (r->sideDistX < r->sideDistY)
+		j = 0;
+		while (game->map[i][j])
 		{
-			r->sideDistX += r->deltaDistX;
-			r->mapX += r->stepX;
-			r->side = 0;
+			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
+				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			{
+				game->player->x = j;
+				game->player->y = i;
+				game->player->rederaction = game->map[i][j];
+				game->map[i][j] = '0';
+				count++;
+			}
+			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
+				ft_error_exit("invalid charterer in map");
+			j++;
 		}
-		else
-		{
-			r->sideDistY += r->deltaDistY;
-			r->mapY += r->stepY;
-			r->side = 1;
-		}
-		if (game->map[r->mapY][r->mapX] == '1')
-			hit = 1;
+		i++;
 	}
-	if (r->side == 0)
-		r->perpWallDist = (r->sideDistX - r->deltaDistX);
-	else
-		r->perpWallDist = (r->sideDistY - r->deltaDistY);
+	if (count != 1)
+		ft_error_exit("player position not found or too much\n");
 }
 
-void	get_line_height(t_ray *r)
-{
-	r->lineHeight = (int)(900 / r->perpWallDist);
-	r->drawStart = ((-1 * r->lineHeight) / 2) + 450;
-	if (r->drawStart < 0)
-		r->drawStart = 0;
-	r->drawEnd = (r->lineHeight / 2) + 450;
-	if (r->drawEnd >= 900)
-		r->drawEnd = 899;
-}
-
-void	ray_casting(t_game *game)
+void	getcolor(t_game *game, char *str, char *type)
 {
 	int		i;
-	int		tmp;
-	t_ray	*r;
+	char	**colors;
+	int		rgb[3];
 
-	r = game->ray;
-	game->t.img = mlx_new_image(game->mlx, 1800, 900);
-	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits,
-			&game->t.size_line, &tmp);
-	i = -1;
-	while (++i < 1800)
+	i = 0;
+	colors = ft_split(str, ',');
+	if (!ft_strcmp(type, "F"))
 	{
-		r->cameraX = 2 * i / (float)1800 - 1.0;
-		r->rayDirX = game->player->dirX + r->planeX * r->cameraX;
-		r->rayDirY = game->player->dirY + r->planeY * r->cameraX;
-		r->mapX = (int)game->player->x;
-		r->mapY = (int)game->player->y;
-		get_side_dist(game, r);
-		get_hit_distance(game, r);
-		get_line_height(r);
-		if (r->side == 0)
-			game->Wallx = game->player->y + r->perpWallDist * r->rayDirY;
-		else
-			game->Wallx = game->player->x + r->perpWallDist * r->rayDirX;
-		game->texX = (game->Wallx - (int)game->Wallx) * 64;
-		game->step =  1.0 * 64 / r->lineHeight;
-		game->texPos = ((r->drawStart - 900 / 2) + (r->lineHeight / 2)) * game->step;
-		fill_image(game, i, r->drawStart, r->drawEnd); 
+		game->ply_map->f++;
+		while (colors[i])
+		{
+			if (i < 3)
+			{
+				rgb[i] = ft_atoi(colors[i]);
+				if (rgb[i] > 255 || rgb[i] < 0)
+					ft_error_exit("error in floor color\n");
+			}
+			else
+				ft_error_exit("error in floor color N of elements\n");
+			i++;
+		}
+		game->ply_map->fcolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		twodfree(colors);
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
-	mlx_destroy_image(game->mlx, game->t.img);
+	if (!ft_strcmp(type, "C"))
+	{
+		game->ply_map->c++;
+		while (colors[i])
+		{
+			if (i < 3)
+			{
+				rgb[i] = ft_atoi(colors[i]);
+				if (rgb[i] > 255 || rgb[i] < 0)
+					ft_error_exit("error in celing color\n");
+			}
+			else
+				ft_error_exit("error in celing color N of elements\n");
+			i++;
+		}
+		game->ply_map->ccolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		twodfree(colors);
+	}
+}
+
+void	whattypeis(t_game *game, char *str)
+{
+	void	*ptr;
+	int		lol;
+	char	*type;
+
+	if (str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
+		type = ft_strdup("NO");
+	if (str[0] == 'S' && str[1] == 'E' && str[2] == ' ')
+		type = ft_strdup("SE");
+	if (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
+		type = ft_strdup("WE");
+	if (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
+		type = ft_strdup("EA");
+	if (str[0] == 'F' && str[1] == ' ')
+		type = ft_strdup("F");
+	if (str[0] == 'C' && str[1] == ' ')
+		type = ft_strdup("C");
+	if (ft_strlen(str) > ft_strlen(type) + 1)
+		str += ft_strlen(type);
+	else
+		ft_error_exit("error in map\n");
+	while (*str && *str == ' ')
+		str++;
+	if (!ft_strcmp(type, "NO") || !ft_strcmp(type, "SE")
+		|| !ft_strcmp(type, "WE") || !ft_strcmp(type, "EA"))
+	{
+		ptr = mlx_png_file_to_image(game->mlx, str, &lol, &lol);
+		if (!ptr)
+			ft_error_exit("error : texture path is invalid\n");
+		if (!ft_strcmp(type, "NO"))
+		{
+			game->ply_map->ntexture = ptr;
+			game->ply_map->no++;
+		}
+		if (!ft_strcmp(type, "SE"))
+		{
+			game->ply_map->stexture = ptr;
+			game->ply_map->se++;
+		}
+		if (!ft_strcmp(type, "WE"))
+		{
+			game->ply_map->wtexture = ptr;
+			game->ply_map->we++;
+		}
+		if (!ft_strcmp(type, "EA"))
+		{
+			game->ply_map->etexture = ptr;
+			game->ply_map->ea++;
+		}
+	}
+	else if (!ft_strcmp(type, "F") || !ft_strcmp(type, "C"))
+		getcolor(game, str, type);
+	free(type);
+}
+
+char	**getnewmap(char **map)
+{
+	int		i;
+	char	**new;
+
+	i = 6;
+	while (map[i])
+		i++;
+	new = malloc(sizeof(char *) * (i + 1));
+	if (!new)
+		ft_error_exit("error in malloc\n");
+	i = 6;
+	while (map[i])
+	{
+		new[i - 6] = ft_strdup(map[i]);
+		i++;
+	}
+	new[i - 6] = NULL;
+	twodfree(map);
+	return (new);
+}
+
+void	checkelement(t_game *game)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (game->map[i] && i < 6)
+	{
+		str = ft_strtrim(game->map[i], ' ');
+		whattypeis(game, str);
+		free(str);
+		i++;
+	}
+	if (game->ply_map->no != 1 || game->ply_map->se != 1
+		|| game->ply_map->we != 1
+		|| game->ply_map->ea != 1 || game->ply_map->f != 1
+		|| game->ply_map->c != 1)
+		ft_error_exit("Too much or missed some element\n");
+	game->map = getnewmap(game->map);
 }
