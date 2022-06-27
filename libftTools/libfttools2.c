@@ -6,15 +6,15 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:50 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 18:38:08 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 09:29:52 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
 
-int Allnum(char *str)
+int	allnum(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -35,8 +35,8 @@ int	ft_atoi(char *str)
 	sig = 1;
 	n = 0;
 	i = 0;
-	if(Allnum(str) == 0)
-		return (-1);		
+	if (allnum(str) == 0)
+		return (-1);
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+' )

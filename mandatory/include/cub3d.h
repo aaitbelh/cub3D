@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:08:01 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:20:50 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,21 +140,19 @@ void	move_right(t_game *game);
 void	move_left(t_game *game);
 void	count_w_h(t_game *game);
 void	ray_casting(t_game *game);
-int		mapHasWallAt(t_game *game, float x, float y);
-void	drawRay(t_game *game,float D);
-void	TwoDfree(char **table);
-void	initializeData(int ac, char **av, t_game *data);
+void	twodfree(char **table);
+void	initializedata(char **av, t_game *data);
 void	check_map(char **str, t_game *game);
 int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	rotate_right(t_game *game);
 void 	rotate_left(t_game *game);
-void	checkElement(t_game *game);
+void	checkelement(t_game *game);
 char	*ft_strtrim(char *s1, char c);
 int		ft_rgb_to_hex(int r, int g, int b);
 int		ft_atoi(char *str);
-void	getPlayerPosition(t_game *game);
-void	GetColorfromimg(t_game *game);
+void	getplayerposition(t_game *game);
+void	getcolorfromimg(t_game *game);
 
 #endif

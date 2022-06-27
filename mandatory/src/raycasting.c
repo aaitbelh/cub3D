@@ -6,14 +6,14 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 19:05:10 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:07:34 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
 
-void GetColorfromimg(t_game *game)
+void getcolorfromimg(t_game *game)
 {
 	t_ray	*r;
 
@@ -45,7 +45,7 @@ void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 	while (++j < wallStart)
 		put_pixel_in_image(game, i, j, game->ply_map->ccolor);
 	j = wallStart;
-	GetColorfromimg(game);
+	getcolorfromimg(game);
 	while (j < wallEnd)
 	{
 		game->texY = game->texPos;

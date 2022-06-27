@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 18:41:28 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:06:32 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ char	**makeMapRect(t_game *game)
 		i++;
 	}
 	new[i] = NULL;
-	TwoDfree(game->map); 
+	twodfree(game->map); 
 	return (new);
 } 
 
@@ -217,7 +217,7 @@ int main(int ac, char **av)
 	data = malloc(sizeof(t_game));
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1800 ,900, "prototype");
-	initializeData(ac, av, data);
+	initializedata(av, data);
 	mlx_hook(data->win, 02, 1L, KeyReleased, data);
 	mlx_hook(data->win, 03, 2L, KeyPressed, data);
 	mlx_hook(data->win, 17, 0, redCross, NULL);

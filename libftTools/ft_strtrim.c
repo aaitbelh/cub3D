@@ -6,20 +6,20 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 08:45:52 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/26 18:36:16 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 09:28:35 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
 
-int count_lenb(char *s1, char c)
+int	count_lenb(char *s1, char c)
 {
 	int	i;
 	int	len;
 
 	i = ft_strlen(s1) - 1;
 	len = 0;
-	while(i > 0 && s1[i] == c)
+	while (i > 0 && s1[i] == c)
 	{
 		i--;
 		len ++;
@@ -27,12 +27,12 @@ int count_lenb(char *s1, char c)
 	return (len);
 }
 
-int count_lenf(char *s1, char c)
+int	count_lenf(char *s1, char c)
 {
 	int	i;
 
 	i = 0;
-	while(s1[i] && s1[i] == c)
+	while (s1[i] && s1[i] == c)
 		i++;
 	return (i);
 }
@@ -43,17 +43,17 @@ char	*ft_strtrim(char *s1, char c)
 	int		len_b;
 	int		i;
 	char	*new;
-	
+
 	len_f = count_lenf(s1, c);
 	len_b = count_lenb(s1, c);
-	if(len_b == 0 && len_f == 0)
+	if (len_b == 0 && len_f == 0)
 		return (ft_strdup(s1));
 	new = malloc(sizeof(char ) * (ft_strlen(s1) - (len_b + len_f) + 1));
-	i  = 0;
-	while(i <= ft_strlen(s1)  - (len_f + len_b) - 1)
+	i = 0;
+	while (i <= ft_strlen(s1) - (len_f + len_b) - 1)
 	{
 		new[i] = s1[len_f + i];
-		i++;	
+		i++;
 	}
 	new[i] = '\0';
 	return (new);

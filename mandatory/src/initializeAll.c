@@ -6,13 +6,31 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 08:32:04 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:20:55 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	GetDirectionOfPlayer(t_game *game)
+void	getdirectionofplayer2(t_game *game)
+{
+	if (game->player->rederaction == 'N')
+	{
+		game->player->dirX = 0.0;
+		game->player->dirY = -1.0;
+		game->ray->planeX = 0.66;
+		game->ray->planeY = 0.0;
+	}
+	if (game->player->rederaction == 'S')
+	{
+		game->player->dirX = 0.0;
+		game->player->dirY = 1.0;
+		game->ray->planeX = -0.66;
+		game->ray->planeY = 0.0;
+	}
+}
+
+void	getdirectionofplayer(t_game *game)
 {
 	if (game->player->rederaction == 'W')
 	{
@@ -28,28 +46,16 @@ void	GetDirectionOfPlayer(t_game *game)
 		game->ray->planeX = 0.0;
 		game->ray->planeY = -0.66;
 	}
-	if(game->player->rederaction == 'N')
-	{
-		game->player->dirX = 0.0;
-		game->player->dirY = -1.0;
-		game->ray->planeX = 0.66;
-		game->ray->planeY = 0.0;
-	}
-	if(game->player->rederaction == 'S')
-	{
-		game->player->dirX = 0.0;
-		game->player->dirY = 1.0;
-		game->ray->planeX = -0.66;
-		game->ray->planeY = 0.0;
-	}
+	else
+		getdirectionofplayer2(game);
 }
 
-void initializeMap(t_game *game)
+void	initializemap(t_game *game)
 {
 	int	i;
 
 	i = 0;
-	while(i <= 2)
+	while (i <= 2)
 	{
 		game->player->tab[i] = 0;
 		game->player->tab[i + 123] = 0;
@@ -64,22 +70,21 @@ void initializeMap(t_game *game)
 	game->ply_map->f = 0;
 }
 
-void initializeData(int ac, char **av, t_game *data)
+void	initializedata(char **av, t_game *data)
 {
-	(void)ac;
 	data->ply_map = malloc(sizeof(t_maps));
 	data->player = malloc(sizeof(t_player));
 	data->line = malloc(sizeof(t_line));
 	data->ray = malloc(sizeof(t_ray));
-	if(check_map_name(av[1]))
+	if (check_map_name(av[1]))
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(av[1]);
-	initializeMap(data);
-	checkElement(data);
+	initializemap(data);
+	checkelement(data);
 	check_map(data->map, data);
 	fix_map(data);
-	getPlayerPosition(data);
-	GetDirectionOfPlayer(data);
+	getplayerposition(data);
+	getdirectionofplayer(data);
 	count_w_h(data);
 	data->player->rotation_speed = 0.05;
 	data->player->move_speed = 0.1;
