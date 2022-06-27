@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:49:36 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 19:35:57 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 21:04:58 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,41 +88,30 @@ void	draw_square(t_game *game, float x, float y, int color)
 
 void	draw_minimap(t_game *game)
 {
-	int	i;
-	int	j;
-	int oldi;
-	int oldj;
-	int xend;
-	int yend;
-	
-	i = (int)game->player->x - 5;
-	j = (int)game->player->y - 5;
-	xend = game->player->x + 5;
-	yend = game->player->y + 5;
-	if(xend > game->ply_map->width)
-		xend = game->ply_map->width;
-	if(yend > game->ply_map->hight)
-		yend = game->ply_map->hight;
-	if(i < 0)
-		i = 0;
-	if(j < 0)
-		j = 0;
-	printf("%d %d %d %d %d %d\n",i,j,xend,yend, (int)game->player->x, (int)game->player->y);
-	oldi = i;
-	oldj = j;
-	while(j < yend)
-	{
-		while(i < xend)
-		{
-			if(i == (int)game->player->x && j == (int)game->player->y)
-				printf("P");
-			else
-				printf("%c",game->map[j][i]);
-			i++;
-		}
-		printf("\n");
-		i = game->player->x - 20;
-		j++;
-	}
+	char **mini;
 
+	mini = malloc(11*sizeof(char *));
+	int i = 0;
+	int a = (int)game->player->y - 5;
+	int b = (int)game->player->x - 5;
+	printf("%d %d\n", a, b);
+	while (i < 10) {
+		b = (int)game->player->x - 5;
+		mini[i] = malloc(10*sizeof(char ) + 1);
+		int j = 0;
+		while(j < 10) {
+			mini[i][j] = game->map[a][b];
+			if (b == (int)game->player->x && a == (int)game->player->y)
+				mini[i][j] = 'P';
+			b++;
+			j++;
+		}
+		mini[i][j] = 0;
+		a++;
+		i++;
+	}
+	mini[i] = 0;
+	for (int i=0; i<10; i++){
+		printf("%s\n", mini[i]);
+	}
 }
