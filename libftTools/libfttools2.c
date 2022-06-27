@@ -6,11 +6,13 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:50 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 09:29:52 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:57:22 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
+#include "../bonus/include/cub3d_bonus.h"
+
 
 int	allnum(char *str)
 {

@@ -6,11 +6,13 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 11:54:41 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 08:40:12 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:57:18 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
+#include "../bonus/include/cub3d_bonus.h"
+
 
 int	ft_strlen(char *str)
 {

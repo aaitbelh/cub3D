@@ -6,11 +6,13 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 08:45:52 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 09:28:35 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:57:16 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
+#include "../bonus/include/cub3d_bonus.h"
+
 
 int	count_lenb(char *s1, char c)
 {

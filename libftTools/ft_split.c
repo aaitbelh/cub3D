@@ -6,11 +6,12 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 11:37:46 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 09:11:13 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/27 10:57:06 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mandatory/include/cub3d.h"
+#include "../bonus/include/cub3d_bonus.h"
 
 static char	**free_table(char **ptr, int i)
 {
