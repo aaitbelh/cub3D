@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:49:36 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 21:04:58 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/06/28 14:03:14 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	draw_minimap(t_game *game)
 	int i = 0;
 	int a = (int)game->player->y - 5;
 	int b = (int)game->player->x - 5;
-	printf("%d %d\n", a, b);
 	while (i < 10) {
 		b = (int)game->player->x - 5;
 		mini[i] = malloc(10*sizeof(char ) + 1);
@@ -109,9 +108,5 @@ void	draw_minimap(t_game *game)
 		mini[i][j] = 0;
 		a++;
 		i++;
-	}
-	mini[i] = 0;
-	for (int i=0; i<10; i++){
-		printf("%s\n", mini[i]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 14:15:09 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/06/28 14:03:38 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ void	ray_casting(t_game *game)
 		fill_image(game, i, r->drawStart, r->drawEnd); 
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
-	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->t.miniimg, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);
 	mlx_destroy_image(game->mlx, game->t.miniimg);
