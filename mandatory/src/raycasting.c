@@ -6,14 +6,13 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:07:34 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/03 10:04:28 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-
-void getcolorfromimg(t_game *game)
+void	getcolorfromimg(t_game *game)
 {
 	t_ray	*r;
 
