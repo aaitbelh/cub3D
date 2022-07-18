@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 09:57:27 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/18 09:12:22 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,20 @@ void	checkfory(t_game *game, int i, int j)
 	while (game->map[h])
 		h++;
 	while (game->map[k][j] != '1' && k > 0)
+	{
+		if (k != 0 && j > ft_strlen(game->map[k - 1]))
+			ft_error_exit("Error Map is not closed\n");
 		k--;
+	}
 	if (game->map[k][j] != '1' && k == 0)
 		ft_error_exit("Error Map is not closed\n");
 	k = i;
 	while (game->map[k][j] != '1' && k < h - 1)
+	{
+		if (k != h - 1 && j > ft_strlen(game->map[k + 1]))
+			ft_error_exit("Error Map is not closed\n");
 		k++;
+	}
 	if (game->map[k][j] != '1' && k == h - 1)
 		ft_error_exit("Error Map is not closed\n");
 }

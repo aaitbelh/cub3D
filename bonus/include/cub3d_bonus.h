@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 12:36:45 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:23:22 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct s_player
 	float		dirY;
 } t_player;
 
+
 typedef struct s_game
 {
 	char		*map_name;
@@ -160,6 +161,10 @@ int		ft_atoi(char *str);
 void	getplayerposition(t_game *game);
 void	getcolorfromimg(t_game *game);
 void	draw_minimap(t_game *game);
-
+void	getplayerchars(t_game *game, int i, int j, int *count);
+void	getceillingcolor(char **colors, t_game *game);
+void	getfloorcolor(char **colors, t_game *game);
+char	*gettype(char *str);
+void	getimgpath(t_game *game, char *type, char *str, int lol);
 
 #endif

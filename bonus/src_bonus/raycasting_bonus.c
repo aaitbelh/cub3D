@@ -6,40 +6,44 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/28 14:03:38 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/18 12:51:52 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d_bonus.h"
 
-
-void getcolorfromimg(t_game *game)
+void	getcolorfromimg(t_game *game)
 {
 	t_ray	*r;
 
 	r = game->ray;
 	if (r->side == 0 && r->rayDirX < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->wtexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->wtexture,
+				&game->tbits, &game->tsize_line, &game->tendian);
 	if (r->side == 0 && r->rayDirX >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->etexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->etexture,
+				&game->tbits, &game->tsize_line, &game->tendian);
 	if (r->side == 1 && r->rayDirY < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->ntexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->ntexture,
+				&game->tbits, &game->tsize_line, &game->tendian);
 	if (r->side == 1 && r->rayDirY >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->stexture, &game->tbits , &game->tsize_line, &game->tendian);
+		game->colorPointer = mlx_get_data_addr(game->ply_map->stexture,
+				&game->tbits, &game->tsize_line, &game->tendian);
 }
 
 void	put_pixel_in_image(t_game *game, int i, int j, int color)
 {
 	char	*a;
 
-	a = game->t.p + (j * game->t.size_line + i * (game->t.bits / 8));
+	a = game->t.p + (j * game->t.size_line
+			+ i * (game->t.bits / 8));
 	*(unsigned int *)a = color;
 }
 
 void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 {
 	int	j;
-	int *color;
+	int	*color;
 
 	j = -1;
 	while (++j < wallStart)
@@ -142,14 +146,16 @@ void	ray_casting(t_game *game)
 {
 	int		i;
 	t_ray	*r;
-	int tmp;
+	int		tmp;
+
 	r = game->ray;
 	i = -1;
 	game->t.img = mlx_new_image(game->mlx, 1800, 900);
 	game->t.p = mlx_get_data_addr(game->t.img, &game->t.bits,
 			&game->t.size_line, &tmp);
 	game->t.miniimg = mlx_new_image(game->mlx, 200, 200);
-	game->t.minip = mlx_get_data_addr(game->t.miniimg, &game->t.minibits, &game->t.minisize_line, &game->t.miniendian);
+	game->t.minip = mlx_get_data_addr(game->t.miniimg,
+			&game->t.minibits, &game->t.minisize_line, &game->t.miniendian);
 	while (++i < 1800)
 	{
 		r->cameraX = 2 * i / (float)1800 - 1.0;
@@ -165,11 +171,13 @@ void	ray_casting(t_game *game)
 		else
 			game->Wallx = game->player->x + r->perpWallDist * r->rayDirX;
 		game->texX = (game->Wallx - (int)game->Wallx) * 64;
-		game->step =  1.0 * 64 / r->lineHeight;
-		game->texPos = ((r->drawStart - 900 / 2) + (r->lineHeight / 2)) * game->step;
-		fill_image(game, i, r->drawStart, r->drawEnd); 
+		game->step = 1.0 * 64 / r->lineHeight;
+		game->texPos = ((r->drawStart - 900 / 2)
+				+ (r->lineHeight / 2)) * game->step;
+		fill_image(game, i, r->drawStart, r->drawEnd);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->t.miniimg, 0, 0);
 	mlx_destroy_image(game->mlx, game->t.img);
 	mlx_destroy_image(game->mlx, game->t.miniimg);

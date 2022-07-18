@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 11:26:36 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/18 11:35:40 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,7 @@ void	getplayerposition(t_game *game)
 		j = 0;
 		while (game->map[i][j])
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
-				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
-			{
-				game->player->x = j;
-				game->player->y = i;
-				game->player->rederaction = game->map[i][j];
-				game->map[i][j] = '0';
-				count++;
-			}
-			else if (game->map[i][j] != '0' && game->map[i][j] != '1')
-				ft_error_exit("invalid charterer in map");
+			getplayerchars(game, i, j, &count);
 			j++;
 		}
 		i++;
@@ -46,100 +36,36 @@ void	getplayerposition(t_game *game)
 
 void	getcolor(t_game *game, char *str, char *type)
 {
-	int		i;
 	char	**colors;
-	int		rgb[3];
 
-	i = 0;
 	colors = ft_split(str, ',');
 	if (!ft_strcmp(type, "F"))
 	{
-		game->ply_map->f++;
-		while (colors[i])
-		{
-			if (i < 3)
-			{
-				rgb[i] = ft_atoi(colors[i]);
-				if (rgb[i] > 255 || rgb[i] < 0)
-					ft_error_exit("error in floor color\n");
-			}
-			else
-				ft_error_exit("error in floor color N of elements\n");
-			i++;
-		}
-		game->ply_map->fcolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		getfloorcolor(colors, game);
 		twodfree(colors);
 	}
 	if (!ft_strcmp(type, "C"))
 	{
-		game->ply_map->c++;
-		while (colors[i])
-		{
-			if (i < 3)
-			{
-				rgb[i] = ft_atoi(colors[i]);
-				if (rgb[i] > 255 || rgb[i] < 0)
-					ft_error_exit("error in celing color\n");
-			}
-			else
-				ft_error_exit("error in celing color N of elements\n");
-			i++;
-		}
-		game->ply_map->ccolor = ft_rgb_to_hex(rgb[0], rgb[1], rgb[2]);
+		getceillingcolor(colors, game);
 		twodfree(colors);
 	}
 }
 
 void	whattypeis(t_game *game, char *str)
 {
-	void	*ptr;
 	int		lol;
 	char	*type;
 
-	if (str[0] == 'N' && str[1] == 'O' && str[2] == ' ')
-		type = ft_strdup("NO");
-	if (str[0] == 'S' && str[1] == 'E' && str[2] == ' ')
-		type = ft_strdup("SE");
-	if (str[0] == 'W' && str[1] == 'E' && str[2] == ' ')
-		type = ft_strdup("WE");
-	if (str[0] == 'E' && str[1] == 'A' && str[2] == ' ')
-		type = ft_strdup("EA");
-	if (str[0] == 'F' && str[1] == ' ')
-		type = ft_strdup("F");
-	if (str[0] == 'C' && str[1] == ' ')
-		type = ft_strdup("C");
+	type = gettype(str);
+	lol = 0;
 	if (ft_strlen(str) > ft_strlen(type) + 1)
 		str += ft_strlen(type);
-	else
-		ft_error_exit("error in map\n");
 	while (*str && *str == ' ')
 		str++;
 	if (!ft_strcmp(type, "NO") || !ft_strcmp(type, "SE")
 		|| !ft_strcmp(type, "WE") || !ft_strcmp(type, "EA"))
 	{
-		ptr = mlx_png_file_to_image(game->mlx, str, &lol, &lol);
-		if (!ptr)
-			ft_error_exit("error : texture path is invalid\n");
-		if (!ft_strcmp(type, "NO"))
-		{
-			game->ply_map->ntexture = ptr;
-			game->ply_map->no++;
-		}
-		if (!ft_strcmp(type, "SE"))
-		{
-			game->ply_map->stexture = ptr;
-			game->ply_map->se++;
-		}
-		if (!ft_strcmp(type, "WE"))
-		{
-			game->ply_map->wtexture = ptr;
-			game->ply_map->we++;
-		}
-		if (!ft_strcmp(type, "EA"))
-		{
-			game->ply_map->etexture = ptr;
-			game->ply_map->ea++;
-		}
+		getimgpath(game, type, str, lol);
 	}
 	else if (!ft_strcmp(type, "F") || !ft_strcmp(type, "C"))
 		getcolor(game, str, type);

@@ -6,39 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/03 10:02:41 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/18 09:05:23 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	move_up(t_game *game)
-{
-	float	tmp_x;
-	float	tmp_y;
-
-	tmp_x = game->player->x + game->player->dirX * game->player->move_speed;
-	tmp_y = game->player->y + game->player->dirY * game->player->move_speed;
-	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
-	{
-		game->player->x = tmp_x;
-		game->player->y = tmp_y;
-	}
-}
-
-void	move_down(t_game *game)
-{
-	float	tmp_x;
-	float	tmp_y;
-
-	tmp_x = game->player->x - game->player->dirX * game->player->move_speed;
-	tmp_y = game->player->y - game->player->dirY * game->player->move_speed;
-	if (game->map[(int)tmp_y][(int)tmp_x] == '0')
-	{
-		game->player->x = tmp_x;
-		game->player->y = tmp_y;
-	}
-}
 
 void	move_left(t_game *game)
 {
