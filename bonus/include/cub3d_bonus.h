@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 14:26:11 by aaitbelh         ###   ########.fr       */
+/*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
+/*   Updated: 2022/07/21 15:24:24 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define NUM_RAYS 900
 # define TEXTURE_WIDTH 64
-# define TEXTURE_HEIGHT 64
+// # define TEXTURE_HEIGHT 64
 
 typedef struct s_ray
 {
@@ -81,6 +81,11 @@ typedef struct s_img
 	int		size_line;
 	int		endian;
 	char	*p;
+	void	*miniimg;
+	int		minibits;
+	int		minisize_line;
+	int		miniendian;
+	char	*minip;
 }	t_img;
 
 typedef struct s_player
@@ -156,4 +161,5 @@ void	getfloorcolor(char **colors, t_game *game);
 void	getceillingcolor(char **colors, t_game *game);
 char	*gettype(char *str);
 void	getimgpath(t_game *game, char *type, char *str, int lol);
+void	draw_minimap(t_game *game);
 #endif
