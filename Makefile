@@ -8,7 +8,7 @@ SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.
 	get_next/get_next_line_utils.c libftTools/ft_split.c mandatory/src/move_player.c \
 	mandatory/src/initializeAll.c mandatory/src/parseMap.c mandatory/src/raycasting.c \
 	libftTools/ft_strtrim.c libftTools/libfttools2.c mandatory/src/parseMap2.c mandatory/src/sometools.c \
-	mandatory/src/moveUpDown.c mandatory/src/parseMap3.c\
+	mandatory/src/moveUpDown.c mandatory/src/parseMap3.c mandatory/src/rc_tools.c\
 
 BSRC = bonus/main_bonus.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c \
 	get_next/get_next_line_utils.c libftTools/ft_split.c bonus/src_bonus/move_player_bonus.c \

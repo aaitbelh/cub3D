@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:32:24 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 18:22:19 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,4 +167,6 @@ int		key_pressed(int key, t_game *game);
 int		get_lenght(char **table);
 void	fill_table(char **table, char **new, int tmp);
 char	**makemaprect(t_game *game);
+void	get_side_dist(t_game *game, t_ray *r);
+void	fill_image(t_game *game, int i, int wallStart, int wallEnd);
 #endif
