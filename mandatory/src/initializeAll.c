@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:20:55 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:18:11 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	getdirectionofplayer2(t_game *game)
 {
 	if (game->player->rederaction == 'N')
 	{
-		game->player->dirX = 0.0;
-		game->player->dirY = -1.0;
-		game->ray->planeX = 0.66;
-		game->ray->planeY = 0.0;
+		game->player->dirx = 0.0;
+		game->player->diry = -1.0;
+		game->ray->planex = 0.66;
+		game->ray->planey = 0.0;
 	}
 	if (game->player->rederaction == 'S')
 	{
-		game->player->dirX = 0.0;
-		game->player->dirY = 1.0;
-		game->ray->planeX = -0.66;
-		game->ray->planeY = 0.0;
+		game->player->dirx = 0.0;
+		game->player->diry = 1.0;
+		game->ray->planex = -0.66;
+		game->ray->planey = 0.0;
 	}
 }
 
@@ -34,17 +34,17 @@ void	getdirectionofplayer(t_game *game)
 {
 	if (game->player->rederaction == 'W')
 	{
-		game->player->dirX = -1.0;
-		game->player->dirY = 0.0;
-		game->ray->planeX = 0.0;
-		game->ray->planeY = 0.66;
+		game->player->dirx = -1.0;
+		game->player->diry = 0.0;
+		game->ray->planex = 0.0;
+		game->ray->planey = 0.66;
 	}
 	if (game->player->rederaction == 'E')
 	{
-		game->player->dirX = 1.0;
-		game->player->dirY = 0.0;
-		game->ray->planeX = 0.0;
-		game->ray->planeY = -0.66;
+		game->player->dirx = 1.0;
+		game->player->diry = 0.0;
+		game->ray->planex = 0.0;
+		game->ray->planey = -0.66;
 	}
 	else
 		getdirectionofplayer2(game);

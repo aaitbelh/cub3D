@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/18 11:09:34 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:24:42 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,25 @@
 
 typedef struct s_ray
 {
-	float		planeX;
-	float		planeY;
-	float		deltaDistX;
-	float		deltaDistY;
-	int			stepX;
-	int			stepY;
-	float		sideDistX;
-	float		sideDistY;
+	float		planex;
+	float		planey;
+	float		deltadistx;
+	float		deltadisty;
+	int			stepx;
+	int			stepy;
+	float		sidedistx;
+	float		sidedisty;
 	int			side;
-	float		perpWallDist;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
-	float		cameraX;
-	float		rayDirX;
-	float		rayDirY;
-	int			mapX;
-	int			mapY;
+	float		perpwalldist;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	float		camerax;
+	float		raydirx;
+	float		raydiry;
+	int			mapx;
+	int			mapy;
 }	t_ray;
-
 
 typedef struct s_line
 {
@@ -73,9 +72,9 @@ typedef struct s_maps
 	void	*stexture;
 	void	*wtexture;
 	void	*etexture;
-} t_maps;
+}	t_maps;
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*img;
 	int		bits;
@@ -84,23 +83,22 @@ typedef	struct s_img
 	char	*p;
 }	t_img;
 
-
 typedef struct s_player
 {
-	float x;
-	float y;
-	int radious;
-	float move_speed;
-	float move_step;
-	float rotation_angle;
-	int turndaraction;
-	int walkdaraction;
-	float rotation_speed;
-	char rederaction;
-	int tab[500];
-	float		dirX;
-	float		dirY;
-} t_player;
+	float	x;
+	float	y;
+	int		radious;
+	float	move_speed;
+	float	move_step;
+	float	rotation_angle;
+	int		turndaraction;
+	int		walkdaraction;
+	float	rotation_speed;
+	char	rederaction;
+	int		tab[500];
+	float	dirx;
+	float	diry;
+}	t_player;
 
 typedef struct s_game
 {
@@ -115,17 +113,16 @@ typedef struct s_game
 	t_img		t;
 	float		rayangle;
 	uint32_t	*textures;
-	uint32_t	texX;
-	uint32_t	texY;
+	uint32_t	tex_x;
+	uint32_t	tex_y;
 	float		step;
-	float		texPos;
-	char 		*colorPointer;
+	float		tex_pos;
+	char		*color_ptr;
 	int			tbits;
 	int			tsize_line;
-	double  	Wallx;
+	double		wallx;
 	int			tendian;
-	
-} t_game;
+}	t_game;
 
 void	ft_error_exit(char *str);
 int		ft_strlen(char *str);
@@ -147,7 +144,7 @@ int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	rotate_right(t_game *game);
-void 	rotate_left(t_game *game);
+void	rotate_left(t_game *game);
 void	checkelement(t_game *game);
 char	*ft_strtrim(char *s1, char c);
 int		ft_rgb_to_hex(int r, int g, int b);

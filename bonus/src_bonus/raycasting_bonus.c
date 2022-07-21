@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/18 12:51:52 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:24:06 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	getcolorfromimg(t_game *game)
 	t_ray	*r;
 
 	r = game->ray;
-	if (r->side == 0 && r->rayDirX < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->wtexture,
+	if (r->side == 0 && r->raydirx < 0)
+		game->color_ptr = mlx_get_data_addr(game->ply_map->wtexture,
 				&game->tbits, &game->tsize_line, &game->tendian);
-	if (r->side == 0 && r->rayDirX >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->etexture,
+	if (r->side == 0 && r->raydirx >= 0)
+		game->color_ptr = mlx_get_data_addr(game->ply_map->etexture,
 				&game->tbits, &game->tsize_line, &game->tendian);
-	if (r->side == 1 && r->rayDirY < 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->ntexture,
+	if (r->side == 1 && r->raydiry < 0)
+		game->color_ptr = mlx_get_data_addr(game->ply_map->ntexture,
 				&game->tbits, &game->tsize_line, &game->tendian);
-	if (r->side == 1 && r->rayDirY >= 0)
-		game->colorPointer = mlx_get_data_addr(game->ply_map->stexture,
+	if (r->side == 1 && r->raydiry >= 0)
+		game->color_ptr = mlx_get_data_addr(game->ply_map->stexture,
 				&game->tbits, &game->tsize_line, &game->tendian);
 }
 
@@ -52,10 +52,10 @@ void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 	getcolorfromimg(game);
 	while (j < wallEnd)
 	{
-		game->texY = game->texPos;
-		game->texPos += game->step;
-		color = (int *)(game->colorPointer + (game->tsize_line * game->texY \
-		+ game->texX * (game->tbits / 8)));
+		game->tex_y = game->tex_pos;
+		game->tex_pos += game->step;
+		color = (int *)(game->color_ptr + (game->tsize_line * game->tex_y \
+		+ game->tex_x * (game->tbits / 8)));
 		put_pixel_in_image(game, i, j, *color);
 		j++;
 	}
@@ -68,38 +68,38 @@ void	fill_image(t_game *game, int i, int wallStart, int wallEnd)
 
 void	get_delta_dist(t_ray *r)
 {
-	if (r->rayDirX == 0)
-		r->deltaDistX = 1e30;
+	if (r->raydirx == 0)
+		r->deltadistx = 1e30;
 	else
-		r->deltaDistX = fabs(1 / r->rayDirX);
-	if (r->rayDirY == 0)
-		r->deltaDistY = 1e30;
+		r->deltadistx = fabs(1 / r->raydirx);
+	if (r->raydiry == 0)
+		r->deltadisty = 1e30;
 	else
-		r->deltaDistY = fabs(1 / r->rayDirY);
+		r->deltadisty = fabs(1 / r->raydiry);
 }
 
 void	get_side_dist(t_game *game, t_ray *r)
 {
 	get_delta_dist(r);
-	if (r->rayDirX < 0)
+	if (r->raydirx < 0)
 	{
-		r->stepX = -1;
-		r->sideDistX = (game->player->x - r->mapX) * r->deltaDistX;
+		r->stepx = -1;
+		r->sidedistx = (game->player->x - r->mapx) * r->deltadistx;
 	}
 	else
 	{
-		r->stepX = 1;
-		r->sideDistX = (r->mapX + 1.0 - game->player->x) * r->deltaDistX;
+		r->stepx = 1;
+		r->sidedistx = (r->mapx + 1.0 - game->player->x) * r->deltadistx;
 	}
-	if (r->rayDirY < 0)
+	if (r->raydiry < 0)
 	{
-		r->stepY = -1;
-		r->sideDistY = (game->player->y - r->mapY) * r->deltaDistY;
+		r->stepy = -1;
+		r->sidedisty = (game->player->y - r->mapy) * r->deltadisty;
 	}
 	else
 	{
-		r->stepY = 1;
-		r->sideDistY = (r->mapY + 1.0 - game->player->y) * r->deltaDistY;
+		r->stepy = 1;
+		r->sidedisty = (r->mapy + 1.0 - game->player->y) * r->deltadisty;
 	}
 }
 
@@ -110,36 +110,36 @@ void	get_hit_distance(t_game *game, t_ray *r)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (r->sideDistX < r->sideDistY)
+		if (r->sidedistx < r->sidedisty)
 		{
-			r->sideDistX += r->deltaDistX;
-			r->mapX += r->stepX;
+			r->sidedistx += r->deltadistx;
+			r->mapx += r->stepx;
 			r->side = 0;
 		}
 		else
 		{
-			r->sideDistY += r->deltaDistY;
-			r->mapY += r->stepY;
+			r->sidedisty += r->deltadisty;
+			r->mapy += r->stepy;
 			r->side = 1;
 		}
-		if (game->map[r->mapY][r->mapX] == '1')
+		if (game->map[r->mapy][r->mapx] == '1')
 			hit = 1;
 	}
 	if (r->side == 0)
-		r->perpWallDist = (r->sideDistX - r->deltaDistX);
+		r->perpwalldist = (r->sidedistx - r->deltadistx);
 	else
-		r->perpWallDist = (r->sideDistY - r->deltaDistY);
+		r->perpwalldist = (r->sidedisty - r->deltadisty);
 }
 
 void	get_line_height(t_ray *r)
 {
-	r->lineHeight = (int)(900 / r->perpWallDist);
-	r->drawStart = ((-1 * r->lineHeight) / 2) + 450;
-	if (r->drawStart < 0)
-		r->drawStart = 0;
-	r->drawEnd = (r->lineHeight / 2) + 450;
-	if (r->drawEnd >= 900)
-		r->drawEnd = 899;
+	r->lineheight = (int)(900 / r->perpwalldist);
+	r->drawstart = ((-1 * r->lineheight) / 2) + 450;
+	if (r->drawstart < 0)
+		r->drawstart = 0;
+	r->drawend = (r->lineheight / 2) + 450;
+	if (r->drawend >= 900)
+		r->drawend = 899;
 }
 
 void	ray_casting(t_game *game)
@@ -158,23 +158,23 @@ void	ray_casting(t_game *game)
 			&game->t.minibits, &game->t.minisize_line, &game->t.miniendian);
 	while (++i < 1800)
 	{
-		r->cameraX = 2 * i / (float)1800 - 1.0;
-		r->rayDirX = game->player->dirX + r->planeX * r->cameraX;
-		r->rayDirY = game->player->dirY + r->planeY * r->cameraX;
-		r->mapX = (int)game->player->x;
-		r->mapY = (int)game->player->y;
+		r->camerax = 2 * i / (float)1800 - 1.0;
+		r->raydirx = game->player->dirx + r->planex * r->camerax;
+		r->raydiry = game->player->diry + r->planey * r->camerax;
+		r->mapx = (int)game->player->x;
+		r->mapy = (int)game->player->y;
 		get_side_dist(game, r);
 		get_hit_distance(game, r);
 		get_line_height(r);
 		if (r->side == 0)
-			game->Wallx = game->player->y + r->perpWallDist * r->rayDirY;
+			game->wallx = game->player->y + r->perpwalldist * r->raydiry;
 		else
-			game->Wallx = game->player->x + r->perpWallDist * r->rayDirX;
-		game->texX = (game->Wallx - (int)game->Wallx) * 64;
-		game->step = 1.0 * 64 / r->lineHeight;
-		game->texPos = ((r->drawStart - 900 / 2)
-				+ (r->lineHeight / 2)) * game->step;
-		fill_image(game, i, r->drawStart, r->drawEnd);
+			game->wallx = game->player->x + r->perpwalldist * r->raydirx;
+		game->tex_x = (game->wallx - (int)game->wallx) * 64;
+		game->step = 1.0 * 64 / r->lineheight;
+		game->tex_pos = ((r->drawstart - 900 / 2)
+				+ (r->lineheight / 2)) * game->step;
+		fill_image(game, i, r->drawstart, r->drawend);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->t.img, 0, 0);
 	draw_minimap(game);
