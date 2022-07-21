@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 16:33:24 by aaitbelh         ###   ########.fr       */
+/*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
+/*   Updated: 2022/07/21 17:32:24 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <limits.h>
-# include "../../get_next/get_next_line.h"
+# include "../get_next/get_next_line.h"
 # include <math.h>
-# include "../../minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 
 # define NUM_RAYS 900
 # define TEXTURE_WIDTH 64
@@ -81,6 +81,11 @@ typedef struct s_img
 	int		size_line;
 	int		endian;
 	char	*p;
+	void	*miniimg;
+	int		minibits;
+	int		minisize_line;
+	int		miniendian;
+	char	*minip;
 }	t_img;
 
 typedef struct s_player
@@ -122,7 +127,7 @@ typedef struct s_game
 	int			tsize_line;
 	double		wallx;
 	int			tendian;
-} t_game;
+}	t_game;
 
 void	ft_error_exit(char *str);
 int		ft_strlen(char *str);
@@ -144,7 +149,7 @@ int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	rotate_right(t_game *game);
-void 	rotate_left(t_game *game);
+void	rotate_left(t_game *game);
 void	checkelement(t_game *game);
 char	*ft_strtrim(char *s1, char c);
 int		ft_rgb_to_hex(int r, int g, int b);
@@ -156,6 +161,7 @@ void	getfloorcolor(char **colors, t_game *game);
 void	getceillingcolor(char **colors, t_game *game);
 char	*gettype(char *str);
 void	getimgpath(t_game *game, char *type, char *str, int lol);
+void	draw_minimap(t_game *game);
 int		key_released(int key, t_game *game);
 int		key_pressed(int key, t_game *game);
 int		get_lenght(char **table);

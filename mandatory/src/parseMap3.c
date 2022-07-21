@@ -6,11 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:21:06 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/18 11:16:37 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:28:29 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 void	getplayerchars(t_game *game, int i, int j, int *count)
 {

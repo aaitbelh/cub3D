@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 21:54:38 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:57:49 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:32:49 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "../mandatory/include/cub3d.h"
-# include "../bonus/include/cub3d_bonus.h"
+# include "../include/cub3d.h"
 #define BUFFER_SIZE 20
 
 char	*ft_strjoin_get(char *s1, char *s2);

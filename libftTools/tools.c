@@ -6,12 +6,12 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:30:13 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/06/27 10:57:27 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:27:05 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mandatory/include/cub3d.h"
-#include "../bonus/include/cub3d_bonus.h"
+#include "../include/cub3d.h"
+
 
 
 void	count_w_h(t_game *game)

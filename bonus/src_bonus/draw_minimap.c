@@ -6,11 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:49:36 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/18 11:44:24 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d_bonus.h"
+#include "../../include/cub3d.h"
 
 void	draw_pixel_in_image(t_game *game, int i, int j, int color)
 {

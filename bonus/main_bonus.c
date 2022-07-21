@@ -6,11 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 16:35:41 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:32:15 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/cub3d_bonus.h"
+#include "../include/cub3d.h"
 
 int	update(t_game *game)
 {

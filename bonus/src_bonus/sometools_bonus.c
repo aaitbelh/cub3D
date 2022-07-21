@@ -6,11 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:17:43 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 16:36:45 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d_bonus.h"
+#include "../../include/cub3d.h"
 
 void	fix_map(t_game *game)
 {
