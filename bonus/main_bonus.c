@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 15:11:44 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:35:41 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,6 @@ int	update(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	ray_casting(game);
-	return (1);
-}
-
-int	key_released(int key, t_game *game)
-{
-	game->player->tab[key] = 1;
-	if (key == 53)
-		exit(0);
-	return (1);
-}
-
-int	key_pressed(int key, t_game *game)
-{
-	game->player->tab[key] = 0;
-	if (key == 53)
-		exit(0);
 	return (1);
 }
 
@@ -57,65 +41,19 @@ char	**makemaprect(t_game *game)
 {
 	int		i;
 	int		tmp;
-	int		j;
 	char	**new;
 
 	i = 0;
 	while (game->map[i])
 		i++;
 	new = malloc(sizeof(char *) * (i + 1));
-	tmp = 0;
-	tmp = ft_strlen(game->map[0]);
-	i = 0;
-	while (game->map[i])
-	{
-		if (tmp < ft_strlen(game->map[i]))
-			tmp = ft_strlen(game->map[i]);
-		i++;
-	}
 	if (!new)
 		return (NULL);
 	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		new[i] = malloc(sizeof(char) * (tmp + 1));
-		while (j < tmp)
-		{
-			if (j < ft_strlen(game->map[i]))
-			{
-				new[i][j] = game->map[i][j];
-			}
-			else
-				new[i][j] = '0';
-			j++;
-		}
-		new[i][j] = '\0';
-		i++;
-	}
-	new[i] = NULL;
+	tmp = get_lenght(game->map);
+	fill_table(game->map, new, tmp);
 	twodfree(game->map);
 	return (new);
-}
-
-void	fix_map(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (game->map[i])
-	{
-		j = 0;
-		while (game->map[i][j])
-		{
-			if (game->map[i][j] == ' ')
-				game->map[i][j] = '0';
-			j++;
-		}
-		i++;
-	}
-	game->map = makemaprect(game);
 }
 
 int	redcross(int Key)

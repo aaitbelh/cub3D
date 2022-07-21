@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 14:39:09 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:33:24 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_game
 	int			tsize_line;
 	double		wallx;
 	int			tendian;
-}	t_game;
+} t_game;
 
 void	ft_error_exit(char *str);
 int		ft_strlen(char *str);
@@ -144,7 +144,7 @@ int		check_map_name(char *str);
 char	**read_map(char *name);
 void	fix_map(t_game *game);
 void	rotate_right(t_game *game);
-void	rotate_left(t_game *game);
+void 	rotate_left(t_game *game);
 void	checkelement(t_game *game);
 char	*ft_strtrim(char *s1, char c);
 int		ft_rgb_to_hex(int r, int g, int b);
@@ -156,4 +156,9 @@ void	getfloorcolor(char **colors, t_game *game);
 void	getceillingcolor(char **colors, t_game *game);
 char	*gettype(char *str);
 void	getimgpath(t_game *game, char *type, char *str, int lol);
+int		key_released(int key, t_game *game);
+int		key_pressed(int key, t_game *game);
+int		get_lenght(char **table);
+void	fill_table(char **table, char **new, int tmp);
+char	**makemaprect(t_game *game);
 #endif

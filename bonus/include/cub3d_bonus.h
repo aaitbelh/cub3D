@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 15:24:24 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/21 16:46:27 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define NUM_RAYS 900
 # define TEXTURE_WIDTH 64
-// # define TEXTURE_HEIGHT 64
+# define TEXTURE_HEIGHT 64
 
 typedef struct s_ray
 {
@@ -162,4 +162,9 @@ void	getceillingcolor(char **colors, t_game *game);
 char	*gettype(char *str);
 void	getimgpath(t_game *game, char *type, char *str, int lol);
 void	draw_minimap(t_game *game);
+int		key_released(int key, t_game *game);
+int		key_pressed(int key, t_game *game);
+int		get_lenght(char **table);
+void	fill_table(char **table, char **new, int tmp);
+char	**makemaprect(t_game *game);
 #endif
