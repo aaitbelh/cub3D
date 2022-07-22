@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 18:22:19 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:15:30 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_game
 	int			tsize_line;
 	double		wallx;
 	int			tendian;
+	char		**minimap;
 }	t_game;
 
 void	ft_error_exit(char *str);

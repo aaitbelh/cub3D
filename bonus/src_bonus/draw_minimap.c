@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:49:36 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/22 14:48:33 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,31 +90,40 @@ void	draw_square(t_game *game, float x, float y, int color)
 
 void	draw_minimap(t_game *game)
 {
-	char	**mini;
+	int		begin_x;
+	int		begin_y;
 	int		i;
-	int		a;
-	int		b;
 	int		j;
+	int		tmp_x;
 
-	mini = malloc(11 * sizeof(char *));
+	begin_x = (int)game->player->x - 10;
+	begin_y = (int)game->player->y - 10;
 	i = 0;
-	a = (int)game->player->y - 5;
-	b = (int)game->player->x - 5;
-	while (i < 10)
+	while (i < 200)
 	{
-		b = (int)game->player->x - 5;
-		mini[i] = malloc(10 * sizeof(char ) + 1);
+		if (i % 10 == 0 && i != 0)
+			begin_y++;
 		j = 0;
-		while (j < 10)
+		tmp_x = begin_x;
+		while (j < 200)
 		{
-			mini[i][j] = game->map[a][b];
-			if (b == (int)game->player->x && a == (int)game->player->y)
-				mini[i][j] = 'P';
-			b++;
+			if (j % 10 == 0 && j != 0)
+				tmp_x++;
+			if (begin_y < 0 || begin_y >= game->ply_map->hight
+				|| tmp_x < 0 || tmp_x >= game->ply_map->width)
+				draw_pixel_in_image(game, i, j, 0x000000);
+			else
+			{
+				if (game->map[begin_y][tmp_x] == '1')
+					draw_pixel_in_image(game, i, j, 0xFFFFFF);
+				else
+					draw_pixel_in_image(game, i, j, 0x000000);
+			}
+			if (begin_y == (int)game->player->y
+				&& tmp_x == (int)game->player->x)
+				draw_pixel_in_image(game, i, j, 0xFF0000);
 			j++;
 		}
-		mini[i][j] = 0;
-		a++;
 		i++;
 	}
 }
