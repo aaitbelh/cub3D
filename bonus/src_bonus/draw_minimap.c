@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 11:49:36 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/22 14:48:33 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:16:47 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,70 +21,29 @@ void	draw_pixel_in_image(t_game *game, int i, int j, int color)
 	*(unsigned int *)a = color;
 }
 
-void	draw_line(t_game *game, t_line *line, int len)
+void	fill_minimap(t_game *game, int tmp_x, int begin_y, int i)
 {
-	float	x;
-	float	y;
-	float	l;
-	float	step;
+	int	j;
 
-	step = 0.1;
-	line->offset_x = game->player->x * 10;
-	line->offset_y = game->player->y * 10;
-	l = 0.0;
-	while (l < len)
+	j = 0;
+	while (j < 200)
 	{
-		x = cos(game->player->rotation_angle) * l;
-		y = sin(game->player->rotation_angle) * l;
-		draw_pixel_in_image(game, line->offset_x
-			+ x, line->offset_y + y, 0xFF0000);
-		l += step;
-	}
-}
-
-void	draw_cyrcle(t_game *game, t_line *line)
-{
-	double	l;
-	float	y;
-	float	x;
-	float	step;
-
-	line->offset_x = game->player->x * 10;
-	line->offset_y = game->player->y * 10;
-	l = 0.0;
-	step = 0.0;
-	while (l < M_PI * 2)
-	{
-		step = 0;
-		while (step < 5)
+		if (j % 10 == 0 && j != 0)
+			tmp_x++;
+		if (begin_y < 0 || begin_y >= game->ply_map->hight
+			|| tmp_x < 0 || tmp_x >= game->ply_map->width)
+			draw_pixel_in_image(game, i, j, 0x000000);
+		else
 		{
-			x = cos(l) * step;
-			y = sin(l) * step;
-			draw_pixel_in_image(game, game->player->x * 10 + x,
-				game->player->y * 10 + y, 0xFF0000);
-			step += 0.2;
+			if (game->map[begin_y][tmp_x] == '1')
+				draw_pixel_in_image(game, i, j, 0xFFFFFF);
+			else
+				draw_pixel_in_image(game, i, j, 0x000000);
 		}
-		l += 0.2;
-	}
-}
-
-void	draw_square(t_game *game, float x, float y, int color)
-{
-	int		i;
-	int		j;
-	int		size;
-
-	size = 20;
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size)
-		{
-			draw_pixel_in_image(game, x + i, y + j, color);
-			j++;
-		}
-		i++;
+		if (begin_y == (int)game->player->y
+			&& tmp_x == (int)game->player->x)
+			draw_pixel_in_image(game, i, j, 0xFF0000);
+		j++;
 	}
 }
 
@@ -93,9 +52,11 @@ void	draw_minimap(t_game *game)
 	int		begin_x;
 	int		begin_y;
 	int		i;
-	int		j;
 	int		tmp_x;
 
+	game->t.miniimg = mlx_new_image(game->mlx, 200, 200);
+	game->t.minip = mlx_get_data_addr(game->t.miniimg,
+			&game->t.minibits, &game->t.minisize_line, &game->t.miniendian);
 	begin_x = (int)game->player->x - 10;
 	begin_y = (int)game->player->y - 10;
 	i = 0;
@@ -103,27 +64,10 @@ void	draw_minimap(t_game *game)
 	{
 		if (i % 10 == 0 && i != 0)
 			begin_y++;
-		j = 0;
 		tmp_x = begin_x;
-		while (j < 200)
-		{
-			if (j % 10 == 0 && j != 0)
-				tmp_x++;
-			if (begin_y < 0 || begin_y >= game->ply_map->hight
-				|| tmp_x < 0 || tmp_x >= game->ply_map->width)
-				draw_pixel_in_image(game, i, j, 0x000000);
-			else
-			{
-				if (game->map[begin_y][tmp_x] == '1')
-					draw_pixel_in_image(game, i, j, 0xFFFFFF);
-				else
-					draw_pixel_in_image(game, i, j, 0x000000);
-			}
-			if (begin_y == (int)game->player->y
-				&& tmp_x == (int)game->player->x)
-				draw_pixel_in_image(game, i, j, 0xFF0000);
-			j++;
-		}
+		fill_minimap(game, tmp_x, begin_y, i);
 		i++;
 	}
+	mlx_put_image_to_window(game->mlx, game->win, game->t.miniimg, 0, 0);
+	mlx_destroy_image(game->mlx, game->t.miniimg);
 }

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   libfttools2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 18:04:50 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:05 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:38:35 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-
 
 int	allnum(char *str)
 {
