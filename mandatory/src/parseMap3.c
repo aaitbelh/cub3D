@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parseMap3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:21:06 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:22:05 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	getplayerchars(t_game *game, int i, int j, int *count)
 		(*count)++;
 	}
 	else if (game->map[i][j] != '0' && game->map[i][j] != '1')
-		ft_error_exit("invalid charterer in map");
+		ft_error_exit("invalid charterer in map\n");
 }
 
 void	getceillingcolor(char **colors, t_game *game)

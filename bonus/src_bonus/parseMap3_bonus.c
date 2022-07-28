@@ -6,7 +6,7 @@
 /*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:35:53 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/28 15:18:16 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:21:46 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	getplayerchars(t_game *game, int i, int j, int *count)
 		(*count)++;
 	}
 	else if (game->map[i][j] != '0' && game->map[i][j] != '1')
-		ft_error_exit("invalid charterer in map");
+		ft_error_exit("invalid charterer in map\n");
 }
 
 void	getceillingcolor(char **colors, t_game *game)

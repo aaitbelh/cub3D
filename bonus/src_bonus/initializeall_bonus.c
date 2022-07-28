@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializeall_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:52:31 by alaajili         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	getdirectionofplayer2(t_game *game)
 	{
 		game->player->dirx = 0.0;
 		game->player->diry = -1.0;
-		game->ray->planex = 0.66;
+		game->ray->planex = -0.66;
 		game->ray->planey = 0.0;
 	}
 	if (game->player->rederaction == 'S')
 	{
 		game->player->dirx = 0.0;
 		game->player->diry = 1.0;
-		game->ray->planex = -0.66;
+		game->ray->planex = 0.66;
 		game->ray->planey = 0.0;
 	}
 }
