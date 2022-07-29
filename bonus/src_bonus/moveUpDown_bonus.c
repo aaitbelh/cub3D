@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:33:40 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:41:51 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void	move_up(t_game *game)
 		game->player->x = tmp_x;
 		game->player->y = tmp_y;
 	}
+	else if (game->map[(int)tmp_y][(int)game->player->x] != '1')
+		game->player->y = tmp_y;
+	else if (game->map[(int)game->player->y][(int)tmp_x] != '1')
+		game->player->x = tmp_x;
 }
 
 void	move_down(t_game *game)
