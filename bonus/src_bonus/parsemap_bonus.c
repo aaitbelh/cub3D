@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:08:12 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,21 @@ void	checkfory(t_game *game, int i, int j)
 	k = i;
 	while (game->map[h])
 		h++;
-	while (game->map[k][j] != '1' && k > 0 && k <= ft_strlen(game->map[k - 1]))
+	while (game->map[k][j] != '1' && k > 0)
+	{
+		if (k != 0 && j > ft_strlen(game->map[k - 1]))
+			ft_error_exit("Error Map is not closed\n");
 		k--;
-	if ((game->map[k][j] != '1' && k == 0) || k > ft_strlen(game->map[i - 1]))
+	}
+	if (game->map[k][j] != '1' && k == 0)
 		ft_error_exit("Error Map is not closed\n");
 	k = i;
 	while (game->map[k][j] != '1' && k < h - 1)
+	{
+		if (k != h - 1 && j > ft_strlen(game->map[k + 1]))
+			ft_error_exit("Error Map is not closed\n");
 		k++;
+	}
 	if (game->map[k][j] != '1' && k == h - 1)
 		ft_error_exit("Error Map is not closed\n");
 }
@@ -109,6 +117,8 @@ char	**read_map(char *name)
 		line = ft_strjoin_get(line, buf);
 		free(buf);
 	}
+	if (!line)
+		ft_error_exit("map its empty\n");
 	map = ft_split(line, '\n');
 	free(line);
 	return (map);

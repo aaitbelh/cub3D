@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:09:59 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ char	**read_map(char *name)
 		line = ft_strjoin_get(line, buf);
 		free(buf);
 	}
+	if (!line)
+		ft_error_exit("map its empty\n");
 	map = ft_split(line, '\n');
 	free(line);
 	return (map);
