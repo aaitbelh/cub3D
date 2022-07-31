@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:19:36 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	**getnewmap(char **map)
 {
 	int		i;
 	char	**new;
+	int		tmp;
+	int		j;
 
 	i = 6;
 	while (map[i])
@@ -84,9 +86,20 @@ char	**getnewmap(char **map)
 	if (!new)
 		ft_error_exit("error in malloc\n");
 	i = 6;
+	tmp = get_lenght(map);
 	while (map[i])
 	{
-		new[i - 6] = ft_strdup(map[i]);
+		j = 0;
+		new[i - 6] = malloc(sizeof(char ) * (tmp + 1));
+		while (j < tmp)
+		{
+			if (j < ft_strlen(map[i]))
+				new[i - 6][j] = map[i][j];
+			else
+				new[i - 6][j] = ' ';
+			j++;
+		}
+		new[i - 6][j] = '\0';
 		i++;
 	}
 	new[i - 6] = NULL;

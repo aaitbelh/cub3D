@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializeAll.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/28 16:45:55 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/30 21:56:31 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	initializedata(char **av, t_game *data)
 		ft_error_exit("Wrong Map!\n");
 	data->map = read_map(av[1]);
 	initializemap(data);
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1800, 900, "prototype");
 	checkelement(data);
 	check_map(data->map, data);
 	fix_map(data);

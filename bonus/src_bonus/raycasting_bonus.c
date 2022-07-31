@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/28 15:16:30 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/31 09:40:41 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ray_casting(t_game *game)
 			&game->t.size_line, &tmp);
 	while (++i < 1800)
 	{
-		r->camerax = 2 * i / (float)1800 - 1.0;
+		r->camerax = 2 * i / (double)1800 - 1.0;
 		r->raydirx = game->player->dirx + r->planex * r->camerax;
 		r->raydiry = game->player->diry + r->planey * r->camerax;
 		r->mapx = (int)game->player->x;

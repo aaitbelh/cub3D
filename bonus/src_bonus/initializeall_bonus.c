@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializeall_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/28 16:52:31 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/31 09:29:40 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	initializemap(t_game *game)
 	game->ply_map->we = 0;
 	game->ply_map->ea = 0;
 	game->ply_map->f = 0;
+	game->mousestate = 0;
 }
 
 void	initializedata(char **av, t_game *data)
@@ -86,7 +87,7 @@ void	initializedata(char **av, t_game *data)
 	getplayerposition(data);
 	getdirectionofplayer(data);
 	count_w_h(data);
-	data->player->rotation_speed = 0.05;
+	data->player->rotation_speed = 0.1;
 	data->player->move_speed = 0.1;
 	data->rayangle = 0;
 }

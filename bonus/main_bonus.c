@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/22 14:33:41 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/31 10:50:02 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,40 @@ int	update(t_game *game)
 	return (1);
 }
 
+void mouserotation(t_game *game)
+{
+	int	x = 0;
+	int y = 0;
+	if(game->mousestate)
+	{
+		mlx_mouse_get_pos(game->win, &x, &y);
+		if (x > game->mousex)
+			rotate_right(game);
+		if (x < game->mousex)
+			rotate_left(game);
+		mlx_mouse_move(game->win, 900, 450);
+		mlx_mouse_hide();
+		game->mousex = x;
+		game->mousex = 900;
+		x = 900;
+	}
+	else
+		mlx_mouse_show();
+}
+
 int	render(t_game *game)
 {
 	if (game->player->tab[13])
 		move_up(game);
 	if (game->player->tab[1])
 		move_down(game);
-	if (game->player->tab[124])
-		rotate_right(game);
-	if (game->player->tab[123])
-		rotate_left(game);
 	if (game->player->tab[2])
 		move_right(game);
 	if (game->player->tab[0])
 		move_left(game);
+	mouserotation(game);
 	update(game);
 	return (1);
-}
-
-char	**makemaprect(t_game *game)
-{
-	int		i;
-	int		tmp;
-	char	**new;
-
-	i = 0;
-	while (game->map[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 1));
-	if (!new)
-		return (NULL);
-	i = 0;
-	tmp = get_lenght(game->map);
-	fill_table(game->map, new, tmp);
-	twodfree(game->map);
-	return (new);
 }
 
 int	redcross(int Key)

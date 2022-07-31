@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 23:07:32 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:19:01 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,6 @@ int	render(t_game *game)
 	return (1);
 }
 
-char	**makemaprect(t_game *game)
-{
-	int		i;
-	int		tmp;
-	char	**new;
-
-	i = 0;
-	while (game->map[i])
-		i++;
-	new = malloc(sizeof(char *) * (i + 1));
-	if (!new)
-		return (NULL);
-	i = 0;
-	tmp = get_lenght(game->map);
-	fill_table(game->map, new, tmp);
-	twodfree(game->map);
-	return (new);
-}
-
 int	redcross(int Key)
 {
 	(void)Key;
@@ -69,8 +50,6 @@ int	main(int ac, char **av)
 	if (ac > 2 || ac < 2)
 		ft_error_exit("not enough argument\n");
 	data = malloc(sizeof(t_game));
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1800, 900, "prototype");
 	initializedata(av, data);
 	mlx_hook(data->win, 02, 1L, key_released, data);
 	mlx_hook(data->win, 03, 2L, key_pressed, data);

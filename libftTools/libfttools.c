@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/27 11:54:41 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:05 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:24:09 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,23 @@ char	*ft_strdup(char *str)
 	return (new);
 }
 
-char	*ft_strchr(char *str, char c)
-{
-	int	i;
+char	*ft_strrchr(const char *str, int c)
+{	
+	char	*ptr;
 
-	i = 0;
-	while (str[i] && str[i] != (char)c)
-			i++;
-	if (str[i] == (char)c)
-		return (&(str[i]));
+	ptr = (char *)str;
+	if (c == 0 && *str == '\0')
+		return ((char *)str);
+	while (*str)
+		str++;
+	while (str >= ptr)
+	{
+		if (*str == (char )c)
+		{
+			return ((char *)str);
+		}
+		str--;
+	}
 	return (NULL);
 }
 

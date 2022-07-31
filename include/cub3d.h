@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alaajili <alaajili@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/22 17:44:56 by alaajili         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:24:27 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,22 @@
 
 typedef struct s_ray
 {
-	float		planex;
-	float		planey;
-	float		deltadistx;
-	float		deltadisty;
+	double		planex;
+	double		planey;
+	double		deltadistx;
+	double		deltadisty;
 	int			stepx;
 	int			stepy;
-	float		sidedistx;
-	float		sidedisty;
+	double		sidedistx;
+	double		sidedisty;
 	int			side;
-	float		perpwalldist;
+	double		perpwalldist;
 	int			lineheight;
 	int			drawstart;
 	int			drawend;
-	float		camerax;
-	float		raydirx;
-	float		raydiry;
+	double		camerax;
+	double		raydirx;
+	double		raydiry;
 	int			mapx;
 	int			mapy;
 }	t_ray;
@@ -90,19 +90,19 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 	int		radious;
-	float	move_speed;
-	float	move_step;
-	float	rotation_angle;
+	double	move_speed;
+	double	move_step;
+	double	rotation_angle;
 	int		turndaraction;
 	int		walkdaraction;
-	float	rotation_speed;
+	double	rotation_speed;
 	char	rederaction;
 	int		tab[500];
-	float	dirx;
-	float	diry;
+	double	dirx;
+	double	diry;
 }	t_player;
 
 typedef struct s_game
@@ -116,12 +116,12 @@ typedef struct s_game
 	void		*mlx;
 	t_ray		*ray;
 	t_img		t;
-	float		rayangle;
+	double		rayangle;
 	uint32_t	*textures;
 	uint32_t	tex_x;
 	uint32_t	tex_y;
-	float		step;
-	float		tex_pos;
+	double		step;
+	double		tex_pos;
 	char		*color_ptr;
 	int			tbits;
 	int			tsize_line;
@@ -129,13 +129,17 @@ typedef struct s_game
 	int			tendian;
 	int			door;
 	void		*doortex;
+	int			highofmap;
+	int			mousex;
+	int			mousey;
+	int			mousestate;
 }	t_game;
 
 void	ft_error_exit(char *str);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 int		ft_strcmp(char *s1, char *s2);
-char	*ft_strchr(char *str, char c);
+char	*ft_strrchr(const char *str, int c);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 void	move_up(t_game *game);
@@ -167,8 +171,6 @@ void	draw_minimap(t_game *game);
 int		key_released(int key, t_game *game);
 int		key_pressed(int key, t_game *game);
 int		get_lenght(char **table);
-void	fill_table(char **table, char **new, int tmp);
-char	**makemaprect(t_game *game);
 void	get_side_dist(t_game *game, t_ray *r);
 void	fill_image(t_game *game, int i, int wallStart, int wallEnd);
 #endif

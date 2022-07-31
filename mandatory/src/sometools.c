@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:17:43 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:28:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/30 19:21:55 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	fix_map(t_game *game)
 		}
 		i++;
 	}
-	game->map = makemaprect(game);
 }
 
 int	key_released(int key, t_game *game)
@@ -63,30 +62,4 @@ int	get_lenght(char **table)
 		i++;
 	}
 	return (tmp);
-}
-
-void	fill_table(char **table, char **new, int tmp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (table[i])
-	{
-		j = 0;
-		new[i] = malloc(sizeof(char) * (tmp + 1));
-		while (j < tmp)
-		{
-			if (j < ft_strlen(table[i]))
-			{
-				new[i][j] = table[i][j];
-			}
-			else
-				new[i][j] = '0';
-			j++;
-		}
-		new[i][j] = '\0';
-		i++;
-	}
-	new[i] = NULL;
 }

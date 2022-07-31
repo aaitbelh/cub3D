@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:29 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 09:40:36 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	move_left(t_game *game)
 {
-	float	tmp_x;
-	float	tmp_y;
-	float	tmp_dirx;
-	float	tmp_diry;
+	double	tmp_x;
+	double	tmp_y;
+	double	tmp_dirx;
+	double	tmp_diry;
 
 	tmp_dirx = game->player->dirx * cos((M_PI / 2))
 		- game->player->diry * sin((M_PI / 2));
@@ -34,10 +34,10 @@ void	move_left(t_game *game)
 
 void	move_right(t_game *game)
 {
-	float	tmp_x;
-	float	tmp_y;
-	float	tmp_dirx;
-	float	tmp_diry;
+	double	tmp_x;
+	double	tmp_y;
+	double	tmp_dirx;
+	double	tmp_diry;
 
 	tmp_dirx = game->player->dirx * -cos((M_PI / 2))
 		- game->player->diry * -sin((M_PI / 2));
@@ -54,8 +54,8 @@ void	move_right(t_game *game)
 
 void	rotate_left(t_game *game)
 {
-	float	old_dirx;
-	float	oldplanex;
+	double	old_dirx;
+	double	oldplanex;
 
 	oldplanex = game->ray->planex;
 	old_dirx = game->player->dirx;
@@ -71,7 +71,7 @@ void	rotate_left(t_game *game)
 
 void	rotate_right(t_game *game)
 {
-	float	oldplanex;
+	double	oldplanex;
 
 	oldplanex = game->ray->planex;
 	game->player->dirx = game->player->dirx * cos(-game->player->rotation_speed)

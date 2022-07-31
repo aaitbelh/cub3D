@@ -6,58 +6,35 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/29 14:08:12 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:14:21 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	checkfory(t_game *game, int i, int j)
+void	checkfory(t_game *game, int y, int x)
 {
-	int		h;
-	int		k;
-
-	h = 0;
-	k = i;
-	while (game->map[h])
-		h++;
-	while (game->map[k][j] != '1' && k > 0)
-	{
-		if (k != 0 && j > ft_strlen(game->map[k - 1]))
-			ft_error_exit("Error Map is not closed\n");
-		k--;
-	}
-	if (game->map[k][j] != '1' && k == 0)
-		ft_error_exit("Error Map is not closed\n");
-	k = i;
-	while (game->map[k][j] != '1' && k < h - 1)
-	{
-		if (k != h - 1 && j > ft_strlen(game->map[k + 1]))
-			ft_error_exit("Error Map is not closed\n");
-		k++;
-	}
-	if (game->map[k][j] != '1' && k == h - 1)
-		ft_error_exit("Error Map is not closed\n");
+	if (y == 0 || y == game->highofmap - 1)
+		ft_error_exit("error in map not serrundered\n");
+	if (game->map[y + 1][x] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y - 1][x] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
 }
 
-void	checkforx(t_game *game, int i, int j)
+void	checkforx(t_game *game, int y, int x)
 {
-	int		k;
-	int		w;
+	int		lenght;
 
-	k = j;
-	w = 0;
-	while (game->map[i][w])
-		w++;
-	while (game->map[i][k] != '1' && k < w)
-		k++;
-	if (game->map[i][k] != '1' && k >= w)
-		ft_error_exit("Error: Map is not closed");
-	k = j;
-	while (game->map[i][k] != '1' && k > 0)
-		k--;
-	if (game->map[i][k] != '1' && k <= 0)
-		ft_error_exit("Error: Map is not closed");
+	lenght = 0;
+	while (game->map[y][lenght])
+		lenght++;
+	if (x == 0 || x == lenght - 1)
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y][x + 1] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y][x - 1] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
 }
 
 void	check_map(char **str, t_game *game)
@@ -65,6 +42,10 @@ void	check_map(char **str, t_game *game)
 	int	i;
 	int	j;
 
+	i = -1;
+	while (game->map[++i])
+		i++;
+	game->highofmap = i;
 	i = 0;
 	while (str[i])
 	{
@@ -92,7 +73,7 @@ int	check_map_name(char *str)
 	while (str[i] && str[i] != '.')
 		i++;
 	fd = open(str, O_RDONLY);
-	new = ft_strchr(str, '.');
+	new = ft_strrchr(str, '.');
 	if (!new || ft_strcmp(new, ".cub") || fd == -1)
 		return (1);
 	return (0);
