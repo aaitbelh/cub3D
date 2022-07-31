@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/30 19:20:04 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:56:22 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char	**getnewmap(char **map)
 	int		i;
 	char	**new;
 	int		tmp;
-	int		j;
 
 	i = 6;
 	while (map[i])
@@ -85,24 +84,8 @@ char	**getnewmap(char **map)
 	new = malloc(sizeof(char *) * (i + 1));
 	if (!new)
 		ft_error_exit("error in malloc\n");
-	i = 6;
 	tmp = get_lenght(map);
-	while (map[i])
-	{
-		j = 0;
-		new[i - 6] = malloc(sizeof(char ) * (tmp + 1));
-		while (j < tmp)
-		{
-			if (j < ft_strlen(map[i]))
-				new[i - 6][j] = map[i][j];
-			else
-				new[i - 6][j] = ' ';
-			j++;
-		}
-		new[i - 6][j] = '\0';
-		i++;
-	}
-	new[i - 6] = NULL;
+	fill_map(map, new, tmp);
 	twodfree(map);
 	return (new);
 }

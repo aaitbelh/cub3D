@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/30 18:01:18 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:56:12 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	check_map_name(char *str)
 	while (str[i] && str[i] != '.')
 		i++;
 	fd = open(str, O_RDONLY);
-	new = ft_strchr(str, '.');
+	new = ft_strrchr(str, '.');
 	if (!new || ft_strcmp(new, ".cub") || fd == -1)
 		return (1);
 	return (0);

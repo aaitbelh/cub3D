@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 12:24:27 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:55:39 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,5 @@ int		key_pressed(int key, t_game *game);
 int		get_lenght(char **table);
 void	get_side_dist(t_game *game, t_ray *r);
 void	fill_image(t_game *game, int i, int wallStart, int wallEnd);
+void	fill_map(char **map, char **new, int tmp);
 #endif

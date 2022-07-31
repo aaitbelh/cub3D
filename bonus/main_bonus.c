@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 10:50:02 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/07/31 12:41:29 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int	update(t_game *game)
 	return (1);
 }
 
-void mouserotation(t_game *game)
+void	mouserotation(t_game *game)
 {
-	int	x = 0;
-	int y = 0;
-	if(game->mousestate)
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	if (game->mousestate)
 	{
 		mlx_mouse_get_pos(game->win, &x, &y);
 		if (x > game->mousex)

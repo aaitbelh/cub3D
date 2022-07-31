@@ -2,7 +2,7 @@ NAME = cub3d
 BNAME = cub3d_bonus
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra 
 
 SRCS = main.c libftTools/libfttools.c libftTools/tools.c get_next/get_next_line.c \
 	get_next/get_next_line_utils.c libftTools/ft_split.c mandatory/src/move_player.c \
