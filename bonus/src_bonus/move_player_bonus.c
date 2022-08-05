@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 13:55:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 09:40:36 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/05 11:06:38 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,13 @@ void	rotate_left(t_game *game)
 void	rotate_right(t_game *game)
 {
 	double	oldplanex;
+	double	old_dirx;
 
-	oldplanex = game->ray->planex;
+	oldplanex = (double)game->ray->planex;
+	old_dirx = game->player->dirx;
 	game->player->dirx = game->player->dirx * cos(-game->player->rotation_speed)
 		- game->player->diry * sin(-game->player->rotation_speed);
-	game->player->diry = game->player->dirx * sin(-game->player->rotation_speed)
+	game->player->diry = old_dirx * sin(-game->player->rotation_speed)
 		+ game->player->diry * cos(-game->player->rotation_speed);
 	game->ray->planex = game->ray->planex * cos(-game->player->rotation_speed)
 		- game->ray->planey * sin(-game->player->rotation_speed);
