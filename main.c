@@ -6,27 +6,11 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 13:48:55 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/08/08 19:16:46 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:56:50 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/cub3d.h"
-
-void	check_newline(char *buf, int *lock)
-{
-	char	*tmp;
-
-	tmp = ft_strtrim(buf, ' ');
-	if (tmp[0] == '1' && !*lock)
-		*lock = 1;
-	if (*lock == 1 && tmp[0] == '\n')
-		*lock = 2;
-	if (*lock == 2 && tmp[0] == '1')
-		*lock = 3;
-	free(tmp);
-	if (*lock == 3)
-		ft_error_exit("a line in the midle of the map\n");
-}
 
 int	update(t_game *game)
 {

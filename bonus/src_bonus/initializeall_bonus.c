@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 08:39:56 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 09:29:40 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:57:12 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	initializedata(char **av, t_game *data)
 	initializemap(data);
 	checkelement(data);
 	check_map(data->map, data);
+	count_w_h(data);
 	fix_map(data);
 	getplayerposition(data);
 	getdirectionofplayer(data);
-	count_w_h(data);
 	data->player->rotation_speed = 0.1;
 	data->player->move_speed = 0.1;
 	data->rayangle = 0;

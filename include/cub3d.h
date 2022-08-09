@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 15:23:49 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/08/08 18:25:41 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:46:53 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,4 +175,5 @@ void	get_side_dist(t_game *game, t_ray *r);
 void	fill_image(t_game *game, int i, int wallStart, int wallEnd);
 void	fill_map(char **map, char **new, int tmp);
 void	check_newline(char *buf, int *lock);
+void	check_player(t_game *game, int y, int x);
 #endif

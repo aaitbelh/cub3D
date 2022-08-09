@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/08 18:28:23 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/08/08 19:17:07 by aaitbelh         ###   ########.fr       */
+/*   Created: 2022/08/09 16:50:17 by aaitbelh          #+#    #+#             */
+/*   Updated: 2022/08/09 16:51:36 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,25 @@ void	check_newline(char *buf, int *lock)
 	free(tmp);
 	if (*lock == 3)
 		ft_error_exit("a line in the midle of the map\n");
+}
+
+void	check_player(t_game *game, int y, int x)
+{
+	int		lenght;
+
+	lenght = 0;
+	while (game->map[y][lenght])
+		lenght++;
+	if (x == 0 || x == lenght - 1)
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y][x + 1] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y][x - 1] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (y == 0 || y == game->highofmap - 1)
+		ft_error_exit("error in map not serrundered\n");
+	if (game->map[y + 1][x] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
+	if (game->map[y - 1][x] == ' ')
+		ft_error_exit("error in map not serrundered or space founded\n");
 }

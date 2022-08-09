@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/08/08 19:13:38 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:56:05 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	check_map(char **str, t_game *game)
 				checkforx(game, i, j);
 				checkfory(game, i, j);
 			}
+			if (str[i][j] == 'W' || str[i][j] == 'S'
+				|| str[i][j] == 'E' || str[i][j] == 'N')
+				check_player(game, i, j);
 			j++;
 		}	
 		i++;
