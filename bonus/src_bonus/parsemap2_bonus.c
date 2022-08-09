@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 10:11:31 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 12:56:30 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/08 19:14:31 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,29 @@ void	getplayerposition(t_game *game)
 void	getcolor(t_game *game, char *str, char *type)
 {
 	char	**colors;
+	int		len;
+	int		i;
 
-	colors = ft_split(str, ',');
-	if (!ft_strcmp(type, "F"))
+	len = 0;
+	i = -1;
+	if (!ft_strcmp(type, "F") || !ft_strcmp(type, "C"))
 	{
-		getfloorcolor(colors, game);
-		twodfree(colors);
-	}
-	if (!ft_strcmp(type, "C"))
-	{
-		getceillingcolor(colors, game);
-		twodfree(colors);
+		while (str[++i])
+			if (str[i] == ',')
+				len++;
+		if (len != 2)
+			ft_error_exit("Celling or floor color parametere problem\n");
+		colors = ft_split(str, ',');
+		if (!ft_strcmp(type, "F"))
+		{
+			getfloorcolor(colors, game);
+			twodfree(colors);
+		}
+		if (!ft_strcmp(type, "C"))
+		{
+			getceillingcolor(colors, game);
+			twodfree(colors);
+		}
 	}
 }
 

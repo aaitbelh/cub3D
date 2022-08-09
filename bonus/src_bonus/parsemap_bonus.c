@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 09:54:03 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 12:14:21 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/08 18:26:43 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	check_map(char **str, t_game *game)
 	int	i;
 	int	j;
 
-	i = -1;
-	while (game->map[++i])
+	i = 0;
+	while (game->map[i])
 		i++;
 	game->highofmap = i;
 	i = 0;
@@ -85,17 +85,20 @@ char	**read_map(char *name)
 	char	*buf;
 	char	**map;
 	char	*line;
+	int		lock;
 
+	lock = 0;
+	line = NULL;
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		ft_error_exit("can't open map\n");
-	line = NULL;
 	while (1)
 	{
 		buf = get_next_line(fd);
 		if (!buf)
 			break ;
 		line = ft_strjoin_get(line, buf);
+		check_newline(buf, &lock);
 		free(buf);
 	}
 	if (!line)
