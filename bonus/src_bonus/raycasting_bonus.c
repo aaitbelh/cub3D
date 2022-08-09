@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 17:40:30 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 09:40:41 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:57:04 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ void	get_tex(t_game *game, t_ray *r)
 		game->wallx = game->player->x + r->perpwalldist * r->raydirx;
 	game->tex_x = (game->wallx - (int)game->wallx) * 64;
 	game->step = 1.0 * 64 / r->lineheight;
-	game->tex_pos = ((r->drawstart - 900 / 2)
-			+ (r->lineheight / 2)) * game->step;
+	game->tex_pos = ((r->drawstart - 900 / 2) + (r->lineheight / 2)) * game->step;
 }
 
 void	ray_casting(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: aaitbelh <aaitbelh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 16:17:43 by aaitbelh          #+#    #+#             */
-/*   Updated: 2022/07/31 12:54:07 by aaitbelh         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:54:00 by aaitbelh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fix_map(t_game *game)
 		while (game->map[i][j])
 		{
 			if (game->map[i][j] == ' ')
-				game->map[i][j] = '0';
+				game->map[i][j] = '1';
 			j++;
 		}
 		i++;
